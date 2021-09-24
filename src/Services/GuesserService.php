@@ -13,8 +13,8 @@ class GuesserService
      */
     private static function formResourceNameMapping(string $resourceName): array
     {
-        $model = '\\App\\Voiler\\Models\\' . $resourceName;
-        $request = '\\App\\Voiler\\Http\\Requests\\' . $resourceName . 'Request';
+        $model = '\\VertexIT\\Voiler\\Models\\' . $resourceName;
+        $request = '\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request';
 
         if (! class_exists($model)) {
             $model = '\\App\\Models\\Admin\\' . $resourceName;
