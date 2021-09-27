@@ -40,7 +40,7 @@ trait HasCompleteness
         }
 
         $values = [];
-        foreach ($propertyArrayValue as $key => $value) {
+        foreach ($propertyArrayValue as $value) {
             if (is_array($value)) {
                 $this->isArrayNotEmpty($value);
             }
@@ -49,7 +49,7 @@ trait HasCompleteness
         }
 
         foreach ($values as $value) {
-            if ($value && preg_replace("/\s+/", "", json_encode($value))) {
+            if (json_decode(preg_replace("/\s+/", "", strip_tags(json_encode($value))))) {
                 return true;
             }
         }

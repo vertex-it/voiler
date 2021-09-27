@@ -2,7 +2,9 @@
 
 namespace VertexIT\Voiler;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class VoilerServiceProvider extends ServiceProvider
 {
@@ -15,13 +17,14 @@ class VoilerServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'voiler');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('voiler.php'),
+                __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
             ], 'config');
 
             // Publishing the views.
@@ -42,6 +45,23 @@ class VoilerServiceProvider extends ServiceProvider
             // Registering package commands.
             // $this->commands([]);
         }
+
+        Route::macro('voilerResource', function ($uri, $controller) {
+            $modelName = Str::of($uri)->singular()->slug('_')->camel();
+
+            Route::as("{$uri}.")->prefix("{$uri}")->group(function () use ($uri, $controller, $modelName) {
+                Route::get("clone/{{$modelName}}", [$controller, 'edit'])->name('clone');
+                Route::put('restore', [$controller, 'restore'])->name('restore');
+                Route::put('update-priority', [$controller, 'updatePriority'])->name('updatePriority');
+                Route::delete('force-delete', [$controller, 'forceDelete'])->name('forceDelete');
+            });
+
+            Route::resource($uri, $controller)
+                ->except(['show'])
+                ->parameters([
+                    $uri => $modelName,
+                ]);
+        });
     }
 
     /**
