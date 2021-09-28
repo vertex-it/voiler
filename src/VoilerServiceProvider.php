@@ -5,6 +5,7 @@ namespace VertexIT\Voiler;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use VertexIT\Voiler\Console\PublishFromPackagesCommand;
 
 class VoilerServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,10 @@ class VoilerServiceProvider extends ServiceProvider
                 __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
                 __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
             ], 'assets');
+
+            $this->commands([
+                PublishFromPackagesCommand::class,
+            ]);
         }
 
         Route::macro('voilerResource', function ($uri, $controller) {
