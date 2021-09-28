@@ -2,7 +2,7 @@
     @foreach(config('navigation') as $name => $navigationGroup)
         @if (isset($navigationGroup['route']))
             <div class="mx-5 font-medium text-sm text-gray-700 tracking-wide">
-                <a href="#" class="py-5 flex items-center">
+                <a href="{{ route($navigationGroup['route']) }}" class="py-5 flex items-center">
                     {!! $navigationGroup['icon'] !!}
                     {{ $name }}
                 </a>

@@ -1,0 +1,75 @@
+table.datatable {
+    padding-top: 2rem;
+}
+
+/*Form fields*/
+.dataTables_wrapper select,
+.dataTables_wrapper .dataTables_filter input {
+    color: #4a5568; 			/*text-gray-700*/
+    padding-left: .5rem; 		/*pl-4*/
+    padding-right: .5rem; 		/*pl-4*/
+    padding-top: .4rem; 		/*pl-2*/
+    padding-bottom: .4rem; 		/*pl-2*/
+    border-width: 2px; 			/*border-2*/
+    border-radius: .25rem;
+    border-color: #edf2f7; 		/*border-gray-200*/
+    background-color: #fff;
+    margin: 0 .4rem;
+    font-size: .85rem;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    border-bottom: 1px solid #9CA3AF;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+table.datatable tbody tr td {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    padding: .9rem 1.2rem;
+    color: #374151; /*text-gray-800*/
+    font-size: 0.95rem;
+}
+
+/*Row Hover*/
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+    background-color: #F9FAFB;
+}
+
+/*Pagination Buttons*/
+.dataTables_wrapper .dataTables_paginate .paginate_button		{
+    border-radius: .25rem;			/*rounded*/
+    border: 1px solid transparent;	/*border border-transparent*/
+}
+
+/*Pagination Buttons - Current selected */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current	{
+    color: #fff !important;				/*text-white*/
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06); 	/*shadow*/
+    border-radius: .25rem;				/*rounded*/
+    background: #2563EB !important;		/*bg-indigo-500*/
+    border: 1px solid transparent;		/*border border-transparent*/
+}
+
+/*Pagination Buttons - Hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover		{
+    color: #fff !important;				/*text-white*/
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);	 /*shadow*/
+    font-weight: 700;					/*font-bold*/
+    border-radius: .25rem;				/*rounded*/
+    background: #2563EB !important;		/*bg-indigo-500*/
+    border: 1px solid transparent;		/*border border-transparent*/
+}
+
+/*Add padding to bottom border */
+table.dataTable.no-footer {
+    border-bottom: 1px solid #e2e8f0;	/*border-b-1 border-gray-300*/
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+/*Change colour of responsive icon*/
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+    background-color: #2563EB !important; /*bg-indigo-500*/
+}

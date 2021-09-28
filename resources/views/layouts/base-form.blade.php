@@ -1,8 +1,6 @@
 @extends('voiler::layouts.master')
 
 @section('content')
-    @yield('breadcrumbs')
-
     <div class="section">
         <div class="section-content">
             <div class="card">

@@ -1,6 +1,6 @@
 @extends('voiler::layouts.master')
 
-@section('title', 'Invoices')
+@section('title', 'All ' . $resource['name_plural'])
 
 @section('breadcrumbs')
     <div class="breadcrumbs">
@@ -27,9 +27,9 @@
             <div class="card">
                 <table id="datatable" class="datatable hover">
                     <thead>
-                    @foreach ($datatableColumns as $column)
-                        <th>{{ $column }}</th>
-                    @endforeach
+                        @foreach ($datatableColumns as $column)
+                            <th>{{ $column }}</th>
+                        @endforeach
                     </thead>
                     <tbody></tbody>
                 </table>
@@ -173,7 +173,168 @@
                     }
                 })
             );
-        })
+
+            // DataTable.buttons().container().appendTo('#datatable_filter');
+
+            $('.btn-no-margin').css({'margin-left': 0});
+
+            DataTable.on('select deselect', function () {
+                var selectedRows = DataTable.rows({ selected: true }).count();
+
+                DataTable.button(2).enable(selectedRows > 0);
+                DataTable.button(3).enable(selectedRows > 0);
+            });
+
+            function deleteElement(url) {
+                $.ajax({
+                    method: 'DELETE',
+                    url: url,
+                    success: function () {
+                        toastr.success('Uspješno ste obrisali element!');
+                        refreshDatatable();
+                    },
+                    error: function () {
+                        toastr.error('Dogodila se greška');
+                    }
+                })
+            }
+
+            function restoreElement(id) {
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ $getModelRoute('restore') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        toastr.success('Uspješno ste vratili element!');
+                        refreshDatatable();
+                    },
+                    error: function () {
+                        toastr.error('Dogodila se greška');
+                    }
+                })
+            }
+
+            function forceDeleteElement(id) {
+                $.ajax({
+                    method: 'DELETE',
+                    url: "{{ $getModelRoute('forceDelete') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        toastr.success('Uspješno ste obrisali trajno element!');
+                        refreshDatatable();
+                    },
+                    error: function () {
+                        toastr.error('Dogodila se greška');
+                    }
+                })
+            }
+
+            function updatePriority(id, priority) {
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ $getModelRoute('updatePriority') }}",
+                    data: {
+                        id: id,
+                        priority: priority
+                    },
+                    success: function () {
+                        toastr.success('Uspješno ste ažurirali prioritet!');
+                        refreshDatatable();
+                    },
+                    error: function () {
+                        toastr.error('Dogodila se greška');
+                    }
+                })
+            }
+
+            function refreshDatatable() {
+                DataTable.ajax.reload();
+            }
+
+            $(document).on('click', '.delete-button', function () {
+                let button = $(this);
+
+                $.confirm({
+                    icon: 'os-icon os-icon-ui-15',
+                    title: 'Da li ste sigurni?',
+                    content: 'Ukoliko obrišete element, možete ga kasnije vratiti',
+                    type: 'red',
+                    buttons: {
+                        confirm: {
+                            text: 'Obrišite',
+                            btnClass: 'btn-red',
+                            action: function () {
+                                deleteElement(button.attr('data-url'));
+                            }
+                        },
+                        cancel: {
+                            text: 'Odustanite',
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.force-delete-button', function () {
+                let button = $(this);
+
+                $.confirm({
+                    icon: 'os-icon os-icon-close',
+                    title: 'Da li ste sigurni?',
+                    content: 'Ukoliko trajno obrišete element, nećete ga više moći vratiti',
+                    type: 'red',
+                    buttons: {
+                        confirm: {
+                            text: 'Obrišite',
+                            btnClass: 'btn-red',
+                            action: function () {
+                                forceDeleteElement(button.attr('data-id'));
+                            }
+                        },
+                        cancel: {
+                            text: 'Odustanite',
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.restore-button', function () {
+                let button = $(this);
+
+                $.confirm({
+                    icon: 'os-icon os-icon-common-07',
+                    title: 'Da li ste sigurni?',
+                    content: 'Da li ste sigurni da želite vratiti ovaj element?',
+                    type: 'green',
+                    buttons: {
+                        confirm: {
+                            text: 'Vratite',
+                            btnClass: 'btn-success',
+                            action: function () {
+                                restoreElement(button.attr('data-id'));
+                            }
+                        },
+                        cancel: {
+                            text: 'Odustanite',
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.update-priority-button', function () {
+                let id = $(this).attr('data-id');
+                let priority = $(this).parents('div.input-group').find('input[name="priority"]').val();
+
+                updatePriority(id, priority);
+            });
+
+            let filters = $('#table_filters').html();
+            $('#table_filters').remove();
+            $('#datatable_wrapper div.filters').html(filters);
+        });
     </script>
 
     @yield('aditional-scripts')

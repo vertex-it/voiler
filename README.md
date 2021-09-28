@@ -14,6 +14,24 @@ You can install the package via composer:
 composer require vertex-it/voiler
 ```
 
+You can publish the config:
+
+```bash
+php artisan vendor:publish --tag=config
+```
+
+You can publish the assets:
+
+```bash
+php artisan vendor:publish --tag=assets --force
+```
+
+You can publish the views:
+
+```bash
+php artisan vendor:publish --tag=views --force
+```
+
 ## Usage
 
 ```php

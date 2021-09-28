@@ -13,10 +13,6 @@ class VoilerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'voiler');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
@@ -27,23 +23,16 @@ class VoilerServiceProvider extends ServiceProvider
                 __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
             ], 'config');
 
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/voiler'),
-            ], 'views');*/
+            $this->publishes([
+                __DIR__.'/../resources/views' => resource_path('views'),
+            ], 'views');
 
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/voiler'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/voiler'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
+            $this->publishes([
+                __DIR__.'/../resources/js' => resource_path('js'),
+                __DIR__.'/../resources/css' => resource_path('css'),
+                __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
+                __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
+            ], 'assets');
         }
 
         Route::macro('voilerResource', function ($uri, $controller) {
