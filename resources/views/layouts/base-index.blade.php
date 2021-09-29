@@ -12,16 +12,13 @@
 
 @section('content')
     <div class="section w-full">
-        {{--        <div class="section-title">--}}
-        {{--            <div>--}}
-        {{--                <h2 class="section-title-name">Datatable</h2>--}}
-        {{--                <div class="section-title-border"></div>--}}
-        {{--            </div>--}}
-        {{--            <a href="{{ route('invoices.create') }}" class="btn btn-sm btn-primary">Add new invoice</a>--}}
-        {{--        </div>--}}
-
-        <div class="text-right">
-        </div>
+        @can($resource['name_plural'] . ' create')
+            @section('action-button')
+                <a class="btn btn-sm btn-primary" href="{{ $getModelRoute('create') }}">
+                    {{ __('Add new ' . $resource['name_singular']) }}
+                </a>
+            @endsection
+        @endcan
 
         <div class="section-content">
             <div class="card">

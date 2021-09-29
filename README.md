@@ -20,11 +20,19 @@ You can publish the config:
 php artisan vendor:publish --tag=config
 ```
 
+You can install tailwind:
+
+```bash
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+```
+
 You can publish the assets:
 
 ```bash
 php artisan vendor:publish --tag=assets --force
 ```
+
+## Optional
 
 You can publish the views:
 
