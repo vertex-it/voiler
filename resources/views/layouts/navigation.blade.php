@@ -9,7 +9,7 @@
             </div>
         @else
             <div class="mx-5 font-medium text-sm text-gray-700 tracking-wide">
-                <a href="#" class="py-5 flex items-center btn-open-dropdown">
+                <a href="#" class="py-5 flex items-center btn-click-dropdown">
                     {!! $navigationGroup['icon'] !!}
                     {{ $name }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" class="ml-0.5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,8 +23,8 @@
                                 {{ $pageName }}
                             </a>
                         @else
-                            <div class="item has-submenu">
-                                <div class="flex justify-between items-baseline btn-open-dropdown">
+                            <div class="item has-submenu btn-open-dropdown">
+                                <div class="flex justify-between items-baseline ">
                                     {{ $pageName }}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -45,13 +45,3 @@
         @endif
     @endforeach
 </nav>
-
-@once
-    @push('scripts')
-        <script>
-            $('header').delegate('.btn-open-dropdown', 'click', function () {
-                $(this).parent().find('.dropdown').first().toggleClass('hidden')
-            })
-        </script>
-    @endpush
-@endonce

@@ -26,8 +26,8 @@
             </button>
 
             <!-- Profile dropdown -->
-            <div class="ml-4 relative">
-                <div class="btn-open-dropdown">
+            <div class="ml-4 relative btn-click-dropdown">
+                <div>
                     <button
                             type="button"
                             class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -37,9 +37,9 @@
                     >
                         <span class="sr-only">Open user menu</span>
                         <img
-                                class="h-8 w-8 rounded-full"
-                                src="{{ asset('img/avatar.png') }}"
-                                alt=""
+                            class="image h-8 w-8 rounded-full"
+                            src="{{ asset('img/avatar.png') }}"
+                            alt=""
                         >
                     </button>
                 </div>
@@ -47,7 +47,7 @@
                     <a href="#" class="item">
                         Profile
                     </a>
-                    <a href="#" class="item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="item" onclick="document.getElementById('logout-form').submit();">
                         Sign out
                     </a>
                 </nav>
@@ -55,4 +55,31 @@
         </div>
     </div>
 </header>
-<form id="logout-form" action="#" method="POST" style="display: none;">@csrf</form>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+
+<style>
+    .btn-open-dropdown:hover > .dropdown {
+        display: flex;
+    }
+</style>
+
+@once
+    @push('scripts')
+        <script>
+            $('header').delegate('.btn-click-dropdown', 'click', function () {
+                $(this).parent().find('.dropdown').first().toggleClass('hidden');
+            })
+
+            $('body').on('click',function(event){
+                if (
+                    ! $(event.target).is('.btn-click-dropdown') &&
+                    ! $(event.target).is('.image') &&
+                    ! $(event.target).is('.items-baseline') &&
+                    ! $(event.target).is('.btn-open-dropdown')
+                ) {
+                    $(".dropdown").addClass("hidden");
+                }
+            });
+        </script>
+    @endpush
+@endonce

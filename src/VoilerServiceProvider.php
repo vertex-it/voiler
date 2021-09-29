@@ -22,18 +22,18 @@ class VoilerServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('voiler.php'),
                 __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
-            ], 'config');
-
-            $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views'),
-            ], 'views');
+            ], 'voiler-config');
 
             $this->publishes([
                 __DIR__.'/../resources/js' => resource_path('js'),
                 __DIR__.'/../resources/css' => resource_path('css'),
                 __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
                 __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
-            ], 'assets');
+            ], 'voiler-assets');
+
+            $this->publishes([
+                __DIR__.'/../resources/views' => resource_path('views'),
+            ], 'voiler-views');
 
             $this->commands([
                 PublishFromPackagesCommand::class,
