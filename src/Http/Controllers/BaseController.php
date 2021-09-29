@@ -23,14 +23,12 @@ class BaseController extends Controller
 
         if ($request->ajax()) {
             return $this->resource['datatable_service']::make($request);
-            // return AdvertisementDatatableService::make($request);
         }
 
         return view(
             $this->resource['view'] . '.index',
             new $this->resource['index_view_model']
         );
-        // return view('admin.advertisement.index', new AdvertisementIndexViewModel);
     }
 
     public function create()
@@ -41,9 +39,6 @@ class BaseController extends Controller
             $this->resource['view'] . '.form',
             new $this->resource['form_view_model'](new $this->resource['model'])
         );
-        // return view('admin.advertisement.form',
-        //     new AdvertisementFormViewModel(new Advertisement)
-        // );
     }
 
     public function store(): RedirectResponse
@@ -53,6 +48,8 @@ class BaseController extends Controller
         $request = app($this->resource['request']);
 
         $model = $this->resource['model']::createWithRelations($request);
+
+        $this->dispatchEvent('store');
 
         return $this->redirectWithMessage('store', $model);
     }
@@ -67,9 +64,6 @@ class BaseController extends Controller
             $this->resource['view'] . '.form',
             new $this->resource['form_view_model']($model)
         );
-        // return view('admin.advertisement.form',
-        //     new AdvertisementFormViewModel($advertisement)
-        // );
     }
 
     public function update(Request $request, $model): RedirectResponse
@@ -79,6 +73,8 @@ class BaseController extends Controller
         [$request, $model] = $this->bindModelAndValidateRequest($request, $model);
 
         $model->updateWithRelations($request);
+
+        $this->dispatchEvent('update');
 
         return $this->redirectWithMessage('update', $model);
     }
@@ -90,7 +86,8 @@ class BaseController extends Controller
         $this->authorize('delete', $model->first());
 
         $model->delete();
-        // $advertisement->delete();
+
+        $this->dispatchEvent('destroy');
 
         return response()->json(true);
     }
@@ -102,7 +99,8 @@ class BaseController extends Controller
         $this->authorize('restore', $model);
 
         $model->restore();
-        // Advertisement::withTrashed()->findOrFail($request->id)->restore();
+
+        $this->dispatchEvent('restore');
 
         return response()->json(true);
     }
@@ -113,9 +111,6 @@ class BaseController extends Controller
             ->update([
                 'priority' => $request->priority,
             ]);
-        // Advertisement::where('id', $request->id)->update([
-        //     'priority' => $request->priority,
-        // ]);
 
         return response()->json(true);
     }
@@ -127,7 +122,8 @@ class BaseController extends Controller
         $this->authorize('forceDelete', $model);
 
         $model->forceDeleteWithRelations();
-        // $advertisement = Advertisement::withTrashed()->findOrFail($request->id);
+
+        $this->dispatchEvent('forceDelete');
 
         return response()->json(true);
     }
@@ -150,5 +146,9 @@ class BaseController extends Controller
         $request = app($this->resource['request']);
 
         return [$request, $model];
+    }
+
+    protected function dispatchEvent($action): void
+    {
     }
 }
