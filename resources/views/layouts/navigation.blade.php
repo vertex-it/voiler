@@ -23,21 +23,27 @@
                                 {{ $pageName }}
                             </a>
                         @else
-                            <div class="item has-submenu btn-open-dropdown">
-                                <div class="flex justify-between items-baseline ">
-                                    {{ $pageName }}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                    </svg>
+                            @if(! isset($page['can']) || Auth::user()->can($page['can']))
+                                <div class="item has-submenu btn-open-dropdown">
+                                    <div class="flex justify-between items-baseline ">
+                                        {{ $pageName }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                    <div class="dropdown dropdown-level-2 hidden">
+                                        @foreach ($page as $route)
+                                            @if (isset($route['route']))
+                                                @if(! isset($route['can']) || Auth::user()->can($route['can']))
+                                                    <a href="{{ route($route['route']) }}" class="item">
+                                                        {{ $route['name'] }}
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="dropdown dropdown-level-2 hidden">
-                                    @foreach ($page as $route)
-                                        <a href="{{ route($route['route']) }}" class="item">
-                                            {{ $route['name'] }}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </div>
+                            @endif
                         @endif
                     @endforeach
                 </nav>
