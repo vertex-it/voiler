@@ -44,37 +44,43 @@ class GuesserService
 
     public static function fromControllerName(string $className): array
     {
-        $resourceName = explode('\\', $className);
-
-        $resourceName = str_replace('Controller', '', last($resourceName));
+        $resourceName = self::getClassPrefixName($className, 'Controller');
 
         return self::formResourceNameMapping($resourceName);
     }
 
     public static function fromPolicyName(string $className): array
     {
-        $resourceName = explode('\\', $className);
-
-        $resourceName = str_replace('Policy', '', last($resourceName));
+        $resourceName = self::getClassPrefixName($className, 'Policy');
 
         return self::formResourceNameMapping($resourceName);
     }
 
     public static function fromIndexViewModelName(string $className)
     {
-        $resourceName = explode('\\', $className);
-
-        $resourceName = str_replace('IndexViewModel', '', last($resourceName));
+        $resourceName = self::getClassPrefixName($className, 'IndexViewModel');
 
         return self::formResourceNameMapping($resourceName);
     }
 
     public static function fromFormViewModelName(string $className)
     {
-        $resourceName = explode('\\', $className);
-
-        $resourceName = str_replace('FormViewModel', '', last($resourceName));
+        $resourceName = self::getClassPrefixName($className, 'FormViewModel');
 
         return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function fromDatatableServiceName(string $className)
+    {
+        $resourceName = self::getClassPrefixName($className, 'DatatableService');
+
+        return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function getClassPrefixName(string $className, string $suffix)
+    {
+        $resourceName = explode('\\', $className);
+
+        return str_replace($suffix, '', last($resourceName));
     }
 }

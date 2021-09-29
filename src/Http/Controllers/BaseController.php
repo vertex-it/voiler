@@ -22,7 +22,7 @@ class BaseController extends Controller
         $this->authorize('viewAny', $this->resource['model']);
 
         if ($request->ajax()) {
-            return $this->resource['datatable_service']::make($request);
+            return (new $this->resource['datatable_service'])->make($request);
         }
 
         return view(
