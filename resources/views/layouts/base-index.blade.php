@@ -1,9 +1,10 @@
 @extends('voiler::layouts.master')
 
-@section('title', 'All ' . $resource['name_plural'])
+@section('title', __('All ' . $resource['name_plural']))
 
 @section('breadcrumbs')
     <x-breadcrumb />
+    @yield('aditional-content')
 @endsection
 
 @section('content')
@@ -11,7 +12,7 @@
         @can($resource['name_plural'] . ' create')
             @section('action-button')
                 <a class="btn btn-sm btn-primary" href="{{ $getModelRoute('create') }}">
-                    {{ __('Add new ' . $resource['name_singular']) }}
+                    {{ __('Add ' . $resource['name_singular']) }}
                 </a>
             @endsection
         @endcan
@@ -248,74 +249,74 @@
                 DataTable.ajax.reload();
             }
 
-            $(document).on('click', '.delete-button', function () {
-                let button = $(this);
-
-                $.confirm({
-                    icon: 'os-icon os-icon-ui-15',
-                    title: 'Da li ste sigurni?',
-                    content: 'Ukoliko obrišete element, možete ga kasnije vratiti',
-                    type: 'red',
-                    buttons: {
-                        confirm: {
-                            text: 'Obrišite',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                deleteElement(button.attr('data-url'));
-                            }
-                        },
-                        cancel: {
-                            text: 'Odustanite',
-                        }
-                    }
-                });
-            });
-
-            $(document).on('click', '.force-delete-button', function () {
-                let button = $(this);
-
-                $.confirm({
-                    icon: 'os-icon os-icon-close',
-                    title: 'Da li ste sigurni?',
-                    content: 'Ukoliko trajno obrišete element, nećete ga više moći vratiti',
-                    type: 'red',
-                    buttons: {
-                        confirm: {
-                            text: 'Obrišite',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                forceDeleteElement(button.attr('data-id'));
-                            }
-                        },
-                        cancel: {
-                            text: 'Odustanite',
-                        }
-                    }
-                });
-            });
-
-            $(document).on('click', '.restore-button', function () {
-                let button = $(this);
-
-                $.confirm({
-                    icon: 'os-icon os-icon-common-07',
-                    title: 'Da li ste sigurni?',
-                    content: 'Da li ste sigurni da želite vratiti ovaj element?',
-                    type: 'green',
-                    buttons: {
-                        confirm: {
-                            text: 'Vratite',
-                            btnClass: 'btn-success',
-                            action: function () {
-                                restoreElement(button.attr('data-id'));
-                            }
-                        },
-                        cancel: {
-                            text: 'Odustanite',
-                        }
-                    }
-                });
-            });
+            // $(document).on('click', '.delete-button', function () {
+            //     let button = $(this);
+            //
+            //     $.confirm({
+            //         icon: 'os-icon os-icon-ui-15',
+            //         title: 'Da li ste sigurni?',
+            //         content: 'Ukoliko obrišete element, možete ga kasnije vratiti',
+            //         type: 'red',
+            //         buttons: {
+            //             confirm: {
+            //                 text: 'Obrišite',
+            //                 btnClass: 'btn-red',
+            //                 action: function () {
+            //                     deleteElement(button.attr('data-url'));
+            //                 }
+            //             },
+            //             cancel: {
+            //                 text: 'Odustanite',
+            //             }
+            //         }
+            //     });
+            // });
+            //
+            // $(document).on('click', '.force-delete-button', function () {
+            //     let button = $(this);
+            //
+            //     $.confirm({
+            //         icon: 'os-icon os-icon-close',
+            //         title: 'Da li ste sigurni?',
+            //         content: 'Ukoliko trajno obrišete element, nećete ga više moći vratiti',
+            //         type: 'red',
+            //         buttons: {
+            //             confirm: {
+            //                 text: 'Obrišite',
+            //                 btnClass: 'btn-red',
+            //                 action: function () {
+            //                     forceDeleteElement(button.attr('data-id'));
+            //                 }
+            //             },
+            //             cancel: {
+            //                 text: 'Odustanite',
+            //             }
+            //         }
+            //     });
+            // });
+            //
+            // $(document).on('click', '.restore-button', function () {
+            //     let button = $(this);
+            //
+            //     $.confirm({
+            //         icon: 'os-icon os-icon-common-07',
+            //         title: 'Da li ste sigurni?',
+            //         content: 'Da li ste sigurni da želite vratiti ovaj element?',
+            //         type: 'green',
+            //         buttons: {
+            //             confirm: {
+            //                 text: 'Vratite',
+            //                 btnClass: 'btn-success',
+            //                 action: function () {
+            //                     restoreElement(button.attr('data-id'));
+            //                 }
+            //             },
+            //             cancel: {
+            //                 text: 'Odustanite',
+            //             }
+            //         }
+            //     });
+            // });
 
             $(document).on('click', '.update-priority-button', function () {
                 let id = $(this).attr('data-id');

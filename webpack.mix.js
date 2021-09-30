@@ -12,14 +12,22 @@ mix
         'resources/css/selectize-custom.css',
         'resources/css/datatables-custom.css',
         'resources/css/toastr.css',
-        'resources/css/jquery-confirm.css',
     ], 'public/css/app.css')
     .scripts([
         'public/js/bootstrap.js',
         'resources/js/adminpanel.js',
         'resources/js/toastr.min.js',
-        'resources/js/jquery-confirm.js',
     ], 'public/js/app.js')
+    .version();
+
+mix.styles([
+    'resources/css/fullcalendar.css',
+], 'public/css/calendar.css')
+    .scripts([
+        'resources/js/moment.min.js',
+        'resources/js/fullcalendar.js',
+        'resources/js/mApp.min.js',
+    ], 'public/js/calendar.js')
     .version();
 
 // Tinymce resources

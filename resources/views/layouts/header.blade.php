@@ -1,7 +1,7 @@
 <header class="bg-white border-b border-gray-100">
     <div class="container mx-auto flex justify-between items-center">
         <a href="#">
-            <img src="{{ asset('img/logo.svg') }}" class="h-6" alt="logo">
+            <img src="{{ asset('img/logo.png') }}" class="h-6" alt="logo">
         </a>
         @include('voiler::layouts.navigation')
         <div class="flex items-center">

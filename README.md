@@ -26,6 +26,12 @@ You can install tailwind:
 npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 ```
 
+You can install datatables:
+
+```bash
+npm install datatables.net datatables.net-dt
+```
+
 You can publish the assets:
 
 ```bash
