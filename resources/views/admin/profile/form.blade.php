@@ -3,11 +3,7 @@
 @section('title', $getFormTitle)
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <a href="{{ route('admin.dashboard') }}" class="item item-link">{{ config('app.name') }}</a>
-        <span class="separator">/</span>
-        <span class="item item-last">@yield('title')</span>
-    </div>
+    <x-breadcrumb :model="$profile" />
 @endsection
 
 @section('inputs')
