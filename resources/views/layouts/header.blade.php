@@ -44,7 +44,7 @@
                     </button>
                 </div>
                 <nav class="dropdown mt-6 hidden right-0">
-                    <a href="#" class="item">
+                    <a href="{{ route('admin.profiles.edit', ['profile' => Auth::user()]) }}" class="item">
                         Profile
                     </a>
                     <a href="#" class="item" onclick="document.getElementById('logout-form').submit();">
@@ -66,18 +66,25 @@
 @once
     @push('scripts')
         <script>
-            $('header').delegate('.btn-click-dropdown', 'click', function () {
-                $(this).parent().find('.dropdown').first().toggleClass('hidden');
+            const body = $('body');
+
+            body.delegate('.btn-click-dropdown', 'click', function (event) {
+                event.stopPropagation();
+                const dropdown = $(this).parent().find('.dropdown').first();
+
+                $('.dropdown').not(dropdown).addClass('hidden')
+
+                dropdown.toggleClass('hidden');
             })
 
-            $('body').on('click',function(event){
+            body.on('click',function(event){
                 if (
                     ! $(event.target).is('.btn-click-dropdown') &&
                     ! $(event.target).is('.image') &&
                     ! $(event.target).is('.items-baseline') &&
                     ! $(event.target).is('.btn-open-dropdown')
                 ) {
-                    $(".dropdown").addClass("hidden");
+                    $('.dropdown').addClass('hidden');
                 }
             });
         </script>

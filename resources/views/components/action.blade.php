@@ -1,7 +1,7 @@
 @if(method_exists($model, 'trashed') && $model->trashed())
     @if($resource['name_plural'] . ' restore')
         <button
-                class="btn btn-sm btn-success m-0 restore-button"
+                class="btn btn-sm btn-primary m-0 restore-button"
                 data-id="{{ $model->id }}"
         >
             <i class="os-icon os-icon-common-07"></i>
@@ -18,29 +18,27 @@
     @endcan
 @else
     @if(Gate::check($resource['name_plural'] . ' update') || Gate::check($resource['name_plural'] . ' create') || Gate::check($resource['name_plural'] . ' delete'))
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div>
+            <button type="button" class="btn btn-click-dropdown">
                 <x-heroicon-o-dots-horizontal width="20px" height="20px" class="float-left" />
             </button>
-            <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown mt-3 hidden">
 
                 @can($resource['name_plural'] . ' update')
-                    <a class="dropdown-item" href="{{ $getModelRoute('edit', $model) }}">
+                    <a class="item" href="{{ $getModelRoute('edit', $model) }}">
                         Izmjenite
                     </a>
                 @endcan
 
                 @can($resource['name_plural'] . ' create')
-                    <a class="dropdown-item" href="{{ $getModelRoute('clone', $model) }}">
+                    <a class="item" href="{{ $getModelRoute('clone', $model) }}">
                         Kopirajte
                     </a>
                 @endcan
 
-                <div class="dropdown-divider"></div>
-
                 @can($resource['name_plural'] . ' delete')
                     <a
-                            class="dropdown-item delete-button"
+                            class="item delete-button"
                             data-url="{{ $getModelRoute('destroy', $model) }}"
                             href="#"
                     >
@@ -52,3 +50,4 @@
         </div>
     @endif
 @endif
+

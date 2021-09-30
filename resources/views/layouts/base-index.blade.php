@@ -3,11 +3,7 @@
 @section('title', 'All ' . $resource['name_plural'])
 
 @section('breadcrumbs')
-    <div class="breadcrumbs">
-        <a href="#" class="item item-link">{{ config('app.name') }}</a>
-        <span class="separator">/</span>
-        <span class="item item-last">@yield('title')</span>
-    </div>
+    <x-breadcrumb />
 @endsection
 
 @section('content')
