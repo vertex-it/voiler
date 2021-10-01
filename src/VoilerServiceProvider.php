@@ -73,7 +73,7 @@ class VoilerServiceProvider extends ServiceProvider
                     $uri => $modelName,
                 ]);
         });
-        
+
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
