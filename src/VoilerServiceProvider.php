@@ -16,7 +16,7 @@ class VoilerServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->registerRoutes();
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -39,7 +39,24 @@ class VoilerServiceProvider extends ServiceProvider
                 PublishFromPackagesCommand::class,
             ]);
         }
+    }
 
+    /**
+     * Register the application services.
+     */
+    public function register()
+    {
+        // Automatically apply the package configuration
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'voiler');
+
+        // Register the main class to use with the facade
+        $this->app->singleton('voiler', function () {
+            return new Voiler;
+        });
+    }
+
+    protected function registerRoutes()
+    {
         Route::macro('voilerResource', function ($uri, $controller) {
             $modelName = Str::of($uri)->singular()->slug('_')->camel();
 
@@ -56,19 +73,17 @@ class VoilerServiceProvider extends ServiceProvider
                     $uri => $modelName,
                 ]);
         });
+        
+        Route::group($this->routeConfiguration(), function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
     }
 
-    /**
-     * Register the application services.
-     */
-    public function register()
+    protected function routeConfiguration()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'voiler');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('voiler', function () {
-            return new Voiler;
-        });
+        return [
+            'as' => 'admin.',
+            'middleware' => config('voiler.middleware'),
+        ];
     }
 }

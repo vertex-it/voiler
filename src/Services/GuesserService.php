@@ -15,14 +15,10 @@ class GuesserService
     {
         $model = '\\VertexIT\\Voiler\\Models\\' . $resourceName;
         $request = '\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request';
-
-        if (! class_exists($model)) {
-            $model = '\\App\\Models\\Admin\\' . $resourceName;
-        }
-
-        if (! class_exists($request)) {
-            $request = '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request';
-        }
+        $datatableService = '\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService';
+        $indexViewModel = '\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel';
+        $formViewModel = '\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel';
+        $view = 'admin.' . Str::of($resourceName)->kebab()->lower();
 
         return [
             'name' => $resourceName,
@@ -32,13 +28,13 @@ class GuesserService
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
             'route' => 'admin/' . strtolower(Str::plural($resourceName)),
             'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'model' => $model,
+            'model' => class_exists($model) ? $model : '\\App\\Models\\Admin\\' . $resourceName,
             'title_column' => class_exists($model) ? (new $model)->getTitleColumn() : '',
-            'view' => 'admin.' . Str::of($resourceName)->kebab()->lower(),
-            'request' => $request,
-            'datatable_service' => '\\App\\Services\\Datatables\\' . $resourceName . 'DatatableService',
-            'index_view_model' => '\\App\ViewModels\\Index\\' . $resourceName . 'IndexViewModel',
-            'form_view_model' => '\\App\ViewModels\\Form\\' . $resourceName . 'FormViewModel',
+            'view' => view()->exists($view . '.index') ? $view : 'voiler::admin.' . Str::of($resourceName)->kebab()->lower(),
+            'request' => class_exists($request) ? $request : '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request',
+            'datatable_service' => class_exists($datatableService) ? $datatableService : '\\App\\Services\\Datatables\\' . $resourceName . 'DatatableService',
+            'index_view_model' => class_exists($indexViewModel) ? $indexViewModel : '\\App\ViewModels\\Index\\' . $resourceName . 'IndexViewModel',
+            'form_view_model' => class_exists($formViewModel) ? $formViewModel : '\\App\ViewModels\\Form\\' . $resourceName . 'FormViewModel',
         ];
     }
 

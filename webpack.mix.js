@@ -16,6 +16,8 @@ mix
     .scripts([
         'public/js/bootstrap.js',
         'resources/js/adminpanel.js',
+        'resources/js/modal.js',
+        'resources/js/util.js',
         'resources/js/toastr.min.js',
     ], 'public/js/app.js')
     .version();
