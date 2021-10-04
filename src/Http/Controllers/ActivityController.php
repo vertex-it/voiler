@@ -3,9 +3,6 @@
 namespace VertexIT\Voiler\Http\Controllers;
 
 use VertexIT\Voiler\Models\Activity;
-use Illuminate\Http\Request;
-use VertexIT\Voiler\Services\Datatables\ActivityDatatableService;
-use VertexIT\Voiler\ViewModels\Index\ActivityIndexViewModel;
 
 class ActivityController extends BaseController
 {

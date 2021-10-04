@@ -22,7 +22,7 @@ class BaseDatatableService
 
         $datatables->addColumn('action', function ($model) {
             return view(
-                'voiler::components.action',
+                'voiler::components.datatable-action',
                 new $this->resource['index_view_model']($model)
             );
         });

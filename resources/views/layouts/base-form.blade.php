@@ -5,10 +5,10 @@
         <div class="section-content">
             <div class="card">
                 <x-form
-                        action="{{ $getFormAction }}"
-                        method="{{ $getFormMethod }}"
-                        buttonText="Sačuvajte"
-                        multipart
+                    action="{{ $getFormAction }}"
+                    method="{{ $getFormMethod }}"
+                    buttonText="Sačuvajte"
+                    multipart
                 >
                     @yield('inputs')
                 </x-form>

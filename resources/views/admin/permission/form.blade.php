@@ -7,30 +7,28 @@
 @endsection
 
 @section('inputs')
-
     <x-inputs.input
-            type="text"
-            name="name"
-            :value="$permission->name"
-            label="Naziv"
-            placeholder="Unesite naziv dozvole"
-            required
+        type="text"
+        name="name"
+        :value="$permission->name"
+        label="Naziv"
+        placeholder="Unesite naziv dozvole"
+        required
     />
 
     <x-inputs.textarea
-            name="description"
-            label="Opis"
-            :value="$permission->description"
+        name="description"
+        label="Opis"
+        :value="$permission->description"
     />
 
     <x-inputs.select
-            name="roles"
-            label="Uloge"
-            placeholder="Odaberite uloge..."
-            :options="$roles"
-            :value="$activeRoles"
-            selectize
-            multiple
+        name="roles"
+        label="Uloge"
+        placeholder="Odaberite uloge..."
+        :options="$roles"
+        :value="$activeRoles"
+        selectize
+        multiple
     />
-
 @endsection
