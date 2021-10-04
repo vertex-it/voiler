@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class PublishFromPackagesCommand extends Command
 {
-    protected $signature = 'packages:publish';
+    protected $signature = 'voiler:publish-packages';
 
     protected $description = 'Install the BlogPackage';
 

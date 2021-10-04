@@ -93,13 +93,6 @@
                 .replace(/ /g,'-')
                 .replace(/[^\w-]+/g,'');
         }
-
-        jconfirm.defaults = {
-            closeIcon: true,
-            columnClass: 'col-md-3',
-            theme: 'modern',
-            backgroundDismiss: true,
-        }
     </script>
 
     @yield('external-js')
