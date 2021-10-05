@@ -218,5 +218,9 @@
     .form-input, .btn-white, .selectize-input, .selectize-control, .form-input-focus {
         @apply focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent;
     }
+
+    .status-pill {
+        @apply w-3 h-3 rounded-full;
+    }
 }
 

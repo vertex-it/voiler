@@ -11,7 +11,7 @@
     <div class="section w-full">
         @can($resource['name_plural'] . ' create')
             @section('action-button')
-                <a class="btn btn-primary" href="{{ $getModelRoute('create') }}">
+                <a class="btn btn-primary btn-sm px-5" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['name_singular']) }}
                 </a>
             @endsection
