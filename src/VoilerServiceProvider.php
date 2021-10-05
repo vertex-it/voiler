@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use VertexIT\Voiler\Console\PublishFromPackagesCommand;
+use Illuminate\Support\Facades\Gate;
 
 class VoilerServiceProvider extends ServiceProvider
 {
@@ -16,28 +17,14 @@ class VoilerServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'voiler');
         $this->registerRoutes();
+        // TODO: Check if this could be removed
+        $this->registerPolicies();
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('voiler.php'),
-                __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
-            ], 'voiler-config');
-
-            $this->publishes([
-                __DIR__.'/../resources/js' => resource_path('js'),
-                __DIR__.'/../resources/css' => resource_path('css'),
-                __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
-                __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
-            ], 'voiler-assets');
-
-            $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views'),
-            ], 'voiler-views');
-
-            $this->commands([
-                PublishFromPackagesCommand::class,
-            ]);
+            $this->registerPublishableFiles();
+            $this->registerCommands();
         }
     }
 
@@ -85,5 +72,46 @@ class VoilerServiceProvider extends ServiceProvider
             'as' => 'admin.',
             'middleware' => config('voiler.middleware'),
         ];
+    }
+
+    protected function registerPolicies()
+    {
+        $policies = [
+            'VertexIT\Voiler\Models\VoilerUser' => 'VertexIT\Voiler\Policies\UserPolicy',
+            'VertexIT\Voiler\Models\Permission' => 'VertexIT\Voiler\Policies\PermissionPolicy',
+            'VertexIT\Voiler\Models\Role' => 'VertexIT\Voiler\Policies\RolePolicy',
+            'VertexIT\Voiler\Models\Activity' => 'VertexIT\Voiler\Policies\ActivityPolicy',
+            'VertexIT\Voiler\Models\Profile' => 'VertexIT\Voiler\Policies\ProfilePolicy',
+        ];
+
+        foreach ($policies as $key => $value) {
+            Gate::policy($key, $value);
+        }
+    }
+
+    protected function registerPublishableFiles()
+    {
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('voiler.php'),
+            __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
+        ], 'voiler-config');
+
+        $this->publishes([
+            __DIR__.'/../resources/js' => resource_path('js'),
+            __DIR__.'/../resources/css' => resource_path('css'),
+            __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
+            __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
+        ], 'voiler-assets');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views'),
+        ], 'voiler-views');
+    }
+
+    protected function registerCommands()
+    {
+        $this->commands([
+            PublishFromPackagesCommand::class,
+        ]);
     }
 }

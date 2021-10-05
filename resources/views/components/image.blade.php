@@ -1,5 +1,5 @@
 <img
-        src="{{ $imageUrl }}"
-        class="img-responsive"
-        width="100%"
+    src="{{ $imageUrl }}"
+    class="img-responsive"
+    width="100%"
 >

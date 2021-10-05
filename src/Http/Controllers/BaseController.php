@@ -49,7 +49,7 @@ class BaseController extends Controller
 
         $model = $this->resource['model']::createWithRelations($request);
 
-        $this->dispatchEvent('store');
+        $this->dispatchEvent('store', $model);
 
         return $this->redirectWithMessage('store', $model);
     }
@@ -74,7 +74,7 @@ class BaseController extends Controller
 
         $model->updateWithRelations($request);
 
-        $this->dispatchEvent('update');
+        $this->dispatchEvent('update', $model);
 
         return $this->redirectWithMessage('update', $model);
     }
@@ -148,7 +148,7 @@ class BaseController extends Controller
         return [$request, $model];
     }
 
-    protected function dispatchEvent($action): void
+    protected function dispatchEvent($action, $modelRecord = null): void
     {
     }
 }

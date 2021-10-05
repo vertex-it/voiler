@@ -2,6 +2,6 @@
 
 namespace VertexIT\Voiler\Policies;
 
-class UserPolicy extends BasePolicy
+class ActivityPolicy extends BasePolicy
 {
 }

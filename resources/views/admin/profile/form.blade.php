@@ -7,7 +7,6 @@
 @endsection
 
 @section('inputs')
-
     <x-inputs.input
         name="name"
         type="text"
@@ -30,5 +29,4 @@
         label="Šifra"
         placeholder="Unesite šifru"
     />
-
 @endsection

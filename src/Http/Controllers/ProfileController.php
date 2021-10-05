@@ -4,7 +4,6 @@ namespace VertexIT\Voiler\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use VertexIT\Voiler\ViewModels\Form\ProfileFormViewModel;
 
 class ProfileController extends BaseController
 {
