@@ -20,9 +20,9 @@
     @if(Gate::check($resource['name_plural'] . ' update') || Gate::check($resource['name_plural'] . ' create') || Gate::check($resource['name_plural'] . ' delete'))
         <div class="relative btn-click-dropdown">
             <button type="button" class="btn btn-transparent btn-sm">
-                <x-heroicon-o-dots-horizontal width="20px" height="20px" class="float-left" />
+                <x-heroicon-o-dots-vertical width="20px" height="20px" class="float-left" />
             </button>
-            <div class="dropdown mt-3 hidden">
+            <div class="dropdown mt-3 hidden right-0">
                 @can($resource['name_plural'] . ' update')
                     <a
                         class="item"

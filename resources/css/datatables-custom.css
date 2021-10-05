@@ -1,15 +1,27 @@
 table.datatable {
-    padding-top: 2rem;
+    padding: 2rem 0;
+}
+
+#datatable_filter input[type="search"],
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: #E5E7EB;
+    font-size: 0.8rem;
+    color: #4a5568;
+}
+
+#datatable_filter input[type="search"] {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+    margin: 0;
 }
 
 /*Form fields*/
 .dataTables_wrapper select,
 .dataTables_wrapper .dataTables_filter input {
     color: #4a5568; 			/*text-gray-700*/
-    padding-left: .5rem; 		/*pl-4*/
-    padding-right: .5rem; 		/*pl-4*/
-    padding-top: .4rem; 		/*pl-2*/
-    padding-bottom: .4rem; 		/*pl-2*/
+    padding: .4rem .5rem;
     border-width: 2px; 			/*border-2*/
     border-radius: .25rem;
     border-color: #edf2f7; 		/*border-gray-200*/
