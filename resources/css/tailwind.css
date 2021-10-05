@@ -14,7 +14,7 @@
     }
 
     .btn-sm {
-        @apply px-4 text-sm;
+        @apply px-3 text-sm;
     }
 
     .btn-primary {
@@ -22,7 +22,7 @@
     }
 
     .btn-transparent {
-        @apply bg-transparent hover:bg-gray-100 text-gray-700 focus:border-gray-400;
+        @apply bg-transparent shadow-none hover:bg-gray-200 text-gray-700 focus:border-gray-400;
     }
 
     .btn-white {
