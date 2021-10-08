@@ -105,6 +105,11 @@ class VoilerServiceProvider extends ServiceProvider
         ], 'voiler-assets');
 
         $this->publishes([
+            __DIR__.'/../database/seeders' => database_path('seeders'),
+            __DIR__.'/../database/factories/Admin' => database_path('factories/Admin'),
+        ], 'voiler-seeders');
+
+        $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views'),
         ], 'voiler-views');
     }
