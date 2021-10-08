@@ -101,6 +101,7 @@ class VoilerServiceProvider extends ServiceProvider
             __DIR__.'/../resources/css' => resource_path('css'),
             __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
             __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
+            __DIR__.'/../.gitignore' => '.gitignore',
         ], 'voiler-assets');
 
         $this->publishes([
