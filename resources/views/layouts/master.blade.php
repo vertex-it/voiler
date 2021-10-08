@@ -94,6 +94,7 @@
                 .replace(/[^\w-]+/g,'');
         }
     </script>
+    @include('voiler::layouts.alerts')
 
     @yield('external-js')
     @stack('scripts')
