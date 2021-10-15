@@ -26,6 +26,12 @@ You can install tailwind:
 npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 ```
 
+You can install jquery:
+
+```bash
+npm install jquery jquery-cropper jquery-timepicker
+```
+
 You can install datatables:
 
 ```bash

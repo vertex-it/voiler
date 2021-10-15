@@ -28,7 +28,7 @@ class GuesserService
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
             'route' => 'admin/' . strtolower(Str::plural($resourceName)),
             'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'model' => class_exists($model) ? $model : '\\App\\Models\\Admin\\' . $resourceName,
+            'model' => class_exists($model) ? $model : '\\App\\Models\\' . $resourceName,
             'title_column' => class_exists($model) ? (new $model)->getTitleColumn() : '',
             'view' => view()->exists($view . '.index') ? $view : 'voiler::admin.' . Str::of($resourceName)->kebab()->lower(),
             'request' => class_exists($request) ? $request : '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request',

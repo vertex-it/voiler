@@ -2,7 +2,7 @@
 
 namespace VertexIT\Voiler\ViewModels\Form;
 
-use App\Models\Admin\User;
+use App\Models\User;
 use VertexIT\Voiler\Models\Permission;
 use VertexIT\Voiler\Models\Role;
 
