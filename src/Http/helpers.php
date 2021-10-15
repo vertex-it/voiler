@@ -17,6 +17,6 @@ if (! function_exists('toastrMessage')) {
             $title = $model->name ?? '';
         }
 
-        return implode('', [__('toastr.' . $type), '<br>', $title]);
+        return implode('', [__('voiler::toastr.' . $type), '<br>', $title]);
     }
 }

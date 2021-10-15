@@ -97,11 +97,17 @@ class VoilerServiceProvider extends ServiceProvider
         ], 'voiler-config');
 
         $this->publishes([
-            __DIR__.'/../resources/js' => resource_path('js'),
-            __DIR__.'/../resources/css' => resource_path('css'),
+            __DIR__.'/../resources/js' => resource_path('js/vendor'),
+            __DIR__.'/../resources/css' => resource_path('css/vendor'),
             __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
             __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
+            __DIR__.'/../.gitignore' => '.gitignore',
         ], 'voiler-assets');
+
+        $this->publishes([
+            __DIR__.'/../database/seeders' => database_path('seeders'),
+            __DIR__.'/../database/factories/Admin' => database_path('factories/Admin'),
+        ], 'voiler-seeders');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views'),
