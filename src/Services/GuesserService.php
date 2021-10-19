@@ -41,7 +41,7 @@ class GuesserService
             'route' => 'admin/' . strtolower(Str::plural($resourceName)),
             'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
             'model' => $model,
-            'title_column' => (new $model)->getTitleColumn(),
+            'title_column' => class_exists($model) ? (new $model)->getTitleColumn() : '',
             'view' => $view,
             'request' => $request,
             'datatable_service' => $datatableService,
