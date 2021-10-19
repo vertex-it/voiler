@@ -35,7 +35,7 @@ npm install jquery jquery-cropper jquery-timepicker
 You can install datatables:
 
 ```bash
-npm install datatables.net datatables.net-dt
+npm install datatables.net-dt datatables.net-buttons-dt datatables.net-select-dt datatables.net-responsive-dt
 ```
 
 You can publish the assets:

@@ -13,12 +13,24 @@ class GuesserService
      */
     private static function formResourceNameMapping(string $resourceName): array
     {
-        $model = '\\VertexIT\\Voiler\\Models\\' . $resourceName;
-        $request = '\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request';
-        $datatableService = '\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService';
-        $indexViewModel = '\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel';
-        $formViewModel = '\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel';
-        $view = 'admin.' . Str::of($resourceName)->kebab()->lower();
+        $model = class_exists('\\VertexIT\\Voiler\\Models\\' . $resourceName) ?
+            '\\VertexIT\\Voiler\\Models\\' . $resourceName :
+            '\\App\\Models\\' . $resourceName;
+        $request = class_exists('\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request') ?
+            '\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request' :
+            '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request';
+        $datatableService = class_exists('\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService') ?
+            '\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService' :
+            '\\App\\Services\\Datatables\\' . $resourceName . 'DatatableService';
+        $indexViewModel = class_exists('\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel') ?
+            '\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel' :
+            '\\App\ViewModels\\Index\\' . $resourceName . 'IndexViewModel';
+        $formViewModel = class_exists('\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel') ?
+            '\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel' :
+            '\\App\ViewModels\\Form\\' . $resourceName . 'FormViewModel';
+        $view = view()->exists('admin.' . Str::of($resourceName)->kebab()->lower() . '.index') ?
+            'admin.' . Str::of($resourceName)->kebab()->lower() :
+            'voiler::admin.' . Str::of($resourceName)->kebab()->lower();
 
         return [
             'name' => $resourceName,
@@ -28,13 +40,13 @@ class GuesserService
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
             'route' => 'admin/' . strtolower(Str::plural($resourceName)),
             'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'model' => class_exists($model) ? $model : '\\App\\Models\\' . $resourceName,
-            'title_column' => class_exists($model) ? (new $model)->getTitleColumn() : '',
-            'view' => view()->exists($view . '.index') ? $view : 'voiler::admin.' . Str::of($resourceName)->kebab()->lower(),
-            'request' => class_exists($request) ? $request : '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request',
-            'datatable_service' => class_exists($datatableService) ? $datatableService : '\\App\\Services\\Datatables\\' . $resourceName . 'DatatableService',
-            'index_view_model' => class_exists($indexViewModel) ? $indexViewModel : '\\App\ViewModels\\Index\\' . $resourceName . 'IndexViewModel',
-            'form_view_model' => class_exists($formViewModel) ? $formViewModel : '\\App\ViewModels\\Form\\' . $resourceName . 'FormViewModel',
+            'model' => $model,
+            'title_column' => (new $model)->getTitleColumn(),
+            'view' => $view,
+            'request' => $request,
+            'datatable_service' => $datatableService,
+            'index_view_model' => $indexViewModel,
+            'form_view_model' => $formViewModel,
         ];
     }
 

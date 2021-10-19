@@ -159,6 +159,19 @@
                         }
                     ],
                     columnDefs: [],
+                    responsive: {
+                        details: {
+                            display: $.fn.dataTable.Responsive.display.modal({
+                                header: function (row) {
+                                    var data = row.data();
+                                    return 'Detalji za ' + data.{{ $resource['title_column'] }};
+                                }
+                            }),
+                            renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                                tableClass: 'table'
+                            })
+                        }
+                    },
                     rowCallback: function (row, data) {
                         if (data.deleted_at) {
                             $(row).css({'color': 'red'});
@@ -167,7 +180,7 @@
                 })
             );
 
-            // DataTable.buttons().container().appendTo('#datatable_filter');
+            DataTable.buttons().container().appendTo('#datatable_filter');
 
             $('.btn-no-margin').css({'margin-left': 0});
 
