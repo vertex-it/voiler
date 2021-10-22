@@ -42,7 +42,7 @@
     }
 
     .modal {
-        @apply hidden fixed z-40 inset-0 overflow-y-auto;
+        @apply fixed z-10 inset-0 overflow-y-auto;
     }
 
     .modal-dialog {
@@ -57,12 +57,16 @@
         @apply hidden sm:inline-block sm:align-middle sm:h-screen;
     }
 
-    .modal-content {
+    .modal-data {
         @apply inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full;
     }
 
-    .modal-body {
-        @apply bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4;
+    .modal-title {
+        @apply text-lg leading-6 font-medium text-gray-900;
+    }
+
+    .modal-content {
+        @apply mt-6;
     }
 
     .modal-footer {
