@@ -32,7 +32,7 @@
     </div>
 @endsection
 
-@section('external-js')
+@section('scripts')
     <script>
         ajaxData = function () {
             return {};
@@ -286,17 +286,17 @@
 
             body.delegate('.delete-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'delete-confirm', 'Obrišite',  'btn btn-sm btn-danger');
+                openConfirmModal($(this), 'delete-confirm', '{{ __('Delete') }}',  'btn btn-sm btn-danger');
             })
 
             body.delegate('.force-delete-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'force-delete-confirm', 'Obrišite', 'btn btn-sm btn-danger');
+                openConfirmModal($(this), 'force-delete-confirm', '{{ __('Delete') }}', 'btn btn-sm btn-danger');
             })
 
             body.delegate('.restore-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'restore-confirm', 'Vratite', 'btn btn-sm btn-primary');
+                openConfirmModal($(this), 'restore-confirm', '{{ __('Bring back') }}', 'btn btn-sm btn-primary');
             })
 
             $(document).on('click', '.update-priority-button', function () {

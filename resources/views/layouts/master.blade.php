@@ -58,8 +58,7 @@
     </script>
     @include('voiler::layouts.alerts')
 
-{{--    TODO change to scripts --}}
-    @yield('external-js')
+    @yield('scripts')
     @stack('scripts')
 </body>
 </html>
