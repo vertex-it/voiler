@@ -14,25 +14,27 @@
         * {
             font-family: 'Roboto', sans-serif;
         }
-
-        body {
-            background-color: #f9fafb;
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='24' viewBox='0 0 12 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23eaeaea' fill-opacity='0.4'%3E%3Cpath d='M2 0h2v12H2V0zm1 20c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM9 8c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-1 4h2v12H8V12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
     </style>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body>
+<body class="bg-gradient-to-tr from-blue-100 via-red-100 to-blue-100">
     <div class="container mx-auto h-screen flex items-center" style="max-width: 560px;">
         <div class="section m-0 w-full">
             <div class="section-content">
                 <div class="card">
                     <div class="py-8">
-                        <p class="text-center text-2xl tracking-wide text-blue-500 font-semibold mb-3">{{ config('app.name') }}</p>
-                        <h1 class="font-bold text-gray-800 text-3xl text-center">{{ __('Sign into your account') }}</h1>
+                        <div class="flex justify-center pb-10">
+                            <img
+                                    src="{{ asset('img/logo.png') }}"
+                                    alt="Logo"
+                                    height="30%"
+                                    width="30%"
+                            >
+                        </div>
                     </div>
-                    <hr class="my-10 border-gray-100">
+                    <h1 class="text-gray-800 text-2xl">{{ __('Sign into your account') }}</h1>
+                    <hr class="my-5">
                     <x-form
                         action="{{ route('login') }}"
                         method="POST"

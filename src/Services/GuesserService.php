@@ -13,21 +13,26 @@ class GuesserService
      */
     private static function formResourceNameMapping(string $resourceName): array
     {
-        $model = class_exists('\\VertexIT\\Voiler\\Models\\' . $resourceName) ?
-            '\\VertexIT\\Voiler\\Models\\' . $resourceName :
-            '\\App\\Models\\' . $resourceName;
-        $request = class_exists('\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request') ?
-            '\\VertexIT\\Voiler\\Http\\Requests\\' . $resourceName . 'Request' :
-            '\\App\\Http\\Requests\\Admin\\' . $resourceName . 'Request';
-        $datatableService = class_exists('\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService') ?
-            '\\VertexIT\\Voiler\\Services\\Datatables\\' . $resourceName . 'DatatableService' :
-            '\\App\\Services\\Datatables\\' . $resourceName . 'DatatableService';
-        $indexViewModel = class_exists('\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel') ?
-            '\\VertexIT\\Voiler\\ViewModels\\Index\\' . $resourceName . 'IndexViewModel' :
-            '\\App\ViewModels\\Index\\' . $resourceName . 'IndexViewModel';
-        $formViewModel = class_exists('\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel') ?
-            '\\VertexIT\\Voiler\\ViewModels\\Form\\' . $resourceName . 'FormViewModel' :
-            '\\App\ViewModels\\Form\\' . $resourceName . 'FormViewModel';
+        $classNamespaces = [
+            'model' => '\\Models',
+            'request' => '\\Http\\Requests',
+            'datatableService' => '\\Services\\Datatables',
+            'indexViewModel' => '\\ViewModels\\Index',
+            'formViewModel' => '\\ViewModels\\Form',
+        ];
+
+        foreach ($classNamespaces as $type => $namespace) {
+            $suffix = $type === 'model' ? '' : ucfirst($type);
+
+            $fullNamespace = self::getClassFullNamespace('app', $namespace, $resourceName, $suffix);
+
+            if (! class_exists($fullNamespace)) {
+                $fullNamespace = self::getClassFullNamespace('voiler', $namespace, $resourceName, $suffix);
+            }
+
+            $classNamespaces[$type] = $fullNamespace;
+        }
+
         $view = view()->exists('admin.' . Str::of($resourceName)->kebab()->lower() . '.index') ?
             'admin.' . Str::of($resourceName)->kebab()->lower() :
             'voiler::admin.' . Str::of($resourceName)->kebab()->lower();
@@ -40,13 +45,13 @@ class GuesserService
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
             'route' => 'admin/' . strtolower(Str::plural($resourceName)),
             'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'model' => $model,
-            'title_column' => class_exists($model) ? (new $model)->getTitleColumn() : '',
+            'model' => $classNamespaces['model'],
+            'title_column' => class_exists($classNamespaces['model']) ? (new $classNamespaces['model'])->getTitleColumn() : '',
             'view' => $view,
-            'request' => $request,
-            'datatable_service' => $datatableService,
-            'index_view_model' => $indexViewModel,
-            'form_view_model' => $formViewModel,
+            'request' => $classNamespaces['request'],
+            'datatable_service' => $classNamespaces['datatableService'],
+            'index_view_model' => $classNamespaces['indexViewModel'],
+            'form_view_model' => $classNamespaces['formViewModel'],
         ];
     }
 
@@ -90,5 +95,12 @@ class GuesserService
         $resourceName = explode('\\', $className);
 
         return str_replace($suffix, '', last($resourceName));
+    }
+
+    public static function getClassFullNamespace(string $vendor, string $namespace, string $resourceName, string $suffix)
+    {
+        $prefix = $vendor === 'app' ? '\\App' : '\\VertexIT\\Voiler';
+
+        return $prefix . $namespace . '\\' . $resourceName . $suffix;
     }
 }

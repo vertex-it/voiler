@@ -87,6 +87,10 @@ class VoilerServiceProvider extends ServiceProvider
         foreach ($policies as $key => $value) {
             Gate::policy($key, $value);
         }
+
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('superadmin') ? true : null;
+        });
     }
 
     protected function registerPublishableFiles()
