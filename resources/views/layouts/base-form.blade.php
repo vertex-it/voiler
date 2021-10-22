@@ -9,9 +9,13 @@
                     method="{{ $getFormMethod }}"
                     buttonText="Sačuvajte"
                     multipart
+                    button="{{ $hasButton ?? true }}"
                 >
                     @yield('inputs')
                 </x-form>
+                @if (! ($hasButton ?? true))
+                    @yield('confirm-button')
+                @endif
             </div>
         </div>
     </div>

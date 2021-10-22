@@ -32,7 +32,7 @@
     </div>
 @endsection
 
-@section('external-js')
+@section('scripts')
     <script>
         ajaxData = function () {
             return {};
@@ -260,6 +260,44 @@
             function refreshDatatable() {
                 DataTable.ajax.reload();
             }
+
+            $(document).on('click', '.modal-action-btn', function() {
+                const confirmButtonClass = $(this).data('confirmButtonClass');
+                const properties = $(this).data('properties');
+
+                switch (confirmButtonClass) {
+                    case 'delete-confirm':
+                        deleteElement(properties);
+                        break;
+
+                    case 'force-delete-confirm':
+                        forceDeleteElement(properties);
+                        break;
+
+                    case 'restore-confirm':
+                        restoreElement(properties);
+                        break;
+                }
+
+                closeModal();
+            });
+
+            const body = $('body')
+
+            body.delegate('.delete-button', 'click', function (e) {
+                e.preventDefault();
+                openConfirmModal($(this), 'delete-confirm', '{{ __('Delete') }}',  'btn btn-sm btn-danger');
+            })
+
+            body.delegate('.force-delete-button', 'click', function (e) {
+                e.preventDefault();
+                openConfirmModal($(this), 'force-delete-confirm', '{{ __('Delete') }}', 'btn btn-sm btn-danger');
+            })
+
+            body.delegate('.restore-button', 'click', function (e) {
+                e.preventDefault();
+                openConfirmModal($(this), 'restore-confirm', '{{ __('Bring back') }}', 'btn btn-sm btn-primary');
+            })
 
             $(document).on('click', '.update-priority-button', function () {
                 let id = $(this).attr('data-id');
