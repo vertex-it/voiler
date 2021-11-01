@@ -17,6 +17,7 @@
             font-family: 'Roboto', sans-serif;
         }
     </style>
+    @yield('styles')
 </head>
 <body>
     <x-modal />

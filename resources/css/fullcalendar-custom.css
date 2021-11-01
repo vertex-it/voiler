@@ -1,0 +1,13 @@
+.fc-toolbar button,
+.fc .fc-button-group > button {
+    border: 0;
+    border-radius: 0;
+    background-color: #3b82f6;
+    color: #fff;
+    background-image: none;
+}
+
+.fc-toolbar button:hover,
+.fc .fc-button-group > button:hover {
+    background-color: #0f59d2;
+}

@@ -7,6 +7,10 @@
     @yield('aditional-content')
 @endsection
 
+@section('styles')
+    @yield('aditional-styles')
+@endsection
+
 @section('content')
     <div class="section w-full">
         @can($resource['name_plural'] . ' create')
@@ -27,6 +31,10 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+            </div>
+
+            <div>
+                @yield('aditional-post-content')
             </div>
         </div>
     </div>

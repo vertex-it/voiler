@@ -15,15 +15,16 @@ mix
     ], 'public/css/app.css')
     .scripts([
         'public/js/bootstrap.js',
-        'resources/js/vendor/adminpanel.js',
-        'resources/js/vendor/modal.js',
-        'resources/js/vendor/util.js',
+        // 'resources/js/vendor/adminpanel.js',
+        // 'resources/js/vendor/modal.js',
+        // 'resources/js/vendor/util.js',
         'resources/js/vendor/toastr.min.js',
     ], 'public/js/app.js')
     .version();
 
 mix.styles([
     'resources/css/vendor/fullcalendar.css',
+    'resources/css/vendor/fullcalendar-custom.css',
 ], 'public/css/calendar.css')
     .scripts([
         'resources/js/vendor/moment.min.js',
