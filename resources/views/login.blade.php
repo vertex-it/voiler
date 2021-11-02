@@ -26,7 +26,11 @@
                     <div class="py-8">
                         <div class="flex justify-center pb-10">
                             <img
-                                    src="{{ asset('img/logo.png') }}"
+                                    @if(file_exists(public_path('img/logo.svg')))
+                                        src="{{ asset('img/logo.svg') }}"
+                                    @else
+                                        src="{{ asset('img/logo.png') }}"
+                                    @endif
                                     alt="Logo"
                                     height="30%"
                                     width="30%"
