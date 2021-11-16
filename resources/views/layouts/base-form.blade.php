@@ -7,7 +7,7 @@
                 <x-form
                     action="{{ $getFormAction }}"
                     method="{{ $getFormMethod }}"
-                    buttonText="Sačuvajte"
+                    buttonText="{{ __('voiler::interface.save') }}"
                     multipart
                     button="{{ $hasButton ?? true }}"
                 >

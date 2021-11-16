@@ -1,7 +1,7 @@
 @extends('voiler::layouts.base-index')
 
 @section('aditional-content')
-    <x-modal id="activity-modal" title="Aktivnost" />
+    <x-modal id="activity-modal" title="{{ __('voiler::interface.activity') }}" />
 @endsection
 
 @section('aditional-scripts')

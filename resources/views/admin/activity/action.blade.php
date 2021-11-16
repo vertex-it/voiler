@@ -5,7 +5,7 @@
     <div class="dropdown mt-3 hidden right-0">
         @can($resource['name_plural'] . ' update')
             <a class="item" href="{{ $getModelRoute('show', $model) }}">
-                Prikažite
+                {{ __('voiler::interface.show') }}
             </a>
         @endcan
     </div>

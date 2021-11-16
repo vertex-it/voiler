@@ -13,7 +13,7 @@
 
 @section('content')
     <div class="section w-full">
-        @can($resource['name_plural'] . ' create')
+        @can($resource['roles']['create'])
             @section('action-button')
                 <a class="btn btn-primary btn-sm px-5" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['name_singular']) }}
@@ -120,15 +120,15 @@
                                 {
                                     extend: 'selectAll',
                                     className: 'btn-white btn-sm border border-right-0 btn-no-margin',
-                                    text: 'Odaberite sve'
+                                    text: '{{ __('voiler::interface.select_all') }}'
                                 },
                                 {
                                     extend: 'selectNone',
                                     className: 'btn-white btn-sm border btn-no-margin',
-                                    text: 'Poništite odabir'
+                                    text: '{{ __('voiler::interface.cancel') }}'
                                 },
                                 {
-                                    text: 'Obrišite',
+                                    text: '{{ __('voiler::interface.soft_delete') }}',
                                     className: 'btn-white btn-sm border border-left-0 btn-no-margin',
                                     enabled: false,
                                     action: function (e, dt, node, config) {
@@ -149,7 +149,7 @@
                                     }
                                 },
                                 {
-                                    text: 'Vratite',
+                                    text: '{{ __('voiler::interface.restore') }}',
                                     className: 'btn-white btn-sm border border-left-0 btn-no-margin',
                                     enabled: false,
                                     action: function (e, dt, node, config) {
@@ -172,7 +172,7 @@
                             display: $.fn.dataTable.Responsive.display.modal({
                                 header: function (row) {
                                     var data = row.data();
-                                    return 'Detalji za ' + data.{{ $resource['title_column'] }};
+                                    return '{{ __('voiler::interface.details_for') }} ' + data.{{ $resource['title_column'] }};
                                 }
                             }),
                             renderer: $.fn.dataTable.Responsive.renderer.tableAll({
@@ -204,11 +204,11 @@
                     method: 'DELETE',
                     url: url,
                     success: function () {
-                        toastr.success('Uspješno ste obrisali element!');
+                        toastr.success('{{ __('voiler::interface.soft_delete_success') }}');
                         refreshDatatable();
                     },
                     error: function () {
-                        toastr.error('Dogodila se greška');
+                        toastr.error('{{ __('voiler::interface.there_was_an_error') }}');
                     }
                 })
             }
@@ -221,11 +221,11 @@
                         id: id
                     },
                     success: function () {
-                        toastr.success('Uspješno ste vratili element!');
+                        toastr.success('{{ __('voiler::interface.restore_success') }}');
                         refreshDatatable();
                     },
                     error: function () {
-                        toastr.error('Dogodila se greška');
+                        toastr.error('{{ __('voiler::interface.there_was_an_error') }}');
                     }
                 })
             }
@@ -238,11 +238,11 @@
                         id: id
                     },
                     success: function () {
-                        toastr.success('Uspješno ste obrisali trajno element!');
+                        toastr.success('{{ __('voiler::interface.force_delete_success') }}');
                         refreshDatatable();
                     },
                     error: function () {
-                        toastr.error('Dogodila se greška');
+                        toastr.error('{{ __('voiler::interface.there_was_an_error') }}');
                     }
                 })
             }
@@ -256,11 +256,11 @@
                         priority: priority
                     },
                     success: function () {
-                        toastr.success('Uspješno ste ažurirali prioritet!');
+                        toastr.success('{{ __('voiler::interface.priority_update_success') }}');
                         refreshDatatable();
                     },
                     error: function () {
-                        toastr.error('Dogodila se greška');
+                        toastr.error('{{ __('voiler::interface.there_was_an_error') }}');
                     }
                 })
             }
@@ -294,17 +294,17 @@
 
             body.delegate('.delete-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'delete-confirm', '{{ __('Delete') }}',  'btn btn-sm btn-danger');
+                openConfirmModal($(this), 'delete-confirm', '{{ __('voiler::interface.soft_delete') }}',  'btn btn-sm btn-danger');
             })
 
             body.delegate('.force-delete-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'force-delete-confirm', '{{ __('Delete') }}', 'btn btn-sm btn-danger');
+                openConfirmModal($(this), 'force-delete-confirm', '{{ __('voiler::interface.force_delete') }}', 'btn btn-sm btn-danger');
             })
 
             body.delegate('.restore-button', 'click', function (e) {
                 e.preventDefault();
-                openConfirmModal($(this), 'restore-confirm', '{{ __('Bring back') }}', 'btn btn-sm btn-primary');
+                openConfirmModal($(this), 'restore-confirm', '{{ __('voiler::interface.restore') }}', 'btn btn-sm btn-primary');
             })
 
             $(document).on('click', '.update-priority-button', function () {

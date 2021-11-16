@@ -4,14 +4,16 @@
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{{ route('admin.activities.index') }}">Aktivnosti</a>
+            <a href="{{ route('admin.activities.index') }}">
+                {{ __('voiler::interface.activities') }}
+            </a>
         </li>
     </ul>
     <div class="content-i">
         <div class="content-box">
             <div class="element-wrapper">
                 <h6 class="element-header">
-                    Aktivnost
+                    {{ __('voiler::interface.activity') }}
                 </h6>
                 <div class="element-box">
                     <div class="table-responsive">
@@ -19,11 +21,11 @@
                             <table class="table" style="word-break: break-all; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th width="150">Kolona</th>
+                                        <th width="150">{{ __('voiler::interface.column') }}</th>
                                         @if(isset($activity['old']))
-                                            <th>Stara vrijednost</th>
+                                            <th>{{ __('voiler::interface.old_value') }}</th>
                                         @endif
-                                        <th>Nova vrijednost</th>
+                                        <th>{{ __('voiler::interface.new_value') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

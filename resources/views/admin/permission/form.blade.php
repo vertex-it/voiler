@@ -11,21 +11,21 @@
         type="text"
         name="name"
         :value="$permission->name"
-        label="Naziv"
-        placeholder="Unesite naziv dozvole"
+        label="{{ __('voiler::interface.permission_name') }}"
+        placeholder="{{ __('voiler::interface.please_enter_permission_name') }}"
         required
     />
 
     <x-inputs.textarea
         name="description"
-        label="Opis"
+        label="{{ __('voiler::interface.permission_description') }}"
         :value="$permission->description"
     />
 
     <x-inputs.select
         name="roles"
-        label="Uloge"
-        placeholder="Odaberite uloge..."
+        label="{{ __('voiler::interface.permission_roles') }}"
+        placeholder="{{ __('voiler::interface.permission_roles_picker') }}"
         :options="$roles"
         :value="$activeRoles"
         selectize

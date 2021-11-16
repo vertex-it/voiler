@@ -12,7 +12,7 @@
         type="text"
         value="{{ $profile->name }}"
         required
-        label="Ime i prezime"
+        label="{{ __('voiler::interface.name') }}"
     />
 
     <x-inputs.input
@@ -26,7 +26,7 @@
     <x-inputs.input
         name="password"
         type="password"
-        label="Šifra"
-        placeholder="Unesite šifru"
+        label="{{ __('voiler::interface.password') }}"
+        placeholder="{{ __('voiler::interface.please_enter_your_password') }}"
     />
 @endsection

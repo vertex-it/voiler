@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login | {{ config('app.name') }}</title>
+    <title>{{ __('voiler::interface.login') }} | {{ config('app.name') }}</title>
     <link href="{{ asset('favicon.ico') }}">
 
     <meta charset="UTF-8">
@@ -37,17 +37,17 @@
                             >
                         </div>
                     </div>
-                    <h1 class="text-gray-800 text-2xl">{{ __('Sign into your account') }}</h1>
+                    <h1 class="text-gray-800 text-2xl">{{ __('voiler::interface.sign_in_to_your_account') }}</h1>
                     <hr class="my-5">
                     <x-form
                         action="{{ route('login') }}"
                         method="POST"
-                        buttonText="{{ __('Log in') }}"
+                        buttonText="{{ __('voiler::interface.login') }}"
                         buttonClasses="w-full mt-10"
                     >
                         <x-inputs.input name="email" type="email" fullWidth />
                         <x-inputs.input name="password" type="password" fullWidth />
-                        <x-inputs.toggle name="remember" label="{{ __('Remember me') }}" value="true" />
+                        <x-inputs.toggle name="remember" label="{{ __('voiler::interface.remember_me') }}" value="true" />
                     </x-form>
                 </div>
             </div>

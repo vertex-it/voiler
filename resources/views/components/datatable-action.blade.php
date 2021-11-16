@@ -4,74 +4,74 @@
             <x-heroicon-o-dots-vertical width="20px" height="20px" class="float-left" />
         </button>
         <div class="dropdown mt-3 hidden right-0">
-            @can($resource['name_plural'] . ' restore')
+            @can($resource['roles']['restore'])
                 <x-modal-button
                     id="{{ $model->id }}"
-                    title="Da li ste sigurni?"
-                    content="Da li ste sigurni da želite vratiti ovaj element?"
+                    title="{{ __('voiler::interface.are_you_sure') }}"
+                    content="{{ __('voiler::interface.restored_element_will_be_active') }}"
                     buttonClass="item text-left"
                     confirmButtonClass="restore-button"
                     icon='<svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>'
                 >
-                    {{ __('Restore') }}
+                    {{ __('voiler::interface.restore') }}
                 </x-modal-button>
             @endcan
 
-            @can($resource['name_plural'] . ' forceDelete')
+            @can($resource['roles']['forceDelete'])
                 <x-modal-button
                     id="{{ $model->id }}"
-                    title="Da li ste sigurni?"
-                    content="Ukoliko trajno obrišete element, nećete ga više moći vratiti"
+                    title="{{ __('voiler::interface.are_you_sure') }}"
+                    content="{{ __('voiler::interface.you_will_not_be_able_to_undo_this_action') }}"
                     buttonClass="item text-left"
                     confirmButtonClass="force-delete-button"
                     icon='<svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>'
                 >
-                    {{ __('Force delete') }}
+                    {{ __('voiler::interface.force_delete') }}
                 </x-modal-button>
             @endcan
         </div>
     </div>
 @else
-    @if(Gate::check($resource['name_plural'] . ' update') || Gate::check($resource['name_plural'] . ' create') || Gate::check($resource['name_plural'] . ' delete'))
+    @if(Gate::check($resource['roles']['update']) || Gate::check($resource['roles']['create']) || Gate::check($resource['roles']['delete']))
         <div class="relative btn-click-dropdown">
             <button type="button" class="btn btn-transparent btn-sm">
                 <x-heroicon-o-dots-vertical width="20px" height="20px" class="float-left" />
             </button>
             <div class="dropdown mt-3 hidden right-0">
-                @can($resource['name_plural'] . ' update')
+                @can($resource['roles']['update'])
                     <a
                         class="item"
                         href="{{ $getModelRoute('edit', $model) }}"
                     >
-                        Izmjenite
+                        {{ __('voiler::interface.edit') }}
                     </a>
                 @endcan
 
-                @can($resource['name_plural'] . ' create')
+                @can($resource['roles']['create'])
                     <a
                         class="item"
                         href="{{ $getModelRoute('clone', $model) }}"
                     >
-                        Kopirajte
+                        {{ __('voiler::interface.duplicate') }}
                     </a>
                 @endcan
 
-                @can($resource['name_plural'] . ' delete')
+                @can($resource['roles']['delete'])
                     <x-modal-button
                         id="{{ $getModelRoute('destroy', $model) }}"
-                        title="Da li ste sigurni?"
-                        content="Ukoliko obrišete element, možete ga kasnije vratiti"
+                        title="{{ __('voiler::interface.are_you_sure') }}"
+                        content="{{ __('voiler::interface.soft_deleted_element_is_restorable') }}"
                         buttonClass="item text-left"
                         confirmButtonClass="delete-button"
                         icon='<svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>'
                     >
-                        {{ __('Delete') }}
+                        {{ __('voiler::interface.soft_delete') }}
                     </x-modal-button>
                 @endcan
             </div>

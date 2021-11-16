@@ -1,9 +1,8 @@
-{{-- FIX: Use simple base index because there is no soft delete, etc. --}}
 @extends('voiler::layouts.base-index')
 
 @section('aditional-content')
-    <x-modal id="roles-modal" title="Uloge" />
-    <x-modal id="users-modal" title="Korisnici" />
+    <x-modal id="roles-modal" title="{{ __('voiler::interface.roles') }}" />
+    <x-modal id="users-modal" title="{{ __('voiler::interface.users') }}" />
 @endsection
 
 @section('aditional-scripts')
