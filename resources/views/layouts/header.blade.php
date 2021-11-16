@@ -3,7 +3,9 @@
         <a href="#">
             <img src="{{ asset('img/logo.svg') }}" class="h-6" alt="logo">
         </a>
+
         @include('voiler::layouts.navigation')
+
         <div class="flex items-center">
             <button class="p-1 rounded-full text-gray-600 hover:text-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
                 <span class="sr-only">View notifications</span>

@@ -52,6 +52,7 @@ class GuesserService
             'datatable_service' => $classNamespaces['datatableService'],
             'index_view_model' => $classNamespaces['indexViewModel'],
             'form_view_model' => $classNamespaces['formViewModel'],
+            'roles' => self::generatePermissions($resourceName),
         ];
     }
 
@@ -102,5 +103,17 @@ class GuesserService
         $prefix = $vendor === 'app' ? '\\App' : '\\VertexIT\\Voiler';
 
         return $prefix . $namespace . '\\' . $resourceName . $suffix;
+    }
+
+    private static function generatePermissions(string $resourceName): array
+    {
+        $permissionTypes = config('voiler.permission_types');
+
+        $permissions = [];
+        foreach ($permissionTypes as $permissionType) {
+            $permissions[$permissionType] = $resourceName . ' ' . $permissionType;
+        }
+
+        return $permissions;
     }
 }

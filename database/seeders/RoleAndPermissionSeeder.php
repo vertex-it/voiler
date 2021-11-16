@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Spatie\Permission\PermissionRegistrar;
 use VertexIT\Voiler\Models\Permission;
 use VertexIT\Voiler\Models\Role;
@@ -18,25 +19,32 @@ class RoleAndPermissionSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $models = [
-            // Write your models here
-        ];
+        $models = $this->getModels();
 
-        $modelPermissions = [];
+        $permissionTypes = config('voiler.permission_types');
+
         foreach ($models as $model) {
-            $modelPermissions[] = $model . ' view';
-            $modelPermissions[] = $model . ' create';
-            $modelPermissions[] = $model . ' viewAny';
-            $modelPermissions[] = $model . ' update';
-            $modelPermissions[] = $model . ' delete';
-            $modelPermissions[] = $model . ' restore';
-            $modelPermissions[] = $model . ' forceDelete';
-        }
-
-        foreach ($modelPermissions as $permission) {
-            Permission::create(['name' => $permission]);
+            foreach ($permissionTypes as $permissionType) {
+                Permission::create(['name' => $model . ' ' . $permissionType]);
+            }
         }
 
         Role::create(['name' => 'superadmin']);
+    }
+
+    protected function getModels()
+    {
+        $modelsPath = app_path('Models');
+
+        $modelFiles = File::allFiles($modelsPath);
+
+        $models = [];
+        foreach ($modelFiles as $modelFile) {
+            $models[] = $modelFile->getFilenameWithoutExtension();
+        }
+
+        return array_merge($models, [
+            'Activity', 'Permission', 'Profile', 'Role'
+        ]);
     }
 }
