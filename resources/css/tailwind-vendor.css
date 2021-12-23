@@ -1,0 +1,4 @@
+@import "~datatables.net-dt/css/jquery.dataTables.css";
+@import 'selectize-custom.css';
+@import 'datatables-custom.css';
+@import 'toastr-custom.css';

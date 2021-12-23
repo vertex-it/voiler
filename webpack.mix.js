@@ -1,40 +1,42 @@
 const mix = require('laravel-mix')
 
+// --- VOILER MIX ASSETS BEGIN ---
+// Mix tailwind css
 mix
-    .postCss('resources/css/vendor/tailwind.css', 'public/css/tailwind.css', [
-        require('tailwindcss'),
-    ])
-    .css('resources/css/vendor/styles.css', 'public/css/styles.css')
-    .js('resources/js/vendor/bootstrap.js', 'public/js/bootstrap.js')
+    .postCss('resources/css/vendor/tailwind.css', 'public/css/tailwind.css', [ require('tailwindcss') ])
+    .postCss('resources/css/vendor/tailwind-custom.css', 'public/css/tailwind-custom.css', [ require('tailwindcss') ])
+    .css('resources/css/vendor/tailwind-vendor.css', 'public/css/tailwind-vendor.css')
     .styles([
-        'public/css/tailwind.css',
-        'public/css/styles.css',
-        'resources/css/vendor/selectize-custom.css',
-        'resources/css/vendor/datatables-custom.css',
-        'resources/css/vendor/toastr.css',
+        'public/css/tailwind-custom.css',
+        'public/css/tailwind-vendor.css',
     ], 'public/css/app.css')
+    .version();
+
+// Mix jQuery, blade components and datatables
+mix
+    .js('resources/js/vendor/bootstrap.js', 'public/js/bootstrap.js')
+    .js('resources/js/vendor/tailwind.js', 'public/js/tailwind.js')
     .scripts([
         'public/js/bootstrap.js',
-        // 'resources/js/vendor/adminpanel.js',
-        // 'resources/js/vendor/modal.js',
-        // 'resources/js/vendor/util.js',
+        'public/js/tailwind.js',
         'resources/js/vendor/toastr.min.js',
     ], 'public/js/app.js')
     .version();
 
-mix.styles([
-    'resources/css/vendor/fullcalendar.css',
-    'resources/css/vendor/fullcalendar-custom.css',
-], 'public/css/calendar.css')
-    .scripts([
-        'resources/js/vendor/moment.min.js',
-        'resources/js/vendor/fullcalendar.js',
-        'resources/js/vendor/mApp.min.js',
-    ], 'public/js/calendar.js')
-    .version();
+// TODO Extract datatable assets
+// TODO Separate blade-components dependencies
 
-// Tinymce resources
-mix.copyDirectory('node_modules/tinymce/icons', 'public/js/icons');
-mix.copyDirectory('node_modules/tinymce/plugins', 'public/js/plugins');
-mix.copyDirectory('node_modules/tinymce/skins', 'public/js/skins');
-mix.copyDirectory('node_modules/tinymce/themes', 'public/js/themes');
+// Fullcalendar assets
+// mix
+//     .styles([
+//         'resources/css/vendor/fullcalendar.css',
+//         'resources/css/vendor/fullcalendar-custom.css',
+//     ], 'public/css/fullcalendar.css')
+//     .scripts([
+//         'resources/js/vendor/moment.min.js',
+//         'resources/js/vendor/fullcalendar.js',
+//         'resources/js/vendor/mApp.min.js',
+//     ], 'public/js/fullcalendar.js')
+//     .version();
+
+// --- VOILER MIX ASSETS END ---

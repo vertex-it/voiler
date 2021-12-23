@@ -1,8 +1,13 @@
+const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
+    important: true,
     purge: [
         './storage/framework/views/*.php',
         './resources/**/*.blade.php',
         './resources/**/*.js',
+        './config/navigation.php',
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
@@ -16,6 +21,12 @@ module.exports = {
             },
         },
         extend: {
+            colors: {
+                primary: colors.red
+            },
+            fontFamily: {
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            },
             fontSize: {
                 '2xs': '0.6rem',
             },
