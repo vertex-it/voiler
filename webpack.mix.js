@@ -24,19 +24,6 @@ mix
     .version();
 
 // TODO Extract datatable assets
-// TODO Separate blade-components dependencies
-
-// Fullcalendar assets
-// mix
-//     .styles([
-//         'resources/css/vendor/fullcalendar.css',
-//         'resources/css/vendor/fullcalendar-custom.css',
-//     ], 'public/css/fullcalendar.css')
-//     .scripts([
-//         'resources/js/vendor/moment.min.js',
-//         'resources/js/vendor/fullcalendar.js',
-//         'resources/js/vendor/mApp.min.js',
-//     ], 'public/js/fullcalendar.js')
-//     .version();
+// TODO Extract blade-components dependencies
 
 // --- VOILER MIX ASSETS END ---
