@@ -19,7 +19,6 @@ class VoilerServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'voiler');
         $this->registerRoutes();
-        // TODO: Check if this could be removed
         $this->registerPolicies();
 
         if ($this->app->runningInConsole()) {
@@ -88,7 +87,7 @@ class VoilerServiceProvider extends ServiceProvider
             Gate::policy($key, $value);
         }
 
-        Gate::before(function ($user, $ability) {
+        Gate::before(function ($user) {
             return $user->hasRole('superadmin') ? true : null;
         });
     }

@@ -19,7 +19,7 @@ $(document).ready(function () {
 })
 
 // Dropdown toggle
-$(document).on('click', '.dropdown > a', function (e) {
+$(document).on('click', '.dropdown > :first-child', function (e) {
     e.stopPropagation()
 
     let menu = $(this).siblings('.dropdown-menu')

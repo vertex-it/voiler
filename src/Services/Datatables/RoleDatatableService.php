@@ -28,7 +28,6 @@ class RoleDatatableService extends BaseDatatableService
 
     public function prepareQuery(Request $request)
     {
-        // TODO: Authorization
         return Role::with('permissions', 'users')->withTrashed();
     }
 }

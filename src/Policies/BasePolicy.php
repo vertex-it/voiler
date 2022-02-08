@@ -59,6 +59,6 @@ class BasePolicy
 
     private function getPermissionName($permission): string
     {
-        return $this->resource['name_plural'] . ' ' . $permission;
+        return $this->resource['name'] . ' ' . $permission;
     }
 }

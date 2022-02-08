@@ -1,5 +1,5 @@
 <nav class="bg-white shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
             <div class="flex">
                 <a href="{{ route('admin.index') }}" class="flex-shrink-0 flex items-center">

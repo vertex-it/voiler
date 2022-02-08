@@ -1,9 +1,8 @@
 @foreach(config('navigation._pages') as $name => $navigationGroup)
-        {{-- TODO Add active route check --}}
-        <div class="nav-item {{ false ? 'active' : '' }}">
-            @include('voiler::layouts.navigation.item', [
-                'name' => $name,
-                'navigationGroup' => $navigationGroup,
-            ])
-        </div>
+    <div class="nav-item {{ str_contains(print_r($navigationGroup, true), Route::currentRouteName()) ? 'active' : '' }}">
+        @include('voiler::layouts.navigation.item', [
+            'name' => $name,
+            'navigationGroup' => $navigationGroup,
+        ])
+    </div>
 @endforeach

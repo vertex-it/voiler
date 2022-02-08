@@ -4,7 +4,6 @@ namespace VertexIT\Voiler\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-// TODO: Extract to Voiler
 class WorkTime implements CastsAttributes
 {
     /**
@@ -16,7 +15,7 @@ class WorkTime implements CastsAttributes
      * @param  array  $attributes
      * @return mixed
      */
-    public function get($model, $key, $value, $attributes)
+    public function get($model, string $key, $value, array $attributes): mixed
     {
         return json_decode($value, true);
     }
@@ -28,9 +27,9 @@ class WorkTime implements CastsAttributes
      * @param  string  $key
      * @param  array  $value
      * @param  array  $attributes
-     * @return mixed
+     * @return string|bool
      */
-    public function set($model, $key, $value, $attributes)
+    public function set($model, string $key, $value, array $attributes): string|bool
     {
         return json_encode(
             array_map(function ($day) {

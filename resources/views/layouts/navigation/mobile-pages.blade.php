@@ -1,6 +1,5 @@
 @foreach(config('navigation._pages') as $name => $navigationGroup)
-    {{-- TODO Add active route check --}}
-    <div class="nav-mobile-item {{ false ? 'active' : '' }}">
+    <div class="nav-mobile-item {{ str_contains(print_r($navigationGroup, true), Route::currentRouteName()) ? 'active' : '' }}">
         @include('voiler::layouts.navigation.mobile-item', [
             'name' => $name,
             'navigationGroup' => $navigationGroup,

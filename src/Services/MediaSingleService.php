@@ -11,9 +11,6 @@ class MediaSingleService
 
     public static function set($model, string $key, $value, array $attributes)
     {
-        // TODO: Remove
-        // return $value;
-
         if (! $model->exists || ! $value) {
             return $value;
         }

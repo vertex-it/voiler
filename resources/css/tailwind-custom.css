@@ -14,35 +14,36 @@
     }
 
     .btn {
-        @apply px-5 py-2 font-bold rounded shadow focus:outline-none focus:ring-2;
+        @apply inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
     }
 
-    .btn-sm {
-        @apply px-3 text-sm;
-    }
+    /* TODO Add btn-sm css */
+    /*.btn-sm {*/
+    /*    @apply px-3;*/
+    /*}*/
 
-    .btn-primary {
-        @apply bg-blue-500 hover:bg-blue-600 text-white focus:border-blue-300;
-    }
+    /*.btn-primary {*/
+    /*    @apply bg-primary-500 hover:bg-primary-600 text-white focus:border-primary-300;*/
+    /*}*/
 
-    .btn-transparent {
-        @apply bg-transparent shadow-none hover:bg-gray-200 text-gray-600 focus:border-gray-400;
-    }
+    /*.btn-transparent {*/
+    /*    @apply bg-transparent shadow-none hover:bg-gray-200 text-gray-600 focus:border-gray-400;*/
+    /*}*/
 
     .btn-white {
-        @apply bg-white border border-gray-300 hover:bg-gray-200 text-gray-600;
+        @apply text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-100;
     }
 
-    .btn-danger {
-        @apply bg-red-600 hover:bg-red-700 text-white focus:border-red-300;
-    }
+    /*.btn-danger {*/
+    /*    @apply bg-red-600 hover:bg-red-700 text-white focus:border-red-300;*/
+    /*}*/
 
-    .btn-black {
-        @apply bg-black text-white focus:border-gray-900;
-    }
+    /*.btn-black {*/
+    /*    @apply bg-black text-white focus:border-gray-900;*/
+    /*}*/
 
     .btn-has-icon {
-        @apply flex items-center justify-between gap-x-1;
+        @apply p-1.5;
     }
 
     .modal {
@@ -110,7 +111,7 @@
     }
 
     .section-title-border {
-        @apply absolute w-7 h-1 bg-indigo-600 -bottom-0.5 rounded;
+        @apply absolute w-7 h-1 bg-primary-600 -bottom-0.5 rounded;
     }
 
     .section-content {
@@ -199,7 +200,7 @@
     }
 
     form fieldset legend {
-        @apply block w-full text-blue-500 mb-10 border-b border-gray-200;
+        @apply block w-full text-primary-500 mb-10 border-b border-gray-200;
         line-height: 0.1em;
     }
 
@@ -250,7 +251,7 @@
     }
 
     .dropdown .menuitem {
-        @apply flex justify-between px-4 py-3 text-gray-700 text-sm hover:bg-gray-100;
+        @apply flex justify-between px-4 py-3 text-gray-700 text-sm hover:bg-gray-100 w-full;
     }
 
     .nav-mobile-item .menuitem {
@@ -274,7 +275,7 @@
     }
 
     .nav-item.active {
-        @apply border-indigo-500 text-gray-900;
+        @apply border-primary-500 text-gray-900;
     }
 
     .nav-mobile-item {
@@ -283,9 +284,9 @@
 
     /* NAVIGATION END */
 
-    .form-input, .btn-white, .selectize-input, .selectize-control, .form-input-focus {
-        @apply focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent;
-    }
+    /*.form-input, .btn-white, .selectize-input, .selectize-control, .form-input-focus {*/
+    /*    @apply focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent;*/
+    /*}*/
 
     .status-pill {
         @apply w-3 h-3 rounded-full;

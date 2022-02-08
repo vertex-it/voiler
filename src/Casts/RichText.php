@@ -2,10 +2,9 @@
 
 namespace VertexIT\Voiler\Casts;
 
-use App\Services\RichTextMediaLibraryImagesService;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use VertexIT\Voiler\Services\RichTextMediaLibraryImagesService;
 
-// TODO: Extract to Voiler
 class RichText implements CastsAttributes
 {
     /**
@@ -17,7 +16,7 @@ class RichText implements CastsAttributes
      * @param  array  $attributes
      * @return mixed
      */
-    public function get($model, $key, $value, $attributes)
+    public function get($model, string $key, $value, array $attributes): mixed
     {
         return $value;
     }
@@ -29,9 +28,9 @@ class RichText implements CastsAttributes
      * @param  string  $key
      * @param  array  $value
      * @param  array  $attributes
-     * @return mixed
+     * @return string|array
      */
-    public function set($model, $key, $value, $attributes)
+    public function set($model, string $key, $value, array $attributes): string|array
     {
         return (
             new RichTextMediaLibraryImagesService($model, $key, $value)

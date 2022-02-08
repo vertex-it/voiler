@@ -49,21 +49,7 @@
         $(document).ready(function () {
             DataTable = $("#datatable").DataTable(
                 Object.assign(aditionalConfig, {
-                    // dom:
-                    //     '<' +
-                    //     '<"row border-0"' +
-                    //     '<"col-sm-12 col-xxl-6" <"filters">>' +
-                    //     '<"col-sm-12 col-xxl-6"fB>' +
-                    //     '>' +
-                    //     '<t>' +
-                    //     '<"row"' +
-                    //     '<"col-12"i>' +
-                    //     '>' +
-                    //     '<"row"' +
-                    //     '<"col-sm-12 col-md-6"l>' +
-                    //     '<"col-sm-12 col-xl-6"p>' +
-                    //     '>' +
-                    //     '>',
+                    dom: '<"custom-filters"> fB t li p',
                     language: {
                         "sProcessing":   "Obrada u toku...",
                         "sLengthMenu":   "Prikažite _MENU_ rezultata",
@@ -316,7 +302,7 @@
 
             let filters = $('#table_filters').html();
             $('#table_filters').remove();
-            $('#datatable_wrapper div.filters').html(filters);
+            $('#datatable_wrapper div.custom-filters').html(filters);
         });
     </script>
 

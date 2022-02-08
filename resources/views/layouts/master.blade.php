@@ -20,18 +20,20 @@
         @include('voiler::layouts.header')
 
         <div class="py-10">
-            <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                @yield('breadcrumbs')
+            <header class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-none">
+                <div class="col-span-2">
+                    @yield('breadcrumbs')
+                </div>
 
-                <h1 class="flex justify-start text-3xl mt-2">
+                <h1 class="text-3xl mt-2">
                     @yield('title')
                 </h1>
 
-                <div class="flex justify-end">
+                <div class="justify-self-end self-end">
                     @yield('action-button')
                 </div>
             </header>
-            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
                 @yield('content')
             </main>
         </div>

@@ -2,20 +2,15 @@
 
 namespace VertexIT\Voiler\Services;
 
-use Illuminate\Support\Str;
-
 class MediaMultipleService
 {
-    public static function get($model, string $key, $value, array $attributes)
+    public static function get($model, string $key, $value, array $attributes): mixed
     {
         return json_decode($value, true);
     }
 
-    public static function set($model, string $key, $value, array $attributes)
+    public static function set($model, string $key, $value, array $attributes): bool|string
     {
-        // TODO: Remove
-        // return json_encode($value);
-
         $uploadedUrls = array_filter($value ?? []);
         $mediaUrls = $model->{$key} ?? [];
 
