@@ -1,6 +1,7 @@
 const mix = require('laravel-mix')
 
 // --- VOILER MIX ASSETS BEGIN ---
+
 // Mix tailwind css
 mix
     .postCss('resources/css/vendor/tailwind.css', 'public/css/tailwind.css', [ require('tailwindcss') ])
