@@ -5,7 +5,7 @@ const mix = require('laravel-mix')
 mix
     .postCss('resources/css/vendor/tailwind.css', 'public/css/tailwind.css', [ require('tailwindcss') ])
     .postCss('resources/css/vendor/tailwind-custom.css', 'public/css/tailwind-custom.css', [ require('tailwindcss') ])
-    .css('resources/css/vendor/tailwind-vendor.css', 'public/css/tailwind-vendor.css')
+    .postCss('resources/css/vendor/tailwind-vendor.css', 'public/css/tailwind-vendor.css', [require('tailwindcss')])
     .styles([
         'public/css/tailwind-custom.css',
         'public/css/tailwind-vendor.css',
@@ -22,8 +22,5 @@ mix
         'resources/js/vendor/toastr.min.js',
     ], 'public/js/app.js')
     .version();
-
-// TODO Extract datatable assets
-// TODO Extract blade-components dependencies
 
 // --- VOILER MIX ASSETS END ---

@@ -1,6 +1,6 @@
-window.$ = window.jQuery = require('jquery');
+window.$ = window.jQuery = require('jquery')
 
-require('../blade-components');
+require('../blade-components')
 
 require('datatables.net-dt')
 require('datatables.net-buttons-dt')
