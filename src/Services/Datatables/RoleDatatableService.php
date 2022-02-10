@@ -10,18 +10,33 @@ class RoleDatatableService extends BaseDatatableService
 {
     public function addColumns($datatables)
     {
-        return $datatables->addColumn('permissions', function ($role) {
-            return view('blade-components::components.modal-button', [
-                'id' => 'permissions-modal',
-                'content' => implode('<br>', $role->permissions->pluck('name')->toArray()),
-                'buttonClass' => 'btn-light btn-sm',
-            ]);
-        })
+        return $datatables
+            ->addColumn('permissions', function ($role) {
+                $permissions = $role->permissions->pluck('name')->toArray();
+
+                if (count($permissions) === 0) {
+                    return 'n/a';
+                }
+
+                return view('blade-components::components.modal-button', [
+                    'id' => 'permissions-modal',
+                    'title' => __('voiler::interface.permissions'),
+                    'content' => implode('<br>', $permissions),
+                    'buttonClass' => 'btn btn-white',
+                ]);
+            })
             ->addColumn('users', function ($role) {
+                $roles = $role->users->pluck('name')->toArray();
+
+                if (count($roles) === 0) {
+                    return 'n/a';
+                }
+
                 return view('blade-components::components.modal-button', [
                     'id' => 'users-modal',
-                    'content' => implode('<br>', $role->users->pluck('name')->toArray()),
-                    'buttonClass' => 'btn-light btn-sm',
+                    'title' => __('voiler::interface.roles'),
+                    'content' => implode('<br>', $roles),
+                    'buttonClass' => 'btn btn-white',
                 ]);
             });
     }
