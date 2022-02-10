@@ -3,13 +3,12 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     important: true,
-    purge: [
+    content: [
         './storage/framework/views/*.php',
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './config/navigation.php',
     ],
-    darkMode: false, // or 'media' or 'class'
     theme: {
         container: {
             screens: {
@@ -38,9 +37,6 @@ module.exports = {
                 'circle': 'circle',
             },
         },
-    },
-    variants: {
-        extend: {},
     },
     plugins: [
         require('@tailwindcss/forms'),

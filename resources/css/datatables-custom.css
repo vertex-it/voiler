@@ -1,5 +1,5 @@
 table.datatable {
-     @apply py-10;
+    @apply py-4;
 }
 
 .dataTables_wrapper * {
@@ -11,9 +11,21 @@ table.datatable {
     @apply focus:ring-primary-500 focus:border-primary-500 h-full py-2 pl-3 pr-7 mx-1 border-transparent bg-transparent border border-gray-300 text-gray-500 sm:text-sm rounded-md;
 }
 
+.dataTables_wrapper .dataTables_filter {
+    @apply flex;
+}
+
+.dataTables_wrapper .dataTables_filter button {
+    @apply ml-2;
+}
+
+.dataTables_wrapper .dataTables_filter span.dt-down-arrow {
+    @apply hidden;
+}
+
 .dataTables_wrapper .dataTables_filter input {
     /* TODO Use default created style based on tailwind ui */
-    @apply shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full px-4 py-2 leading-tight sm:text-sm border-gray-300 rounded-md;
+    @apply shadow-sm focus-visible:outline-none focus:ring-primary-500 focus:border-primary-500 block w-full px-4 py-2 leading-tight sm:text-sm border-gray-300 rounded-md;
 }
 
 /*Row Hover*/
