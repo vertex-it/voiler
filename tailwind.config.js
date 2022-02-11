@@ -10,15 +10,6 @@ module.exports = {
         './config/navigation.php',
     ],
     theme: {
-        container: {
-            screens: {
-                sm: '600px',
-                md: '728px',
-                lg: '984px',
-                xl: '1240px',
-                '2xl': '1496px',
-            },
-        },
         extend: {
             colors: {
                 primary: colors.red
@@ -28,13 +19,6 @@ module.exports = {
             },
             fontSize: {
                 '2xs': '0.6rem',
-            },
-            screens: {
-                '3xl': '1700px',
-                '4xl': '1950px',
-            },
-            listStyleType: {
-                'circle': 'circle',
             },
         },
     },

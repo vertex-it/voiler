@@ -13,6 +13,7 @@
                 >
                     @yield('inputs')
                 </x-form>
+
                 @if (! ($hasButton ?? true))
                     @yield('confirm-button')
                 @endif

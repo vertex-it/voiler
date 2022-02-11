@@ -51,6 +51,15 @@ table.dataTable thead td {
     @apply border-b border-gray-100 font-medium mb-2;
 }
 
+table.dataTable tbody tr.selected {
+    @apply bg-primary-50;
+}
+
+table.dataTable.hover tbody tr:hover.selected,
+table.dataTable.display tbody tr:hover.selected {
+    @apply bg-primary-200;
+}
+
 /*Pagination Buttons*/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     @apply font-bold rounded border border-transparent bg-none;
