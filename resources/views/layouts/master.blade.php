@@ -14,6 +14,7 @@
     </head>
     <body class="bg-primary h-full">
         <x-modal />
+
         <div class="min-h-screen">
 
             @include('voiler::layouts.header')

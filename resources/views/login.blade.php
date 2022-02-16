@@ -17,8 +17,8 @@
         <div class="mx-auto md:w-full lg:w-1/3 px-10 py-16 bg-white rounded-lg">
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
                 <img
-                    @if(file_exists(public_path('img/logo.svg')))
-                        src="{{ asset('img/logo.svg') }}"
+                    @if(file_exists(public_path(config('navigation._logo.url'))))
+                        src="{{ asset(config('navigation._logo.url')) }}"
                     @else
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                     @endif

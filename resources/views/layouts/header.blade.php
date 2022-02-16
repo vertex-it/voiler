@@ -3,8 +3,8 @@
         <div class="flex justify-between h-20">
             <div class="flex">
                 <a href="{{ route('admin.index') }}" class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-6 w-auto" src="{{ asset('img/logo.svg') }}" alt="Logo">
-                    <img class="hidden lg:block h-6 w-auto" src="{{ asset('img/logo.svg') }}" alt="Logo">
+                    <img class="block lg:hidden h-6 w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Logo">
+                    <img class="hidden lg:block h-6 w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Logo">
                 </a>
 
                 <div class="hidden lg:-my-px lg:ml-16 lg:flex lg:space-x-6">
