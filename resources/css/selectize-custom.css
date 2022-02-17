@@ -99,7 +99,7 @@
 }
 
 .selectize-control.plugin-remove_button .remove-single {
-    @apply text-lg text-gray-700 ml-3;
+    @apply text-sm text-gray-400 ml-3;
 }
 
 .selectize-control {
@@ -113,8 +113,7 @@
 }
 
 .selectize-control.multi .selectize-input.has-items {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding: 6px 8px 3px;
 }
 
 .selectize-input.full {
@@ -136,7 +135,7 @@
 }
 
 .selectize-control.multi .selectize-input > div {
-    @apply cursor-pointer mr-2 px-3 bg-gray-100;
+    @apply cursor-pointer mr-2 mb-1 px-3 bg-gray-100;
 }
 
 .selectize-control.multi .selectize-input > div.active {
