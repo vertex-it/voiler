@@ -21,3 +21,7 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="{{ mix('js/blade-components.js') }}"></script>
+@endsection

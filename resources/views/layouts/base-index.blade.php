@@ -4,6 +4,7 @@
 
 @section('breadcrumbs')
     <x-breadcrumb />
+
     @yield('aditional-content')
 @endsection
 
@@ -56,6 +57,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ mix('js/datatables.js') }}"></script>
     <script>
         ajaxData = function () {
             return {}
