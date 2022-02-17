@@ -13,7 +13,7 @@
             </div>
 
             <div class="hidden lg:ml-6 lg:flex lg:items-center">
-                @include('voiler::layouts.navigation.profile')
+                @include('voiler::layouts.sidebar.profile')
             </div>
 
             <div class="-mr-2 flex items-center lg:hidden">

@@ -15,28 +15,34 @@
     <body class="bg-primary h-full">
         <x-modal />
 
-        <div class="min-h-screen">
+        @include('voiler::layouts.sidebar.mobile')
 
-            @include('voiler::layouts.header')
+        @include('voiler::layouts.sidebar.desktop')
 
-            <div class="py-10">
-                <header class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-none">
-                    <div class="col-span-2">
-                        @yield('breadcrumbs')
+        <div class="md:pl-64 flex flex-col flex-1">
+            @include('voiler::layouts.sidebar.top')
+
+            <main class="flex-1">
+                <div class="px-12 py-8">
+                    <header class="w-full mx-auto grid grid-cols-2 md:grid-cols-none">
+                        <div class="col-span-2">
+                            @yield('breadcrumbs')
+                        </div>
+
+                        <h1 class="text-3xl mt-2">
+                            @yield('title')
+                        </h1>
+
+                        <div class="justify-self-end self-end">
+                            @yield('action-button')
+                        </div>
+                    </header>
+
+                    <div class="w-full mx-auto">
+                        @yield('content')
                     </div>
-
-                    <h1 class="text-3xl mt-2">
-                        @yield('title')
-                    </h1>
-
-                    <div class="justify-self-end self-end">
-                        @yield('action-button')
-                    </div>
-                </header>
-                <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                    @yield('content')
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
