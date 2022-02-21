@@ -118,7 +118,7 @@
     }
 
     .section-content .card {
-        @apply bg-white rounded-xl shadow-md px-10 py-8;
+        @apply bg-white rounded-lg shadow p-8;
     }
 
     /* SECTIONS END */
@@ -202,7 +202,7 @@
 
 @layer utilities {
     .bg-primary {
-        background-color: #F8F9FE;
+        background-color: #F2F4F8;
     }
 
     .text-headline {

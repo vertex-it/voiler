@@ -1,6 +1,6 @@
 <div class="flex">
     <div class="dropdown direction-down-left">
-        <a class="btn btn-white p-1.5" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
+        <a class="btn btn-transparent hover:bg-white hover:border hover:border-gray-200 text-gray-700 p-1.5" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
             <x-heroicon-o-dots-horizontal width="22px" height="22px" />
         </a>
 

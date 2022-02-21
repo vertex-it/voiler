@@ -23,7 +23,7 @@
             @include('voiler::layouts.sidebar.top')
 
             <main class="flex-1">
-                <div class="px-12 py-8">
+                <div class="px-10 py-8">
                     <header class="w-full mx-auto grid grid-cols-2 md:grid-cols-none">
                         <div class="col-span-2">
                             @yield('breadcrumbs')

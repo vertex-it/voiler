@@ -1,5 +1,5 @@
 table.datatable {
-    @apply py-4;
+    @apply py-1;
 }
 
 .dataTables_wrapper * {
@@ -8,7 +8,7 @@ table.datatable {
 
 .dataTables_wrapper .dataTables_length select {
     /* TODO Use default created style based on tailwind ui */
-    @apply focus:ring-primary-500 focus:border-primary-500 h-full py-2 pl-3 pr-7 mx-1 border-transparent bg-transparent border border-gray-300 text-gray-500 sm:text-sm rounded-md;
+    @apply focus:ring-primary-500 focus:border-primary-500 h-full py-2 pl-3 pr-7 mx-1 border-transparent bg-transparent border border-gray-300 text-gray-500 text-sm rounded-md;
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -31,12 +31,12 @@ table.datatable {
 /*Row Hover*/
 table.dataTable.hover tbody tr:hover,
 table.dataTable.display tbody tr:hover {
-    @apply bg-primary-100 cursor-pointer;
+    @apply bg-primary-50 cursor-pointer;
 }
 
 table.dataTable tbody th,
 table.dataTable tbody td {
-    @apply py-4 px-4
+    @apply py-3 px-4 text-gray-700 text-sm border-b border-gray-100;
 }
 
 table.dataTable thead th,
@@ -48,7 +48,7 @@ table.dataTable tbody td {
 
 table.dataTable thead th,
 table.dataTable thead td {
-    @apply border-b border-gray-100 font-medium mb-2;
+    @apply border-b border-gray-400 font-medium text-sm mb-2;
 }
 
 table.dataTable tbody tr.selected {
@@ -62,24 +62,25 @@ table.dataTable.display tbody tr:hover.selected {
 
 /*Pagination Buttons*/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    @apply font-bold rounded border border-transparent bg-none;
+    @apply rounded font-medium border border-transparent bg-none;
 }
 
 /*Pagination Buttons - Current selected */
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     @apply text-white !important;
-    @apply shadow font-bold rounded bg-primary-500 border border-transparent bg-none;
+    @apply shadow-md rounded bg-primary-500 border border-transparent bg-none;
 }
 
 /*Pagination Buttons - Hover */
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    @apply text-white shadow font-bold rounded bg-primary-500 border border-transparent;
+    background: none;
+    @apply text-white shadow-md rounded border border-transparent bg-primary-500;
 }
 
 /*Add padding to bottom border */
 table.dataTable.no-footer {
-    @apply border-b border-gray-100 my-10;
+    @apply border-b-0 my-8;
 }
 
 /*Change colour of responsive icon*/
