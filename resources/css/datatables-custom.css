@@ -61,21 +61,37 @@ table.dataTable.display tbody tr:hover.selected {
 }
 
 /*Pagination Buttons*/
+.dataTables_paginate.paging_simple_numbers {
+    @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    @apply rounded font-medium border border-transparent bg-none;
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium m-0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous, .dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    @apply relative inline-flex items-center px-5 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous {
+    @apply rounded-l-md;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    @apply rounded-r-md;
 }
 
 /*Pagination Buttons - Current selected */
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    @apply text-white !important;
-    @apply shadow-md rounded bg-primary-500 border border-transparent bg-none;
+    background: none;
+    @apply z-10 bg-primary-50 border-primary-500 text-primary-500 !important;
 }
 
 /*Pagination Buttons - Hover */
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: none;
-    @apply text-white shadow-md rounded border border-transparent bg-primary-500;
+    @apply bg-gray-100 text-gray-500 border border-gray-300 !important;
 }
 
 /*Add padding to bottom border */

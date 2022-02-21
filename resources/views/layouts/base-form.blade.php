@@ -1,7 +1,7 @@
 @extends('voiler::layouts.master')
 
 @section('content')
-    <div class="section">
+    <div class="section max-w-full lg:max-w-4xl">
         <div class="section-content">
             <div class="card">
                 <x-form
