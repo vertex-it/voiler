@@ -16,7 +16,7 @@
     <div class="section w-full">
         @can($resource['roles']['create'])
             @section('action-button')
-                <a class="btn btn-primary btn-sm px-5" href="{{ $getModelRoute('create') }}">
+                <a class="btn btn-primary btn-sm" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['name_singular']) }}
                 </a>
             @endsection
@@ -53,6 +53,9 @@
                 </div>
             </div>
         </div>
+
+        @yield('filters')
+
     </div>
 @endsection
 
@@ -66,10 +69,16 @@
         $(document).ready(function () {
             DataTable = $("#datatable").DataTable(
                 Object.assign(aditionalConfig, {
-                    dom: '<"custom-filters"> <"flex justify-end" f <"ml-2 custom-buttons">> t li p',
+                    dom:
+                        '<"flex justify-between items-center"' +
+                            '<"custom-filters">' +
+                            '<"flex justify-end items-center" lf <"ml-2 custom-buttons">>' +
+                        '>' +
+                        ' t ' +
+                        'i p',
                     language: {
                         "sProcessing":   "Obrada u toku...",
-                        "sLengthMenu":   "Prikažite _MENU_ rezultata",
+                        "sLengthMenu":   "Broj redova _MENU_",
                         "sZeroRecords":  "Nije pronađen nijedan rezultat",
                         "sInfo":         "Prikaz _START_ do _END_ od ukupno _TOTAL_ rezultata",
                         "sInfoEmpty":    "Prikaz 0 do 0 od ukupno 0 rezultata",
@@ -79,10 +88,10 @@
                         "sSearchPlaceholder": "Pretraga...",
                         "sUrl":          "",
                         "oPaginate": {
-                            "sFirst":    "Početna",
-                            "sPrevious": "Prethodna",
-                            "sNext":     "Sledeća",
-                            "sLast":     "Poslednja"
+                            "sFirst": '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /> </svg>',
+                            "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /> </svg>',
+                            "sNext": '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /> </svg>',
+                            "sLast": '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /> </svg>'
                         },
                         "select": {
                             "rows": {

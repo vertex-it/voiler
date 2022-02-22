@@ -12,7 +12,7 @@ table.datatable {
 }
 
 .dataTables_wrapper .dataTables_filter {
-    @apply flex;
+    @apply flex mt-0;
 }
 
 .dataTables_wrapper .dataTables_filter button {
@@ -66,11 +66,15 @@ table.dataTable.display tbody tr:hover.selected {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium m-0;
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm m-0;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous, .dataTables_wrapper .dataTables_paginate .paginate_button.next {
-    @apply relative inline-flex items-center px-5 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply relative inline-flex items-center py-2 border border-gray-300 bg-white text-sm text-gray-500 hover:bg-gray-50;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    @apply cursor-not-allowed hover:bg-white !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous {
@@ -107,4 +111,8 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 
 .dataTables_wrapper .dataTables_info .select-info {
     @apply pl-2;
+}
+
+.dataTables_info, .dataTables_length {
+    @apply text-gray-500 !important;
 }
