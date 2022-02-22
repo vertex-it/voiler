@@ -1,11 +1,11 @@
 <div class="flex-shrink-0 flex h-16 border-b border-gray-200">
-    <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
+    <button type="button" class="mobile-menu-open">
         <span class="sr-only">Open sidebar</span>
 
         <x-heroicon-o-menu-alt-2 class="h-6 w-6"/>
     </button>
 
-    <div class="px-10 flex-1 flex justify-between">
+    <div class="px-4 md:px-6 lg:px-10 flex-1 flex justify-between">
         <div class="flex-1 flex">
 {{--            TODO insert search --}}
         </div>

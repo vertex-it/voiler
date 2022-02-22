@@ -3,6 +3,10 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     important: true,
+    safelist: [
+        'transition', 'ease-out', 'duration-200', 'transform', 'opacity-0', 'scale-95', 'opacity-100', 'scale-100', 'ease-in', 'duration-75',
+        'bg-green-500', 'bg-red-500', 'bg-gray-500', 'bg-yellow-400'
+    ],
     content: [
         './storage/framework/views/*.php',
         './resources/**/*.blade.php',

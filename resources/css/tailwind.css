@@ -31,6 +31,10 @@
         @apply border-gray-800 shadow-sm text-gray-200 bg-black hover:bg-gray-900 font-medium;
     }
 
+    .btn-gray {
+        @apply border-gray-300 shadow-sm text-gray-700 bg-gray-100 hover:bg-gray-200 font-medium;
+    }
+
     .btn-transparent {
         @apply bg-transparent shadow-none hover:bg-transparent;
     }
@@ -123,7 +127,7 @@
 
     /* SECTIONS END */
 
-    /* DROPDOWNS BEGIN */
+    /* DROPDOWNS START */
 
     .dropdown {
         @apply relative block text-left;
@@ -169,35 +173,70 @@
         @apply flex justify-between px-4 py-3 text-gray-700 text-sm hover:bg-gray-100 w-full;
     }
 
-    .nav-mobile-item .menuitem {
-        @apply border-l-2 border-gray-100 hover:bg-transparent;
+    /* DROPDOWNS END */
+
+    /* NAVIGATION START */
+
+    .nav-label {
+        @apply uppercase text-primary-500 tracking-widest text-xs mb-2 mt-4 font-medium;
     }
 
-    .nav-mobile-item .dropdown-menu {
+    .nav-item {
+        @apply text-gray-800 hover:text-gray-900 flex items-center py-2.5 text-sm rounded-md cursor-pointer;
+    }
+    .nav-item.active > div > a {
+        @apply font-semibold;
+    }
+
+    .nav-item .menuitem {
+        @apply border-l-2 border-primary-300 hover:bg-transparent;
+    }
+
+    .nav-item .dropdown-menu {
         @apply relative bg-transparent shadow-none ring-0 w-full mt-0;
     }
 
-    .nav-mobile-item .dropdown-menu .dropdown-menu {
+    .nav-item .dropdown-menu .dropdown-menu {
         @apply pl-5 border-gray-100 border-l-2;
     }
 
-    /* DROPDOWNS END */
-
-    /* NAVIGATION BEGIN */
-
-    .nav-item {
-        @apply inline-flex items-center text-sm px-1 pt-1 border-b-2 text-sm border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700;
+    .nav-item .menuitem {
+        @apply py-2.5;
     }
 
-    .nav-item.active {
-        @apply border-primary-500 text-gray-900;
+    .nav-item .dropdown {
+        @apply w-full;
     }
 
-    .nav-mobile-item {
-        @apply border-transparent text-gray-600 hover:bg-gray-50 hover:border-primary-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium;
+    .nav-item .dropdown a span {
+        @apply w-full justify-between !important;
     }
 
     /* NAVIGATION END */
+
+    /* PILLS START */
+    .pills {
+        @apply flex space-x-4;
+    }
+
+    .pills .item {
+        @apply text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md;
+    }
+
+    .pills .item.active {
+        @apply bg-primary-50 text-primary-500;
+    }
+    /* PILLS END */
+
+    /* STATUS PILLS START */
+    .status-pill {
+        @apply w-3 h-3 rounded-full;
+    }
+    /* STATUS PILLS END */
+
+    .mobile-menu-open {
+        @apply px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden;
+    }
 }
 
 @layer utilities {

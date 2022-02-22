@@ -13,9 +13,12 @@
         @yield('styles')
     </head>
     <body class="bg-primary h-full">
+        <form class="hidden" id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
         <x-modal />
 
-        @include('voiler::layouts.sidebar.mobile')
+        <div id="mobile-menu" hidden>
+            @include('voiler::layouts.sidebar.mobile')
+        </div>
 
         @include('voiler::layouts.sidebar.desktop')
 
@@ -23,17 +26,16 @@
             @include('voiler::layouts.sidebar.top')
 
             <main class="flex-1">
-                <div class="px-10 py-8">
-                    <header class="w-full mx-auto grid grid-cols-2 md:grid-cols-none">
-                        <div class="col-span-2">
+                <div class="px-4 md:px-6 lg:px-10 py-4 md:py-6 lg:py-8">
+                    <header class="w-full mx-auto flex flex-col md:flex-row justify-between md:items-end">
+                        <div class="flex flex-col">
                             @yield('breadcrumbs')
+                            <h1 class="text-xl md:text-2xl lg:text-3xl mt-2">
+                                @yield('title')
+                            </h1>
                         </div>
 
-                        <h1 class="text-3xl mt-2">
-                            @yield('title')
-                        </h1>
-
-                        <div class="justify-self-end self-end">
+                        <div class="mt-3 md:mt-0 flex">
                             @yield('action-button')
                         </div>
                     </header>

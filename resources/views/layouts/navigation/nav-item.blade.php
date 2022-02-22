@@ -9,7 +9,13 @@
         </a>
     @else
         <div class="dropdown {{ isset($isSubmenu) && $isSubmenu ? 'submenu' : '' }} direction-down-right">
-            <a class="flex {{ isset($isSubmenu) && $isSubmenu ? 'menuitem' : '' }}" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
+            <a
+                class="flex {{ isset($isSubmenu) && $isSubmenu ? 'menuitem' : '' }}"
+                href="#"
+                aria-current="page"
+                aria-expanded="false"
+                aria-haspopup="true"
+            >
                 <span class="inline-flex justify-center">
                     {{ $name }}
                     <x-heroicon-s-chevron-down class="ml-1 h-5 w-3" />
@@ -43,7 +49,7 @@
                             @continue
                         @endif
 
-                        @include('voiler::layouts.navigation.mobile-item', [
+                        @include('voiler::layouts.navigation.nav-item', [
                             'name' => $subName,
                             'navigationGroup' => $subNavigationGroup,
                             'isSubmenu' => true,

@@ -61,8 +61,6 @@ $(document).on('click', function () {
 })
 
 // Mobile menu dropdown toggle
-$('#mobile-menu-toggle').on('click', function() {
-    toggle($('#mobile-menu').get(0))
-
-    $(this).find('svg').toggleClass('hidden')
+$('.mobile-menu-open, .mobile-menu-close').on('click', function() {
+    $('#mobile-menu').toggle()
 })
