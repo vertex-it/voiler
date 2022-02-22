@@ -15,7 +15,7 @@
         <div class="flex-shrink-0 flex items-center">
             <img class="h-10 w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Workflow">
         </div>
-        <div class="mt-5 flex-1 h-0 overflow-y-auto">
+        <div class="my-5 flex-1 h-0 overflow-y-auto pr-6 -mr-6">
             <nav class="flex-1 pb-4">
                 @include('voiler::layouts.navigation.pages')
             </nav>

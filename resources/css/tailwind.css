@@ -86,7 +86,7 @@
     /* TODO Check sections css */
 
     .section {
-        @apply mt-8;
+        @apply mt-3 md:mt-8;
     }
 
     .section-title {
@@ -99,10 +99,6 @@
 
     .section-title-border {
         @apply absolute w-7 h-1 bg-primary-600 -bottom-0.5 rounded;
-    }
-
-    .section-content {
-        @apply mt-7;
     }
 
     .info-cards {
@@ -122,7 +118,7 @@
     }
 
     .section-content .card {
-        @apply bg-white rounded-lg shadow p-8;
+        @apply bg-white rounded-lg shadow p-5 md:p-8;
     }
 
     /* SECTIONS END */
