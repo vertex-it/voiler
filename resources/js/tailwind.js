@@ -20,6 +20,7 @@ $(document).ready(function () {
 
 // Dropdown toggle
 $(document).on('click', '.dropdown > :first-child', function (e) {
+    e.preventDefault()
     e.stopPropagation()
 
     let menu = $(this).siblings('.dropdown-menu')
