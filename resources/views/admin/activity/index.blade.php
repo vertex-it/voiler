@@ -8,11 +8,11 @@
     <script>
         var aditionalConfig = {
             columns: [
-                { data: "causer.name", orderable: false },
-                { data: "subject_type" },
-                { data: "subject.slug", orderable: false },
-                { data: "description" },
-                { data: "action", searchable: false, orderable: false, width: "60px" },
+                { title: 'causer', data: "causer.name", orderable: false },
+                { title: 'model', data: "subject_type" },
+                { title: 'value', data: "subject.slug", orderable: false },
+                { title: 'action', data: "description" },
+                { title: '', data: "action", searchable: false, orderable: false, width: "60px" },
             ],
             select: {
                 style: 'multi',

@@ -9,11 +9,11 @@
     <script>
         var aditionalConfig = {
             columns: [
-                { data: "name", responsivePriority: 0 },
-                { data: "description" },
-                { data: "roles" },
-                { data: "users" },
-                { data: "action", orderable: false,  width: "80px", responsivePriority: 1, searchable: false },
+                { title: 'name', data: "name", responsivePriority: 0 },
+                { title: 'description', data: "description" },
+                { title: 'roles', data: "roles" },
+                { title: 'users', data: "users" },
+                { title: '', data: "action", orderable: false,  width: "80px", responsivePriority: 1, searchable: false },
             ],
             select: {
                 style: 'multi',
