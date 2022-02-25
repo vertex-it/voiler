@@ -48,7 +48,7 @@ table.dataTable tbody td {
 
 table.dataTable thead th,
 table.dataTable thead td {
-    @apply border-b border-gray-400 font-medium text-sm mb-2;
+    @apply border-b border-gray-300 text-gray-800 font-medium text-sm mb-2 py-3;
 }
 
 table.dataTable tbody tr.selected {
@@ -66,11 +66,11 @@ table.dataTable.display tbody tr:hover.selected {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm m-0;
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-3.5 py-1.5 border text-sm m-0;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous, .dataTables_wrapper .dataTables_paginate .paginate_button.next {
-    @apply relative inline-flex items-center py-2 border border-gray-300 bg-white text-sm text-gray-500 hover:bg-gray-50;
+    @apply relative inline-flex items-center border border-gray-300 bg-white text-sm text-gray-500 hover:bg-gray-50 px-3 py-1.5;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
@@ -115,4 +115,17 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 
 .dataTables_info, .dataTables_length {
     @apply text-gray-500 !important;
+}
+
+/* floating header */
+.dtfh-floatingparent.dtfh-floatingparenthead {
+    @apply overflow-visible bg-white !important;
+}
+
+.dtfh-floatingparent.dtfh-floatingparenthead table.dataTable {
+    @apply my-0 py-0 !important;
+}
+
+.dtfh-floatingparent.dtfh-floatingparenthead table.dataTable thead th {
+    @apply text-gray-800 font-medium border-b border-gray-400 !important;
 }
