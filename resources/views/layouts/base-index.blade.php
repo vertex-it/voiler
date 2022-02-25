@@ -25,11 +25,7 @@
         <div class="section-content">
             <div class="card">
                 <table id="datatable" class="datatable hover">
-                    <thead>
-                        @foreach ($datatableColumns as $column)
-                            <th>{{ __(ucfirst($column)) }}</th>
-                        @endforeach
-                    </thead>
+                    <thead></thead>
                     <tbody></tbody>
                 </table>
             </div>
@@ -78,7 +74,7 @@
                         'i p',
                     language: {
                         "sProcessing":   "Obrada u toku...",
-                        "sLengthMenu":   "Broj redova _MENU_",
+                        "sLengthMenu":   "_MENU_",
                         "sZeroRecords":  "Nije pronađen nijedan rezultat",
                         "sInfo":         "Prikaz _START_ do _END_ od ukupno _TOTAL_ rezultata",
                         "sInfoEmpty":    "Prikaz 0 do 0 od ukupno 0 rezultata",
@@ -110,6 +106,7 @@
                     deferRender: true,
                     stateSave: true,
                     stateDuration: 60*60*24*365,
+                    fixedHeader: true,
                     ajax: {
                         url: "{{ $getModelRoute('index') }}",
                         data: function (d) {
@@ -245,17 +242,17 @@
 
             body.delegate('.delete-button', 'click', function (e) {
                 e.preventDefault()
-                openConfirmModal($(this), 'delete-confirm', '{{ __('voiler::interface.soft_delete') }}',  'btn btn-sm btn-danger')
+                openConfirmModal($(this), 'delete-confirm', '{{ __('voiler::interface.soft_delete') }}',  'btn btn-danger')
             })
 
             body.delegate('.force-delete-button', 'click', function (e) {
                 e.preventDefault()
-                openConfirmModal($(this), 'force-delete-confirm', '{{ __('voiler::interface.force_delete') }}', 'btn btn-sm btn-danger')
+                openConfirmModal($(this), 'force-delete-confirm', '{{ __('voiler::interface.force_delete') }}', 'btn btn-danger')
             })
 
             body.delegate('.restore-button', 'click', function (e) {
                 e.preventDefault()
-                openConfirmModal($(this), 'restore-confirm', '{{ __('voiler::interface.restore') }}', 'btn btn-sm btn-primary')
+                openConfirmModal($(this), 'restore-confirm', '{{ __('voiler::interface.restore') }}', 'btn btn-primary')
             })
 
             $(document).on('click', '.update-priority-button', function () {
