@@ -14,13 +14,13 @@
 
 @section('content')
     <div class="section w-full">
-        @can($resource['roles']['create'])
+        @if(Auth::user()->can($resource['roles']['create']) && $getModelRoute('create'))
             @section('action-button')
                 <a class="btn btn-primary btn-sm" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['name_singular']) }}
                 </a>
             @endsection
-        @endcan
+        @endif
 
         <div class="section-content">
             <div class="card">

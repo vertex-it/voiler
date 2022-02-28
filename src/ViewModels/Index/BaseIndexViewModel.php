@@ -9,6 +9,16 @@ class BaseIndexViewModel extends ViewModel
 {
     public $model;
     public array $resource = [];
+    public array $actions = [
+        'create',
+        'show',
+        'edit',
+        'clone',
+        'destroy',
+        'forceDelete',
+        'restore',
+        'updatePriority',
+    ];
 
     public function __construct($model = null)
     {
@@ -16,8 +26,12 @@ class BaseIndexViewModel extends ViewModel
         $this->resource = GuesserService::fromIndexViewModelName($this::class);
     }
 
-    public function getModelRoute($action, $model = null)
+    public function getModelRoute($action, $model = null): ?string
     {
+        if (! in_array($action, $this->actions, true)) {
+            return null;
+        }
+
         return route(
             implode('.', [
                 $this->resource['route_name'],
