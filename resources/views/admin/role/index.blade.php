@@ -1,13 +1,13 @@
 @extends('voiler::layouts.base-index')
 
-@section('aditional-content')
+@section('additional-content')
     <x-modal id="permissions-modal" title="{{ __('voiler::interface.permissions') }}" />
     <x-modal id="users-modal" title="{{ __('voiler::interface.users') }}" />
 @endsection
 
-@section('aditional-scripts')
+@section('scripts')
     <script>
-        var aditionalConfig = {
+        var additionalConfig = {
             columns: [
                 { title: 'name', data: "name", responsivePriority: 0 },
                 { title: 'description', data: "description" },

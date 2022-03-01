@@ -5,11 +5,11 @@
 @section('breadcrumbs')
     <x-breadcrumb />
 
-    @yield('aditional-content')
+    @yield('additional-content')
 @endsection
 
-@section('styles')
-    @yield('aditional-styles')
+@section('master-styles')
+    @yield('styles')
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
             </div>
 
             <div>
-                @yield('aditional-post-content')
+                @yield('additional-post-content')
             </div>
         </div>
 
@@ -55,7 +55,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('master-scripts')
     <script src="{{ mix('js/datatables.js') }}"></script>
     <script>
         ajaxData = function () {
@@ -64,7 +64,7 @@
 
         $(document).ready(function () {
             DataTable = $("#datatable").DataTable(
-                Object.assign(aditionalConfig, {
+                Object.assign(additionalConfig, {
                     dom:
                         '<"flex justify-between items-center"' +
                             '<"custom-filters">' +
@@ -311,5 +311,5 @@
         })
     </script>
 
-    @yield('aditional-scripts')
+    @yield('scripts')
 @endsection

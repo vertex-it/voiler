@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        @yield('styles')
+        @yield('master-styles')
     </head>
     <body class="bg-primary h-full">
         <form class="hidden" id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
@@ -57,7 +57,7 @@
         </script>
         @include('voiler::layouts.alerts')
 
-        @yield('scripts')
-        @stack('scripts')
+        @yield('master-scripts')
+        @stack('master-scripts')
     </body>
 </html>

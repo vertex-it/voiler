@@ -6,7 +6,7 @@
 
 @section('aditional-scripts')
     <script>
-        var aditionalConfig = {
+        var additionalConfig = {
             columns: [
                 { title: 'causer', data: "causer.name", orderable: false },
                 { title: 'model', data: "subject_type" },
