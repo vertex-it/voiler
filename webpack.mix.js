@@ -25,11 +25,11 @@ mix
 // Mix jQuery, blade components and datatables
 mix
     .js('./vendor/vertex-it/voiler/resources/js/voiler.js', 'public/js/voiler.js')
-    .js('./vendor/vertex-it/blade-components/resources/js/blade-components.js', 'public/js/blade-components.js')
     .js('./vendor/vertex-it/voiler/resources/js/tailwind.js', 'public/js/tailwind.js')
+    .js('./vendor/vertex-it/blade-components/resources/js/blade-components.js', 'public/js/blade-components.js')
+    .js('./vendor/vertex-it/voiler/resources/js/datatables.js', 'public/js/datatables.js')
     .scripts([
         'public/js/voiler.js',
-        'public/js/blade-components.js',
         'public/js/tailwind.js',
         './vendor/vertex-it/voiler/resources/js/toastr.min.js',
     ], 'public/js/app.js')
