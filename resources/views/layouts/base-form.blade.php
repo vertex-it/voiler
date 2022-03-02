@@ -24,4 +24,6 @@
 
 @section('master-scripts')
     <script src="{{ mix('js/blade-components.js') }}"></script>
+
+    @yield('scripts')
 @endsection

@@ -32,7 +32,7 @@ abstract class BaseModel extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom($this->slugMap ?? $this->titleColumn)
+            ->generateSlugsFrom($this->slugMap ?: $this->titleColumn)
             ->saveSlugsTo('slug')
             ->doNotGenerateSlugsOnUpdate();
     }
