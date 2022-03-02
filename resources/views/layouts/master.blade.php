@@ -48,6 +48,11 @@
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
+        @include('voiler::layouts.alerts')
+
+        @yield('master-scripts')
+        @stack('master-scripts')
+
         <script>
             $.ajaxSetup({
                 headers: {
@@ -55,9 +60,5 @@
                 }
             })
         </script>
-        @include('voiler::layouts.alerts')
-
-        @yield('master-scripts')
-        @stack('master-scripts')
     </body>
 </html>
