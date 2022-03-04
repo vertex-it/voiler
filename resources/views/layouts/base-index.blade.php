@@ -24,7 +24,7 @@
 
         <div class="section-content">
             <div class="card">
-                <table id="datatable" class="datatable hover">
+                <table id="datatable" class="datatable nowrap hover" style="width: 100%">
                     <thead></thead>
                     <tbody></tbody>
                 </table>
@@ -36,8 +36,8 @@
         </div>
 
         <div id="custom_buttons" class="hidden">
-            <div class="dropdown direction-down-left">
-                <a class="btn btn-white p-1.5" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
+            <div class="dropdown direction-down-left h-full">
+                <a class="btn btn-white btn-sm h-full" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
                     <x-heroicon-o-dots-horizontal width="22px" height="22px" />
                 </a>
 
@@ -66,9 +66,9 @@
             DataTable = $("#datatable").DataTable(
                 Object.assign(additionalConfig, {
                     dom:
-                        '<"flex justify-between items-center"' +
+                        '<"flex flex-wrap justify-between items-center space-y-2 -mt-1"' +
                             '<"custom-filters">' +
-                            '<"flex justify-end items-center" lf <"ml-2 custom-buttons">>' +
+                            '<"flex justify-end items-stretch" lf <"ml-2 custom-buttons">>' +
                         '>' +
                         ' t ' +
                         'i p',
@@ -107,6 +107,9 @@
                     stateSave: true,
                     stateDuration: 60*60*24*365,
                     fixedHeader: true,
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: true,
                     ajax: {
                         url: "{{ $getModelRoute('index') }}",
                         data: function (d) {
@@ -118,22 +121,9 @@
                         }
                     },
                     columnDefs: [],
-                    responsive: {
-                        details: {
-                            display: $.fn.dataTable.Responsive.display.modal({
-                                header: function (row) {
-                                    var data = row.data()
-                                    return '{{ __('voiler::interface.details_for') }} ' + data.{{ $resource['title_column'] }}
-                                }
-                            }),
-                            renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                                tableClass: 'table'
-                            })
-                        }
-                    },
                     rowCallback: function (row, data) {
                         if (data.deleted_at) {
-                            $(row).addClass('text-red-400')
+                            $(row).addClass('table-row-deleted')
                         }
                     }
                 })
@@ -284,7 +274,7 @@
                     let data = DataTable.rows({selected: true}).data()
                     let nodes = DataTable.rows({selected: true}).nodes()
 
-                    $(nodes).addClass('text-red-400')
+                    $(nodes).addClass('table-row-deleted')
 
                     $.each(data, function (i) {
                         var slug = data[i].slug
@@ -301,7 +291,7 @@
                     let data = DataTable.rows({selected: true}).data()
                     let nodes = DataTable.rows({selected: true}).nodes()
 
-                    $(nodes).removeClass('text-red-400')
+                    $(nodes).removeClass('table-row-deleted')
 
                     $.each(data, function (i) {
                         restoreElement(data[i].id)
