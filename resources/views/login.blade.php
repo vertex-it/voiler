@@ -11,46 +11,42 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body class="h-full bg-gradient-to-tr from-blue-100 via-primary-100 to-blue-100">
-
-    <div class="container mx-auto h-screen flex items-center">
-        <div class="mx-auto md:w-full lg:w-1/3 px-10 py-16 bg-white rounded-lg">
-            <div class="sm:mx-auto sm:w-full sm:max-w-md">
-                <img
-                    @if(file_exists(public_path(config('navigation._logo.url'))))
-                        src="{{ asset(config('navigation._logo.url')) }}"
-                    @else
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    @endif
-                    alt="Logo"
-                    class="h-8 w-auto mx-auto"
-                >
-                <h2 class="mt-14 text-2xl text-gray-900">
-                    {{ __('voiler::interface.sign_in_to_your_account') }}
-                </h2>
-                @if (Route::has('admin.register'))
-                    <p class="mt-2 text-sm text-center text-gray-600">
-                        Or
-                        <a href="{{ route('admin.register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                            Register
-                        </a>
-                    </p>
+<body class="h-screen bg-gradient-to-tr from-blue-100 via-primary-100 to-blue-100">
+    <div class="container mx-auto h-full flex items-start md:items-center">
+        <div class="w-full sm:max-w-lg p-5 md:p-8 mx-2 sm:mx-auto mt-16 md:mt-0 bg-white rounded-lg shadow-lg">
+            <img
+                @if (file_exists(public_path(config('navigation._logo.url'))))
+                    src="{{ asset(config('navigation._logo.url')) }}"
+                @else
+                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                 @endif
-            </div>
+                alt="Logo"
+                class="h-8 w-auto mx-auto mt-4"
+            >
+            <h2 class="mt-10 md:mt-12 lg:mt-14 text-xl md:text-2xl text-gray-700">
+                {{ __('voiler::interface.sign_in_to_your_account') }}
+            </h2>
 
             <div class="mt-8">
-                <div class="mt-6">
-                    <x-form
-                        action="{{ route('login') }}"
-                        method="POST"
-                        buttonText="{{ __('voiler::interface.login') }}"
-                        buttonClasses="btn-block mt-6"
-                    >
-                        <x-inputs.input name="email" type="email" fullWidth />
-                        <x-inputs.input name="password" type="password" fullWidth />
-                        <x-inputs.toggle name="remember" label="{{ __('voiler::interface.remember_me') }}" value="true" />
-                    </x-form>
-                </div>
+                <x-form
+                    action="{{ route('login') }}"
+                    method="POST"
+                    buttonText="{{ __('voiler::interface.login') }}"
+                >
+                    <x-inputs.input name="email" type="email" autofocus />
+                    <x-inputs.input name="password" type="password" />
+                    <x-inputs.toggle name="remember" label="{{ __('voiler::interface.remember_me') }}" value="true" />
+                    <div class="mt-14 mb-6">
+{{--                        @if (Route::has('admin.register'))--}}
+                            <p class="mt-3 text-xs md:text-sm text-center text-gray-500">
+                                Dont have account?
+                                <a href="#" class="font-medium text-primary-500 hover:text-primary-600">
+                                    Register here
+                                </a>
+                            </p>
+{{--                        @endif--}}
+                    </div>
+                </x-form>
             </div>
         </div>
     </div>
