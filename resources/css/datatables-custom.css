@@ -88,7 +88,11 @@ table.dataTable thead td {
 
 /*Add padding to bottom border */
 table.dataTable.no-footer {
-    @apply border-b-0 my-8;
+    @apply border-b-0 mt-8 mb-0;
+}
+
+.dataTables_info, .dataTables_paginate.paging_simple_numbers {
+    @apply mt-4 lg:mt-8;
 }
 
 /*Change colour of responsive icon*/
@@ -142,10 +146,6 @@ table.dataTable tbody tr.selected td {
 }
 
 /*tr.selected:hover,*/
-/*table.dataTable.display tbody tr.selected:hover {*/
-/*    @apply bg-primary-200 !important;*/
-/*}*/
-
 .custom-filters {
     @apply overflow-y-scroll
 }
@@ -175,14 +175,6 @@ table.dataTable tbody tr.selected td {
 }
 
 /* Fixed columns */
-/*table.dataTable.display tbody tr.DTFC_NoData {*/
-/*    background-color: transparent*/
-/*}*/
-
-/*tr td, thead th {*/
-/*    @apply bg-white*/
-/*}*/
-
 tr td:first-child {
     @apply border-r border-r-gray-100 lg:border-r-0 !important
 }
@@ -200,26 +192,7 @@ tr.dt-rowReorder-moving td.dtfc-fixed-right:last-child {
     border-right: 2px solid #555 !important
 }
 
-/*table.dataTable.display tbody tr.DTFC_NoData {*/
-/*    background-color: transparent*/
-/*}*/
-
-/*tr.even td {*/
-/*    background-color: #fff*/
-/*}*/
-
-/*tr.odd td {*/
-/*    background-color: #f9f9f9*/
-/*}*/
-
-/*tr.selected td {*/
-/*    background-color: #a6b4cd*/
-/*}*/
-
-/*thead th {*/
-/*    background-color: white*/
-/*}*/
-
-/*tfoot th {*/
-/*    background-color: white*/
-/*}*/
+/* Action dropdown */
+table td .dropdown > .dropdown-menu {
+    @apply fixed right-[45px] md:right-[95px] !important;
+}
