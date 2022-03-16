@@ -1,6 +1,4 @@
-<!-- Static sidebar for desktop -->
 <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-    <!-- Sidebar component, swap this element with another sidebar if you like -->
     <div class="flex flex-col flex-grow px-8 py-6 bg-white overflow-y-auto shadow">
         <div class="flex items-center flex-shrink-0">
             <img class="h-10 w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Workflow">

@@ -21,7 +21,7 @@ class PermissionDatatableService extends BaseDatatableService
                 'id' => 'roles-modal',
                 'title' => __('voiler::interface.roles'),
                 'content' => implode('<br>', $roles),
-                'buttonClass' => 'btn btn-white',
+                'buttonClass' => 'btn btn-transparent text-gray-500 rounded-full hover:bg-gray-200 px-2',
             ]);
         })
             ->addColumn('users', function ($permission) {
@@ -37,7 +37,7 @@ class PermissionDatatableService extends BaseDatatableService
                     'id' => 'users-modal',
                     'title' => __('voiler::interface.users'),
                     'content' => implode('<br>', $users),
-                    'buttonClass' => 'btn btn-white',
+                    'buttonClass' => 'btn btn-transparent text-gray-500 rounded-full hover:bg-gray-200 px-2',
                 ]);
             });
     }

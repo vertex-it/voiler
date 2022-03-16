@@ -1,8 +1,8 @@
 <div class="flex">
     <div class="dropdown direction-down-left">
-        <a class="btn btn-transparent hover:bg-white hover:border hover:border-gray-200 text-gray-700 p-1.5" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
-            <x-heroicon-o-dots-vertical width="22px" height="22px" />
-        </a>
+        <button class="btn btn-transparent rounded-full hover:bg-gray-200 px-2">
+            <x-heroicon-o-dots-vertical class="w-5 h-5 text-gray-700" />
+        </button>
 
         <div class="hidden dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             @hasSection('datatable-custom-actions')

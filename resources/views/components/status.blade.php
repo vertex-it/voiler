@@ -1,11 +1,5 @@
-@if (isset($statusColor))
-    <div
-        class="status-pill {{ $statusColor }}"
-        title="{{ $statusTitle }}"
-    ></div>
+@if ($status)
+    <x-heroicon-o-check-circle class="inline-flex w-4 h-4 text-green-500" />
 @else
-    <div
-        class="status-pill {{ $status ? 'bg-green-400' : 'bg-red-400' }}"
-        title="{{ $status ? __('voiler::interface.active') : __('voiler::interface.inactive') }}"
-    ></div>
+    <x-heroicon-o-ban class="inline-flex w-4 h-4 text-red-400" />
 @endif

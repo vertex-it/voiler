@@ -29,7 +29,7 @@ table.datatable {
 
 table.dataTable tbody th,
 table.dataTable tbody td {
-    @apply py-1 md:py-3 px-2 md:px-4 text-gray-700 text-xs md:text-sm border-b border-gray-100;
+    @apply py-1 md:py-2.5 px-2 md:px-4 text-gray-800 text-xs md:text-[0.9rem] border-b border-gray-100;
 }
 
 table.dataTable thead th,
@@ -40,12 +40,12 @@ table.dataTable tbody td {
 }
 
 table.dataTable tbody td img {
-    @apply rounded-sm
+    @apply rounded shadow-sm
 }
 
 table.dataTable thead th,
 table.dataTable thead td {
-    @apply border-b border-gray-100 text-gray-700 font-semibold text-xs mb-2 py-1 md:py-3;
+    @apply border-b border-gray-200 text-gray-700 font-medium text-xs mb-2 py-1 md:py-3;
 }
 
 /*Pagination Buttons*/
@@ -54,7 +54,7 @@ table.dataTable thead td {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-3.5 py-1.5 border text-sm m-0;
+    @apply bg-white border-gray-300 text-gray-500 transition-colors duration-200 hover:bg-gray-50 relative inline-flex items-center px-3.5 py-1.5 border text-sm m-0;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous, .dataTables_wrapper .dataTables_paginate .paginate_button.next {
@@ -77,7 +77,7 @@ table.dataTable thead td {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     background: none;
-    @apply z-10 bg-primary-50 border-primary-500 text-primary-500 !important;
+    @apply z-10 bg-gray-50 border-primary-500 text-primary-500 font-semibold !important;
 }
 
 /*Pagination Buttons - Hover */
@@ -88,7 +88,7 @@ table.dataTable thead td {
 
 /*Add padding to bottom border */
 table.dataTable.no-footer {
-    @apply border-b-0 mt-8 mb-0;
+    @apply border-b-0 mt-5 mb-0;
 }
 
 .dataTables_info, .dataTables_paginate.paging_simple_numbers {
@@ -106,7 +106,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
 }
 
 .dataTables_info, .dataTables_length {
-    @apply text-xs md:text-sm text-left text-gray-500 !important;
+    @apply text-xs text-left text-gray-600 !important;
 }
 
 /* floating header */
@@ -129,7 +129,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
 /*Row Hover*/
 table.dataTable.hover tbody tr:hover td,
 table.dataTable.display tbody tr:hover td{
-    @apply bg-primary-50 cursor-pointer !important;
+    @apply bg-gray-50 cursor-pointer !important;
 }
 
 tr td:first-child,
@@ -137,17 +137,11 @@ tr th:first-child {
     @apply bg-white
 }
 
-table.dataTable tbody tr td:hover {
-    @apply bg-primary-50 !important
-}
-
 table.dataTable tbody tr.selected td {
-    @apply bg-primary-50 !important
+    @apply bg-gray-50 !important
 }
-
-/*tr.selected:hover,*/
-.custom-filters {
-    @apply overflow-y-scroll
+table.dataTable tbody tr.selected td:first-child {
+    @apply border-l-2 border-l-primary-500 !important
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

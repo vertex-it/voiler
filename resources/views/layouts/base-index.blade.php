@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="section w-full">
-        @if(Auth::user()->can($resource['roles']['create']) && $getModelRoute('create'))
+        @if (Auth::user()->can($resource['roles']['create']) && $getModelRoute('create'))
             @section('action-button')
                 <a class="btn btn-primary btn-sm" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['name_singular']) }}
@@ -22,23 +22,25 @@
             @endsection
         @endif
 
-        <div class="section-content">
-            <div class="card">
-                <table id="datatable" class="datatable nowrap hover" style="width: 100%">
-                    <thead></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-
-            <div>
-                @yield('additional-post-content')
-            </div>
+        <div class="card">
+            <table id="datatable" class="datatable nowrap hover" style="width: 100%">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
         </div>
 
-        <div id="custom_buttons" class="hidden">
-            <div class="dropdown direction-down-left h-full">
-                <a class="btn btn-white btn-sm h-full" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
-                    <x-heroicon-o-dots-horizontal width="22px" height="22px" />
+        <div>
+            @yield('additional-post-content')
+        </div>
+
+        <div id="custom_filters" class="hidden">
+            @yield('filters')
+        </div>
+
+        <div id="table_buttons">
+            <div class="dropdown direction-down-right h-full">
+                <a class="btn btn-transparent hover:bg-gray-200 rounded-full px-2 h-full" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
+                    <x-heroicon-o-dots-vertical class="h-5 w-5 text-gray-600" />
                 </a>
 
                 <div class="hidden dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
@@ -49,9 +51,6 @@
                 </div>
             </div>
         </div>
-
-        @yield('filters')
-
     </div>
 @endsection
 
@@ -67,8 +66,8 @@
                 Object.assign(additionalConfig, {
                     dom:
                         '<"flex flex-wrap justify-between items-center space-y-2 -mt-1"' +
-                            '<"custom-filters">' +
-                            '<"flex justify-end items-stretch" lf <"ml-2 custom-buttons">>' +
+                            '<"table-buttons">' +
+                            '<"flex justify-end items-stretch" lf <"ml-2 custom-filters">>' +
                         '>' +
                         ' t ' +
                         'i p',
@@ -252,14 +251,14 @@
                 updatePriority(id, priority)
             })
 
-            let customFilters = $('#table_filters').html()
-            $('#table_filters').remove()
-            $('#datatable_wrapper div.custom-filters').html(customFilters)
+            let customFilters = $('#table_buttons').html()
+            $('#table_buttons').remove()
+            $('#datatable_wrapper div.table-buttons').html(customFilters)
 
-            let customButtons = $('#custom_buttons').html()
-            $('#datatable_wrapper div.custom-buttons').html(customButtons)
+            let customButtons = $('#custom_filters').html()
+            $('#datatable_wrapper div.custom-filters').html(customButtons)
 
-            $(document).on('click', 'div.custom-buttons .menuitem', function () {
+            $(document).on('click', 'div.table-buttons .menuitem', function () {
                 let action = $(this).data('action');
 
                 if (action === 'selectAll') {

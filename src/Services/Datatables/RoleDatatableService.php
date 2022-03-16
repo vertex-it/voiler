@@ -22,7 +22,7 @@ class RoleDatatableService extends BaseDatatableService
                     'id' => 'permissions-modal',
                     'title' => __('voiler::interface.permissions'),
                     'content' => implode('<br>', $permissions),
-                    'buttonClass' => 'btn btn-white',
+                    'buttonClass' => 'btn btn-transparent text-gray-500 rounded-full hover:bg-gray-200 px-2',
                 ]);
             })
             ->addColumn('users', function ($role) {
@@ -36,7 +36,7 @@ class RoleDatatableService extends BaseDatatableService
                     'id' => 'users-modal',
                     'title' => __('voiler::interface.roles'),
                     'content' => implode('<br>', $roles),
-                    'buttonClass' => 'btn btn-white',
+                    'buttonClass' => 'btn btn-transparent text-gray-500 rounded-full hover:bg-gray-200 px-2',
                 ]);
             });
     }
