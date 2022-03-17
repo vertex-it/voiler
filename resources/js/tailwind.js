@@ -65,3 +65,47 @@ $(document).on('click', function () {
 $('.mobile-menu-open, .mobile-menu-close').on('click', function() {
     $('#mobile-menu').toggle()
 })
+
+// Datatable filters
+$(document).ready(function () {
+    $(document).on('change', '.filter-inputs select', function () {
+        DataTable.ajax.reload();
+
+        toggleFiltersBtnActiveClass()
+    })
+
+    $(document).on('click', '.btn-reset-filters', function (e) {
+        e.preventDefault()
+
+        let filterInputs = $('.filter-inputs').children()
+
+        $.each(filterInputs, function (i, element) {
+            // TODO only works for selectize filters
+            let selectizeInstance = $(element).find('.selectize')
+            selectizeInstance[0].selectize.clear()
+        })
+
+        toggleFiltersBtnActiveClass()
+    })
+})
+
+function toggleFiltersBtnActiveClass() {
+    let hasActiveFilters = false
+
+    let filterInputs = $('.filter-inputs').children()
+
+    $.each(filterInputs, function (i, element) {
+        // TODO only works for selectize filters
+        let value = $(element).find('option:selected').text()
+
+        if (value && value !== '') {
+            hasActiveFilters = true
+        }
+    })
+
+    if (hasActiveFilters) {
+        $('.btn-filter').addClass('active')
+    } else {
+        $('.btn-filter').removeClass('active')
+    }
+}

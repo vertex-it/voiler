@@ -34,7 +34,23 @@
         </div>
 
         <div id="custom_filters" class="hidden">
-            @yield('filters')
+            @hasSection('filters')
+                <div class="dropdown direction-down-left h-full">
+                    <button class="btn btn-filter h-full">
+                        <x-heroicon-o-filter class="h-5 w-5 text-gray-600" />
+                    </button>
+
+                    <div class="hidden dropdown-menu w-96 p-6" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <div class="filter-inputs">
+                            @yield('filters')
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button class="btn-reset-filters text-red-500 hover:text-red-600">Reset filters</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <div id="table_buttons">
@@ -301,4 +317,5 @@
     </script>
 
     @yield('scripts')
+    @stack('scripts')
 @endsection
