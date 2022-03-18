@@ -88,7 +88,7 @@
                     dom:
                         '<"flex flex-wrap justify-between items-center -mt-1"' +
                             '<"custom-filters">' +
-                            '<"flex justify-end items-stretch" lf <"ml-2 table-buttons">>' +
+                            '<"flex justify-end items-stretch" fl <"ml-2 table-buttons">>' +
                         '>' +
                         ' t ' +
                         'i p',

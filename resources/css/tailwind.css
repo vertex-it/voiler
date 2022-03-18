@@ -12,11 +12,11 @@
     /* BUTTONS START */
 
     .btn {
-        @apply inline-flex items-center items-center px-4 py-2 cursor-pointer border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 transition-colors duration-200 hover:bg-primary-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500;
+        @apply inline-flex items-center items-center px-4 py-2 cursor-pointer border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-primary-600 transition-colors duration-200 hover:bg-primary-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500;
     }
 
     .btn-sm {
-        @apply px-2.5 py-1.5 text-xs;
+        @apply px-3 py-2 text-xs rounded-md;
     }
 
     .btn-block {
