@@ -53,6 +53,7 @@ return [
     'restore_success' => 'Success! Entry was restored.',
     'force_delete_success' => 'Success! Entry was deleted permanently.',
     'priority_update_success' => 'Success! Priority was updated.',
+    'reset_filters' => 'Reset filters',
 
     'login' => 'Login',
     'sign_in_to_your_account' => 'Sign in to your account',

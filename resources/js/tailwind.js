@@ -53,8 +53,8 @@ $(document).on('click', '.dropdown > :first-child', function (e) {
 })
 
 // Close open dropdown on click outside of it
-$(document).on('click', function () {
-    if (! $(this).is('.dropdown *')) {
+$(document).on('click', function (e) {
+    if (! $(this).is('.dropdown *') && ! $(e.target).is('.dropdown *')) {
         $('.dropdown-menu:not(.hidden)').each(function () {
             leave($(this).get(0))
         })
@@ -66,9 +66,11 @@ $('.mobile-menu-open, .mobile-menu-close').on('click', function() {
     $('#mobile-menu').toggle()
 })
 
+
+
 // Datatable filters
 $(document).ready(function () {
-    $(document).on('change', '.filter-inputs select', function () {
+    $(document).on('change', '.filter-inputs select, input[name="show_deleted"]', function () {
         DataTable.ajax.reload();
 
         toggleFiltersBtnActiveClass()

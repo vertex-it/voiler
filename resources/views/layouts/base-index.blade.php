@@ -35,29 +35,34 @@
 
         <div id="custom_filters" class="hidden">
             @hasSection('filters')
-                <div class="dropdown direction-down-left h-full">
-                    <button class="btn btn-filter h-full">
-                        <x-heroicon-o-filter class="h-5 w-5 text-gray-600" />
+                <div class="dropdown direction-down-right">
+                    <button class="btn btn-sm btn-gray btn-filter btn-has-icon text-gray-600">
+                        <x-heroicon-s-adjustments /> Filters
                     </button>
 
-                    <div class="hidden dropdown-menu w-96 p-6" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="hidden dropdown-menu w-80 md:w-96 p-6" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                         <div class="filter-inputs">
                             @yield('filters')
                         </div>
 
                         <div class="flex justify-end">
-                            <button class="btn-reset-filters text-red-500 hover:text-red-600">Reset filters</button>
+                            <button class="btn-reset-filters text-red-500 hover:text-red-600">
+                                {{ __('voiler::interface.reset_filters') }}
+                            </button>
                         </div>
                     </div>
                 </div>
+                @push('master-scripts')
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js" integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                @endpush
             @endif
         </div>
 
         <div id="table_buttons">
-            <div class="dropdown direction-down-right h-full">
-                <a class="btn btn-transparent hover:bg-gray-200 rounded-full px-2 h-full" href="#" aria-current="page" aria-expanded="false" aria-haspopup="true">
-                    <x-heroicon-o-dots-vertical class="h-5 w-5 text-gray-600" />
-                </a>
+            <div class="dropdown direction-down-left h-full">
+                <button class="btn btn-gray btn-has-icon px-2.5 py-1.5 h-full">
+                    <x-heroicon-o-lightning-bolt />
+                </button>
 
                 <div class="hidden dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <a href="#" class="menuitem" data-action="selectAll">{{ __('voiler::interface.select_all') }}</a>
@@ -81,9 +86,9 @@
             DataTable = $("#datatable").DataTable(
                 Object.assign(additionalConfig, {
                     dom:
-                        '<"flex flex-wrap justify-between items-center space-y-2 -mt-1"' +
-                            '<"table-buttons">' +
-                            '<"flex justify-end items-stretch" lf <"ml-2 custom-filters">>' +
+                        '<"flex flex-wrap justify-between items-center -mt-1"' +
+                            '<"custom-filters">' +
+                            '<"flex justify-end items-stretch" lf <"ml-2 table-buttons">>' +
                         '>' +
                         ' t ' +
                         'i p',
@@ -91,7 +96,7 @@
                         "sProcessing":   "Obrada u toku...",
                         "sLengthMenu":   "_MENU_",
                         "sZeroRecords":  "Nije pronađen nijedan rezultat",
-                        "sInfo":         "Prikaz _START_ do _END_ od ukupno _TOTAL_ rezultata",
+                        "sInfo":         "Prikaz _START_ - _END_ od _TOTAL_ rezultata",
                         "sInfoEmpty":    "Prikaz 0 do 0 od ukupno 0 rezultata",
                         "sInfoFiltered": "(filtrirano od ukupno _MAX_ rezultata)",
                         "sInfoPostFix":  "",

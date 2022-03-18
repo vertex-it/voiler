@@ -7,7 +7,7 @@ table.datatable {
 }
 
 .dataTables_wrapper .dataTables_length select {
-    @apply py-2 pl-3 pr-7 mr-2 text-gray-500 text-xs md:text-sm rounded border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500;
+    @apply py-2 pl-3 pr-7 mr-2 text-gray-600 text-xs md:text-sm rounded bg-gray-100 border border-gray-100 shadow-sm focus:ring-primary-500 focus:border-primary-500 !important
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -23,7 +23,7 @@ table.datatable {
 }
 
 .dataTables_wrapper .dataTables_filter input {
-    @apply w-52 mx-0 px-4 py-2 text-gray-500 text-xs md:text-sm rounded border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500
+    @apply w-52 mx-0 px-4 py-2 text-gray-600 text-xs md:text-sm rounded bg-gray-100 border border-gray-100 shadow-sm focus:ring-primary-500 focus:border-primary-500
 }
 
 
@@ -56,7 +56,7 @@ table.dataTable thead td {
 .dataTables_wrapper .dataTables_paginate .paginate_button,
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous,
 .dataTables_wrapper .dataTables_paginate .paginate_button.next {
-    @apply rounded-full py-2 text-gray-800 transition-colors duration-200 hover:bg-gray-50 relative inline-flex items-center border-none focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 !important
+    @apply rounded-lg py-2 text-gray-700 font-medium transition-colors duration-200 hover:bg-gray-50 relative inline-flex items-center border-none focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 !important
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -76,13 +76,13 @@ table.dataTable thead td {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     background: none;
-    @apply z-10 bg-primary-50 border-none text-primary-500 font-semibold !important;
+    @apply z-10 bg-primary-500 border-none text-white font-semibold !important;
 }
 
 /*Pagination Buttons - Hover */
 .dataTables_wrapper .dataTables_paginate .paginate_button:not(.current,.disabled):hover {
     background: none;
-    @apply bg-gray-100 text-gray-700 border-none !important;
+    @apply bg-gray-200 text-gray-700 border-none !important;
 }
 
 /*Add padding to bottom border */
@@ -105,7 +105,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
 }
 
 .dataTables_info, .dataTables_length {
-    @apply text-xs text-left text-gray-600 !important;
+    @apply text-sm text-left text-gray-700 !important;
 }
 
 /* floating header */
@@ -191,11 +191,8 @@ table td .dropdown > .dropdown-menu {
 }
 
 /* Filter */
-.btn-filter {
-    @apply bg-transparent shadow-none hover:bg-gray-200 rounded-full px-2 h-full
-}
 .btn-filter.active {
-    @apply bg-primary-100 hover:bg-primary-200
+    @apply bg-primary-50 text-primary-600 hover:bg-primary-200 !important
 }
 .btn-filter.active svg {
     @apply text-primary-600 !important
