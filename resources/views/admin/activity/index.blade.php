@@ -1,10 +1,10 @@
 @extends('voiler::layouts.base-index')
 
-@section('aditional-content')
+@section('additional-content')
     <x-modal id="activity-modal" title="{{ __('voiler::interface.activity') }}" />
 @endsection
 
-@section('aditional-scripts')
+@section('scripts')
     <script>
         var additionalConfig = {
             columns: [
