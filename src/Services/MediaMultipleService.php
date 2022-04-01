@@ -11,8 +11,6 @@ class MediaMultipleService
 
     public static function set($model, string $key, $value, array $attributes): bool|string
     {
-        return $value;
-
         $uploadedUrls = array_filter($value ?? []);
         $mediaUrls = $model->{$key} ?? [];
 
