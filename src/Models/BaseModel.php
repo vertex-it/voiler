@@ -48,7 +48,9 @@ abstract class BaseModel extends Model implements HasMedia
             foreach ($model->casts as $columnName => $castType) {
                 if (Str::contains($castType, ['RichText', 'MediaSingle', 'MediaMultiple'])) {
                     $model = $model->fresh();
+                    $model->EVENT_CREATED = true;
                     $model->{$columnName} = $model->{$columnName};
+                    unset($model->EVENT_CREATED);
                     $model->save();
                 }
             }

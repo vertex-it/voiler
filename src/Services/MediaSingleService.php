@@ -24,6 +24,7 @@ class MediaSingleService
 
             $adder->toMediaCollection($key);
         } else {
+            // TODO investigate, delete?
             $model->addMediaFromUrl($value)->toMediaCollection($key);
         }
 

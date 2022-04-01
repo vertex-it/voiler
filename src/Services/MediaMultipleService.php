@@ -14,7 +14,13 @@ class MediaMultipleService
         $uploadedUrls = array_filter($value ?? []);
         $mediaUrls = $model->{$key} ?? [];
 
-        if (array_diff($mediaUrls, $uploadedUrls) === array_diff($uploadedUrls, $mediaUrls) || ! $model->exists) {
+        if (
+            ! $model->EVENT_CREATED
+            && (
+                array_diff($mediaUrls, $uploadedUrls) === array_diff($uploadedUrls, $mediaUrls)
+                || ! $model->exists
+            )
+        ) {
             return json_encode($uploadedUrls);
         }
 
@@ -31,7 +37,7 @@ class MediaMultipleService
         $model = $model->fresh();
 
         // If uploaded urls are not in temp then they will not be uploaded
-        foreach ($uploadedUrls as $index => $url) {
+        foreach ($uploadedUrls as $url) {
             if (str_contains($url, config('app.url') . '/storage/temp/')) {
                 $model->addMediaFromDisk(
                     str_replace(config('app.url') . '/storage', '', $url),
