@@ -150,7 +150,7 @@
     .nav-item {
         @apply text-gray-800 hover:text-gray-900 flex items-center text-sm rounded cursor-pointer;
     }
-    .nav-item.active > div > a {
+    .nav-item.active > div > a, .nav-item.active > .single-page {
         @apply font-semibold;
     }
 
@@ -178,7 +178,7 @@
         @apply pr-0;
     }
 
-    .nav-item .dropdown a {
+    .nav-item .dropdown a, .single-page {
         @apply py-2.5;
     }
     /* NAVIGATION END */

@@ -4,7 +4,7 @@
 @if(! isset($navigationGroup['can']) || Auth::user()->can($navigationGroup['can']))
     @if(isset($navigationGroup['route']))
         {{-- Single page --}}
-        <a href="flex {{ route($navigationGroup['route']) }}" aria-current="page">
+        <a class="single-page" href="{{ route($navigationGroup['route']) }}" aria-current="page">
             {{ $name }}
         </a>
     @else
