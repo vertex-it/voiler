@@ -2,6 +2,7 @@
 
 namespace VertexIT\Voiler\Models;
 
+use Spatie\Activitylog\LogOptions;
 use VertexIT\Voiler\Traits\HasCompleteness;
 use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,8 +27,6 @@ abstract class BaseModel extends Model implements HasMedia
     protected $searchableColumns = [];
 
     protected $titleColumn;
-
-    protected static $logAttributes = ["*"];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -174,5 +173,10 @@ abstract class BaseModel extends Model implements HasMedia
         return $query->whereHas($relation, function ($q) use ($keyword) {
             $q->searchTable($keyword);
         });
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logAll();
     }
 }
