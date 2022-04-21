@@ -40,7 +40,7 @@ table.dataTable tbody td {
 }
 
 table.dataTable tbody td img {
-    @apply rounded shadow-sm h-8 w-auto h-auto mx-auto
+    @apply rounded shadow-sm h-8 w-auto mx-auto
 }
 
 table.dataTable thead th,

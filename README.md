@@ -1,14 +1,8 @@
-# Very short description of the package
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vertex-it/voiler.svg?style=flat-square)](https://packagist.org/packages/vertex-it/voiler)
-[![Total Downloads](https://img.shields.io/packagist/dt/vertex-it/voiler.svg?style=flat-square)](https://packagist.org/packages/vertex-it/voiler)
-![GitHub Actions](https://github.com/vertex-it/voiler/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+# Vertex IT Admin
 
 ## Installation
 
-You can install the package via composer:
+Install the package via composer:
 
 ```bash
 composer require vertex-it/voiler
