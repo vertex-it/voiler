@@ -1,7 +1,9 @@
 <div class="flex">
     <div class="dropdown direction-down-left">
         <button class="btn btn-transparent rounded-full hover:bg-gray-200 px-2">
-            <x-heroicon-o-dots-vertical class="w-5 h-5 text-gray-700" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
         </button>
 
         <div class="hidden dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
