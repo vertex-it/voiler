@@ -16,6 +16,9 @@ class ActivityDatatableService extends BaseDatatableService
             ->addColumn('action', function ($activity) {
                 return view('voiler::admin.activity.action', new ActivityIndexViewModel($activity));
             })
+            ->addColumn('created_at_formatted', function ($activity) {
+                return $activity->created_at->format('d. M Y - H:i\h');
+            })
             ->make();
     }
 
