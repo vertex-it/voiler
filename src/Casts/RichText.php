@@ -28,10 +28,14 @@ class RichText implements CastsAttributes
      * @param  string  $key
      * @param  array  $value
      * @param  array  $attributes
-     * @return string|array
+     * @return mixed
      */
-    public function set($model, string $key, $value, array $attributes): string|array
+    public function set($model, string $key, $value, array $attributes): mixed
     {
+        if (! $value) {
+            return null;
+        }
+
         return (
             new RichTextMediaLibraryImagesService($model, $key, $value)
         )->processImagesUpload();
