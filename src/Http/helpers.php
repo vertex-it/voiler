@@ -1,15 +1,16 @@
 <?php
 
 if (! function_exists('flashSuccessMessage')) {
-    function flashSuccessMessage($type = 'default', $model = null)
+    function flashSuccessMessage($type = 'default', $model = null): void
     {
-        request()->session()
+        request()
+            ->session()
             ->flash('success', toastrMessage($type, $model));
     }
 }
 
 if (! function_exists('toastrMessage')) {
-    function toastrMessage($type, $model)
+    function toastrMessage($type, $model): string
     {
         if (isset($model) && method_exists($model, 'getTitle')) {
             $title = optional($model)->getTitle();

@@ -4,9 +4,9 @@ namespace VertexIT\Voiler\Services\Datatables;
 
 use Illuminate\Http\Request;
 use VertexIT\Voiler\Models\Activity;
-use Yajra\DataTables\Facades\DataTables;
 use VertexIT\Voiler\Services\BaseDatatableService;
 use VertexIT\Voiler\ViewModels\Index\ActivityIndexViewModel;
+use Yajra\DataTables\Facades\DataTables;
 
 class ActivityDatatableService extends BaseDatatableService
 {

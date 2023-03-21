@@ -6,9 +6,9 @@ class Profile extends BaseModel
 {
     protected $table = 'users';
 
-    protected $slugMap = 'name';
+    protected string | array $slugMap = 'name';
 
-    protected $titleColumn = 'name';
+    protected string $titleColumn = 'name';
 
     protected $casts = [
         'emails' => 'array',

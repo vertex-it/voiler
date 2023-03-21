@@ -7,11 +7,9 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 class Activity extends SpatieActivity
 {
-    public $guarded = [];
+    public string $titleColumn = 'log_name';
 
-    public $titleColumn = 'log_name';
-
-    public function getTitleColumn()
+    public function getTitleColumn(): string
     {
         return $this->titleColumn;
     }

@@ -19,9 +19,9 @@ class Permission extends BaseModel implements PermissionContract
 
     protected $guarded = ['id'];
 
-    protected $slugMap = ['name'];
+    protected string | array $slugMap = ['name'];
 
-    protected $titleColumn = 'name';
+    protected string $titleColumn = 'name';
 
     public function __construct(array $attributes = [])
     {

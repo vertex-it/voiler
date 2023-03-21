@@ -19,9 +19,9 @@ class Role extends BaseModel implements RoleContract
 
     protected $guarded = ['id'];
 
-    protected $slugMap = 'name';
+    protected string | array $slugMap = 'name';
 
-    protected $titleColumn = 'name';
+    protected string $titleColumn = 'name';
 
     public function __construct(array $attributes = [])
     {
@@ -76,12 +76,11 @@ class Role extends BaseModel implements RoleContract
     /**
      * Find a role by its name and guard name.
      *
-     * @param string $name
-     * @param string|null $guardName
+     * @param  string  $name
+     * @param  null  $guardName
      *
-     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return \Spatie\Permission\Contracts\Role
      *
-     * @throws \Spatie\Permission\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName = null): RoleContract
     {
@@ -112,10 +111,8 @@ class Role extends BaseModel implements RoleContract
     /**
      * Find or create role by its name (and optionally guardName).
      *
-     * @param string $name
-     * @param string|null $guardName
-     *
-     * @return \Spatie\Permission\Contracts\Role
+     * @param  string  $name
+     * @param  null  $guardName
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {

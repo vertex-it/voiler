@@ -25,12 +25,11 @@ trait HasCompleteness
 
     private function propertyIsFilled(string $type, mixed $propertyValue): bool
     {
-        switch ($type) {
-            case 'string':
-                return preg_replace("/\s+/", "", strip_tags($propertyValue));
-            case 'array':
-                return $this->isArrayNotEmpty($propertyValue);
-        }
+        return match ($type) {
+            'string' => preg_replace("/\s+/", "", strip_tags($propertyValue)),
+            'array' => $this->isArrayNotEmpty($propertyValue),
+            default => false,
+        };
     }
 
     private function isArrayNotEmpty($propertyArrayValue): bool

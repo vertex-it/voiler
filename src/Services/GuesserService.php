@@ -2,7 +2,6 @@
 
 namespace VertexIT\Voiler\Services;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class GuesserService
@@ -70,21 +69,21 @@ class GuesserService
         return self::formResourceNameMapping($resourceName);
     }
 
-    public static function fromIndexViewModelName(string $className)
+    public static function fromIndexViewModelName(string $className): array
     {
         $resourceName = self::getClassPrefixName($className, 'IndexViewModel');
 
         return self::formResourceNameMapping($resourceName);
     }
 
-    public static function fromFormViewModelName(string $className)
+    public static function fromFormViewModelName(string $className): array
     {
         $resourceName = self::getClassPrefixName($className, 'FormViewModel');
 
         return self::formResourceNameMapping($resourceName);
     }
 
-    public static function fromDatatableServiceName(string $className)
+    public static function fromDatatableServiceName(string $className): array
     {
         $resourceName = self::getClassPrefixName($className, 'DatatableService');
 
@@ -98,7 +97,7 @@ class GuesserService
         return str_replace($suffix, '', last($resourceName));
     }
 
-    public static function getClassFullNamespace(string $vendor, string $namespace, string $resourceName, string $suffix)
+    public static function getClassFullNamespace(string $vendor, string $namespace, string $resourceName, string $suffix): string
     {
         $prefix = $vendor === 'app' ? '\\App' : '\\VertexIT\\Voiler';
 

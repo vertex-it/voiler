@@ -20,16 +20,16 @@ abstract class VoilerUser extends BaseModel implements
 
     protected $guarded = ['roles'];
 
-    protected $slugMap = 'name';
+    protected string | array $slugMap = 'name';
 
-    protected $titleColumn = 'name';
+    protected string $titleColumn = 'name';
 
     protected $hidden = ['password', 'remember_token'];
 
     /**
      * Check if user is owner for specific resource.
      */
-    public function isOwner($id)
+    public function isOwner($id): bool
     {
         return $this->id === $id;
     }

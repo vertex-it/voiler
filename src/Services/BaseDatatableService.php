@@ -7,7 +7,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class BaseDatatableService
 {
-    private array $resource = [];
+    private array $resource;
 
     public function __construct()
     {

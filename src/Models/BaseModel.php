@@ -2,19 +2,20 @@
 
 namespace VertexIT\Voiler\Models;
 
-use Spatie\Activitylog\LogOptions;
-use VertexIT\Voiler\Traits\HasCompleteness;
-use DB;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use VertexIT\Voiler\Traits\HasCompleteness;
 
 abstract class BaseModel extends Model implements HasMedia
 {
@@ -22,11 +23,11 @@ abstract class BaseModel extends Model implements HasMedia
 
     protected $guarded = [];
 
-    protected $slugMap;
+    protected array | string $slugMap;
 
-    protected $searchableColumns = [];
+    protected array $searchableColumns = [];
 
-    protected $titleColumn;
+    protected string $titleColumn;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -36,14 +37,14 @@ abstract class BaseModel extends Model implements HasMedia
             ->doNotGenerateSlugsOnUpdate();
     }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
     protected static function booted()
     {
-        static::created(function ($model) {
+        static::created(static function ($model) {
             foreach ($model->casts as $columnName => $castType) {
                 if (Str::contains($castType, ['RichText', 'MediaSingle', 'MediaMultiple'])) {
                     $model = $model->fresh();
@@ -56,7 +57,7 @@ abstract class BaseModel extends Model implements HasMedia
         });
     }
 
-    public function isOwnedByUser($user): bool
+    public function isOwnedByUser(User $user): bool
     {
         return true;
     }
@@ -120,7 +121,7 @@ abstract class BaseModel extends Model implements HasMedia
         }
     }
 
-    public function getTitle()
+    public function getTitle(): ?string
     {
         if ($this->titleColumn) {
             return strip_tags($this->{$this->titleColumn});
@@ -143,7 +144,7 @@ abstract class BaseModel extends Model implements HasMedia
         return null;
     }
 
-    public function getTitleColumn()
+    public function getTitleColumn(): string
     {
         return $this->titleColumn;
     }
