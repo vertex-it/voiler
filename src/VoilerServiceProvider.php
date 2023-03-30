@@ -2,11 +2,21 @@
 
 namespace VertexIT\Voiler;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use VertexIT\Voiler\Console\GenerateCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerControllerMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerDatatableServiceMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerFormViewMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerFormViewModelMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerIndexViewMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerIndexViewModelMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerModelMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerPolicyMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerRequestMakeCommand;
 use VertexIT\Voiler\Console\PublishFromPackagesCommand;
-use Illuminate\Support\Facades\Gate;
 
 class VoilerServiceProvider extends ServiceProvider
 {
@@ -46,8 +56,10 @@ class VoilerServiceProvider extends ServiceProvider
         Route::macro('voilerResource', function ($uri, $controller) {
             $modelName = Str::of($uri)->singular()->slug('_')->camel();
 
-            Route::as("{$uri}.")->prefix("{$uri}")->group(function () use ($uri, $controller, $modelName) {
-                Route::get("clone/{{$modelName}}", [$controller, 'edit'])->name('clone');
+            $namePrefix = Str::of($uri)->plural()->slug('_')->camel();
+
+            Route::as("{$uri}.")->prefix($namePrefix)->group(function () use ($controller, $modelName) {
+                Route::get("clone/{$modelName}", [$controller, 'edit'])->name('clone');
                 Route::put('restore', [$controller, 'restore'])->name('restore');
                 Route::put('update-priority', [$controller, 'updatePriority'])->name('updatePriority');
                 Route::delete('force-delete', [$controller, 'forceDelete'])->name('forceDelete');
@@ -128,6 +140,16 @@ class VoilerServiceProvider extends ServiceProvider
     {
         $this->commands([
             PublishFromPackagesCommand::class,
+            GenerateCommand::class,
+            VoilerControllerMakeCommand::class,
+            VoilerRequestMakeCommand::class,
+            VoilerPolicyMakeCommand::class,
+            VoilerDatatableServiceMakeCommand::class,
+            VoilerIndexViewModelMakeCommand::class,
+            VoilerFormViewModelMakeCommand::class,
+            VoilerFormViewMakeCommand::class,
+            VoilerIndexViewMakeCommand::class,
+            VoilerModelMakeCommand::class,
         ]);
     }
 }

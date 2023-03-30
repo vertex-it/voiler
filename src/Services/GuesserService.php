@@ -15,7 +15,8 @@ class GuesserService
         $classNamespaces = [
             'model' => '\\Models',
             'request' => '\\Http\\Requests',
-            'datatableService' => '\\Services\\Datatables',
+            'policy' => '\\Policies',
+            'datatableService' => '\\Services\\Datatable',
             'indexViewModel' => '\\ViewModels\\Index',
             'formViewModel' => '\\ViewModels\\Form',
         ];
@@ -40,19 +41,37 @@ class GuesserService
             'name' => $resourceName,
             'name_singular' => (string) Str::of($resourceName)->camel(),
             'name_plural' => (string) Str::of($resourceName)->plural()->camel(),
+            'database_table' => (string) Str::of($resourceName)->plural()->snake(),
             'controller' => $resourceName . 'Controller',
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
-            'route' => 'admin/' . strtolower(Str::plural($resourceName)),
-            'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'model' => $classNamespaces['model'],
+            'route' => 'admin/' . Str::of($resourceName)->plural()->kebab()->lower(),
+            'route_name' => 'admin.' . Str::of($resourceName)->plural()->camel(),
+            'model' => $resourceName,
+            'model_fqn' => $classNamespaces['model'],
             'title_column' => class_exists($classNamespaces['model']) ? (new $classNamespaces['model'])->getTitleColumn() : '',
-            'view' => $view,
-            'request' => $classNamespaces['request'],
-            'datatable_service' => $classNamespaces['datatableService'],
-            'index_view_model' => $classNamespaces['indexViewModel'],
-            'form_view_model' => $classNamespaces['formViewModel'],
+            'view_path' => (string) Str::of($resourceName)->kebab()->lower(),
+            'view_full_path' => $view,
+            'request' => $resourceName . 'Request',
+            'request_fqn' => $classNamespaces['request'],
+            'policy' => $resourceName . 'Policy',
+            'policy_fqn' => $classNamespaces['policy'],
+            'factory' => $resourceName . 'Factory',
+            'factory_fqn' => '\\Database\\Factories\\' . $resourceName . 'Factory',
+            'seeder' => $resourceName . 'Seeder',
+            'seeder_fqn' => '\\Database\\Seeders\\' . $resourceName . 'Seeder',
+            'datatable_service' => $resourceName . 'DatatableService',
+            'datatable_service_fqn' => $classNamespaces['datatableService'],
+            'index_view_model' => $resourceName . 'IndexViewModel',
+            'index_view_model_fqn' => $classNamespaces['indexViewModel'],
+            'form_view_model' => $resourceName . 'FormViewModel',
+            'form_view_model_fqn' => $classNamespaces['formViewModel'],
             'roles' => self::generatePermissions($resourceName),
         ];
+    }
+
+    public static function fromModelName(string $resourceName): array
+    {
+        return self::formResourceNameMapping($resourceName);
     }
 
     public static function fromControllerName(string $className): array

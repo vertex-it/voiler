@@ -1,6 +1,6 @@
 <?php
 
-namespace VertexIT\Voiler\Services\Datatables;
+namespace VertexIT\Voiler\Services\Datatable;
 
 use Illuminate\Http\Request;
 use VertexIT\Voiler\Models\Permission;

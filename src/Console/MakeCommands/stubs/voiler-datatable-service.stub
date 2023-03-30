@@ -1,0 +1,9 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\Services\BaseDatatableService;
+
+class {{ class }} extends BaseDatatableService
+{
+}

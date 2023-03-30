@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\Http\Controllers\BaseController;
+
+class {{ class }} extends BaseController
+{
+    // Check out BaseController
+}

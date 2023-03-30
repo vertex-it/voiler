@@ -1,0 +1,26 @@
+@extends('voiler::layouts.base-index')
+
+@section('filters')
+    {{-- TODO | Add table filters or remove section if not necessary --}}
+@endsection
+
+@section('scripts')
+    <script>
+        var additionalConfig = {
+            columns: [
+                {{-- TODO | Add table columns --}}
+                { title: '', data: "action", searchable: false, orderable: false, width: "40px",  responsivePriority: 1 },
+            ],
+            select: {
+                style: 'multi',
+                selector: 'td:not(:last-child)'
+            }
+        };
+
+        ajaxData = function () {
+            return {
+                {{-- TODO | Add filters values or remove function if not necessary --}}
+            };
+        }
+    </script>
+@endsection

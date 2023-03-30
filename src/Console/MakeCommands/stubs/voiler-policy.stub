@@ -1,0 +1,9 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\Policies\BasePolicy;
+
+class {{ class }} extends BasePolicy
+{
+}

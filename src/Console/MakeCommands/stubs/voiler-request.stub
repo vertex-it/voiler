@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\Http\Requests\BaseFormRequest;
+
+class {{ class }} extends BaseFormRequest
+{
+    protected array $baseRules = [
+        // TODO Fill array with model attributes
+    ];
+}

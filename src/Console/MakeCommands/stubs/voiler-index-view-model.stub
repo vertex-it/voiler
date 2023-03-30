@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\ViewModels\Index\BaseIndexViewModel;
+
+class {{ class }} extends BaseIndexViewModel
+{
+}
+

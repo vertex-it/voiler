@@ -1,4 +1,10 @@
-# Vertex IT Admin
+<p align="center"><a href="https://vertex-it.com" target="_blank"><img src="logo-voiler.svg" width="400" alt="Voiler Logo"></a></p>
+
+<p align="center">
+<a href="https://packagist.org/packages/vertex-it/voiler"><img src="https://img.shields.io/packagist/dt/vertex-it/voiler" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/vertex-it/voiler"><img src="https://img.shields.io/packagist/v/vertex-it/voiler" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/vertex-it/voiler"><img src="https://img.shields.io/packagist/l/vertex-it/voiler" alt="License"></a>
+</p>
 
 ## Installation
 

@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ namespace }};
+
+use VertexIT\Voiler\ViewModels\Form\BaseFormViewModel;
+use App\Models\{{ model }};
+
+class {{ class }} extends BaseFormViewModel
+{
+    public {{ model }} ${{ nameSingular }};
+
+    public function __construct({{ model }} ${{ nameSingular }})
+    {
+        parent::__construct(${{ nameSingular }});
+
+        $this->{{ nameSingular }} = ${{ nameSingular }};
+    }
+}
+
