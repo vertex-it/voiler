@@ -23,7 +23,7 @@ class BaseDatatableService
         $datatables->addColumn('action', function ($model) {
             return view(
                 'voiler::components.datatable-action',
-                new $this->resource['index_view_model']($model)
+                new $this->resource['index_view_model_fqn']($model)
             );
         });
 
@@ -32,7 +32,7 @@ class BaseDatatableService
 
     public function prepareQuery(Request $request)
     {
-        return $this->resource['model']::withTrashed();
+        return $this->resource['model_fqn']::withTrashed();
     }
 
     public function addColumns($datatables)

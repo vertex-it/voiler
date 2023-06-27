@@ -19,35 +19,35 @@ class BaseController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorize('viewAny', $this->resource['model']);
+        $this->authorize('viewAny', $this->resource['model_fqn']);
 
         if ($request->ajax()) {
-            return (new $this->resource['datatable_service'])->make($request);
+            return (new $this->resource['datatable_service_fqn'])->make($request);
         }
 
         return view(
-            $this->resource['view'] . '.index',
-            new $this->resource['index_view_model']
+            $this->resource['view_full_path'] . '.index',
+            new $this->resource['index_view_model_fqn']
         );
     }
 
     public function create()
     {
-        $this->authorize('create', $this->resource['model']);
+        $this->authorize('create', $this->resource['model_fqn']);
 
         return view(
-            $this->resource['view'] . '.form',
-            new $this->resource['form_view_model'](new $this->resource['model'])
+            $this->resource['view_full_path'] . '.form',
+            new $this->resource['form_view_model_fqn'](new $this->resource['model_fqn'])
         );
     }
 
     public function store(): RedirectResponse
     {
-        $this->authorize('create', $this->resource['model']);
+        $this->authorize('create', $this->resource['model_fqn']);
 
-        $request = app($this->resource['request']);
+        $request = app($this->resource['request_fqn']);
 
-        $model = $this->resource['model']::createWithRelations($request);
+        $model = $this->resource['model_fqn']::createWithRelations($request);
 
         $this->dispatchEvent('store', $model);
 
@@ -56,19 +56,19 @@ class BaseController extends Controller
 
     public function edit($model)
     {
-        $model = $this->resource['model']::findByRouteKeyName($model)->first();
+        $model = $this->resource['model_fqn']::findByRouteKeyName($model)->first();
 
         $this->authorize('update', $model);
 
         return view(
-            $this->resource['view'] . '.form',
-            new $this->resource['form_view_model']($model)
+            $this->resource['view_full_path'] . '.form',
+            new $this->resource['form_view_model_fqn']($model)
         );
     }
 
     public function update(Request $request, $model): RedirectResponse
     {
-        $this->authorize('update', $this->resource['model']::findByRouteKeyName($model)->first());
+        $this->authorize('update', $this->resource['model_fqn']::findByRouteKeyName($model)->first());
 
         [$request, $model] = $this->bindModelAndValidateRequest($request, $model);
 
@@ -81,7 +81,7 @@ class BaseController extends Controller
 
     public function destroy($model): JsonResponse
     {
-        $model = $this->resource['model']::findByRouteKeyName($model);
+        $model = $this->resource['model_fqn']::findByRouteKeyName($model);
 
         $this->authorize('delete', $model->first());
 
@@ -94,7 +94,7 @@ class BaseController extends Controller
 
     public function restore(Request $request): JsonResponse
     {
-        $model = $this->resource['model']::withTrashed()->findOrFail($request->id);
+        $model = $this->resource['model_fqn']::withTrashed()->findOrFail($request->id);
 
         $this->authorize('restore', $model);
 
@@ -107,7 +107,7 @@ class BaseController extends Controller
 
     public function updatePriority(Request $request): JsonResponse
     {
-        $this->resource['model']::where('id', $request->id)
+        $this->resource['model_fqn']::where('id', $request->id)
             ->update([
                 'priority' => $request->priority,
             ]);
@@ -117,7 +117,7 @@ class BaseController extends Controller
 
     public function forceDelete(Request $request): JsonResponse
     {
-        $model = $this->resource['model']::withTrashed()->findOrFail($request->id);
+        $model = $this->resource['model_fqn']::withTrashed()->findOrFail($request->id);
 
         $this->authorize('forceDelete', $model);
 
@@ -137,13 +137,13 @@ class BaseController extends Controller
 
     public function bindModelAndValidateRequest($request, $model): array
     {
-        $model = $this->resource['model']::findByRouteKeyName($model)->first();
+        $model = $this->resource['model_fqn']::findByRouteKeyName($model)->first();
 
         $request->merge([
             $this->resource['name_singular'] => $model,
         ]);
 
-        $request = app($this->resource['request']);
+        $request = app($this->resource['request_fqn']);
 
         return [$request, $model];
     }
