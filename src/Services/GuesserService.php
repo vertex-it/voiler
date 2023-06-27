@@ -14,11 +14,11 @@ class GuesserService
     {
         $classNamespaces = [
             'model' => '\\Models',
-            'request' => '\\Http\\Requests',
-            'policy' => '\\Policies',
-            'datatableService' => '\\Services\\Datatable',
-            'indexViewModel' => '\\ViewModels\\Index',
-            'formViewModel' => '\\ViewModels\\Form',
+            'request' => '\\Http\\Requests\\Admin',
+            'policy' => '\\Policies\\Admin',
+            'datatableService' => '\\Services\\Admin\\Datatable',
+            'indexViewModel' => '\\ViewModels\\Admin\\Index',
+            'formViewModel' => '\\ViewModels\\Admin\\Form',
         ];
 
         foreach ($classNamespaces as $type => $namespace) {
