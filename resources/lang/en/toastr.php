@@ -2,9 +2,9 @@
 
 return [
     // TODO Add set of common actions
-    'clone' => 'U have successfully cloned',
-    'store' => 'U have successfully created',
-    'update' => 'U have successfully updated',
-    'destroy' => 'U have successfully deleted',
-    'default' => 'U have successfully done this action',
+    'clone' => 'You have successfully cloned',
+    'store' => 'You have successfully created',
+    'update' => 'You have successfully updated',
+    'destroy' => 'You have successfully deleted',
+    'default' => 'You have successfully done this action',
 ];
