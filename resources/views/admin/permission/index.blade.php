@@ -9,10 +9,10 @@
     <script>
         var additionalConfig = {
             columns: [
-                { title: 'name', data: "name", responsivePriority: 0 },
-                { title: 'description', data: "description" },
-                { title: 'roles', data: "roles" },
-                { title: 'users', data: "users" },
+                { title: 'Name', data: "name", responsivePriority: 0 },
+                { title: 'Description', data: "description" },
+                { title: 'Roles', data: "roles" },
+                { title: 'Users', data: "users" },
                 { title: '', data: "action", orderable: false,  width: "80px", responsivePriority: 1, searchable: false },
             ],
             select: {
