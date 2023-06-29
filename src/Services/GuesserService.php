@@ -27,7 +27,11 @@ class GuesserService
             $fullNamespace = self::getClassFullNamespace('app', $namespace, $resourceName, $suffix);
 
             if (! class_exists($fullNamespace)) {
-                $fullNamespace = self::getClassFullNamespace('voiler', $namespace, $resourceName, $suffix);
+                $fullNamespace = str_replace(
+                    '\Admin',
+                    '',
+                    self::getClassFullNamespace('voiler', $namespace, $resourceName, $suffix)
+                );
             }
 
             $classNamespaces[$type] = $fullNamespace;
