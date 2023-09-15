@@ -54,35 +54,27 @@ class VoilerServiceProvider extends ServiceProvider
     protected function registerRoutes()
     {
         Route::macro('voilerResource', function ($uri, $controller) {
-            $modelName = Str::of($uri)->singular()->slug('_')->camel();
+            Route::as('admin.')->middleware(config('voiler.middleware'))->group(function () use ($uri, $controller) {
+                $modelName = Str::of($uri)->singular()->slug('_')->camel();
 
-            $namePrefix = Str::of($uri)->plural()->slug('_')->camel();
+                $namePrefix = Str::of($uri)->plural()->slug('_')->camel();
 
-            Route::as("{$uri}.")->prefix($namePrefix)->group(function () use ($controller, $modelName) {
-                Route::get("clone/{{$modelName}}", [$controller, 'edit'])->name('clone');
-                Route::put('restore', [$controller, 'restore'])->name('restore');
-                Route::put('update-priority', [$controller, 'updatePriority'])->name('updatePriority');
-                Route::delete('force-delete', [$controller, 'forceDelete'])->name('forceDelete');
+                Route::as("{$uri}.")->prefix($namePrefix)->group(function() use ($controller, $modelName) {
+                    Route::get("clone/{{$modelName}}", [$controller, 'edit'])->name('clone');
+                    Route::put('restore', [$controller, 'restore'])->name('restore');
+                    Route::put('update-priority', [$controller, 'updatePriority'])->name('updatePriority');
+                    Route::delete('force-delete', [$controller, 'forceDelete'])->name('forceDelete');
+                });
+
+                Route::resource($uri, $controller)
+                    ->except(['show'])
+                    ->parameters([
+                        $uri => $modelName,
+                    ]);
             });
-
-            Route::resource($uri, $controller)
-                ->except(['show'])
-                ->parameters([
-                    $uri => $modelName,
-                ]);
         });
 
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
-    }
-
-    protected function routeConfiguration()
-    {
-        return [
-            'as' => 'admin.',
-            'middleware' => config('voiler.middleware'),
-        ];
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 
     protected function registerPolicies()
