@@ -115,6 +115,7 @@ class VoilerServiceProvider extends ServiceProvider
             __DIR__.'/../resources/js' => resource_path('js/vendor'),
             __DIR__.'/../resources/css' => resource_path('css/vendor'),
             __DIR__.'/../.gitignore' => '.gitignore',
+            __DIR__.'/../package.json' => 'package.json',
         ], 'voiler-assets');
 
         $this->publishes([
@@ -128,7 +129,7 @@ class VoilerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/seeders' => database_path('seeders'),
-            __DIR__.'/../database/factories/Admin' => database_path('factories/Admin'),
+            // __DIR__.'/../database/factories/Admin' => database_path('factories/Admin'),
         ], 'voiler-seeders');
 
         $this->publishes([

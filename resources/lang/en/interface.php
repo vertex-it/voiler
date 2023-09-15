@@ -58,4 +58,5 @@ return [
     'login' => 'Login',
     'sign_in_to_your_account' => 'Sign in to your account',
     'remember_me' => 'Remember me',
+    'register' => 'Register',
 ];

@@ -12,3 +12,15 @@ _ide_helper.php
 .phpstorm.meta.php
 npm-debug.log
 yarn-error.log
+/.phpunit.cache
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+/.fleet
+/.vscode
+_ide_helper*.php
+/tools
+.php-cs-fixer.*

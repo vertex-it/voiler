@@ -39,8 +39,8 @@
                     <div class="mt-14 mb-6">
 {{--                        @if (Route::has('admin.register'))--}}
                             <p class="mt-3 text-xs md:text-sm text-center text-gray-500">
-                                Dont have account?
-                                <a href="#" class="font-medium text-primary-500 hover:text-primary-600">
+                                Don't have account?
+                                <a href="{{ route('register') }}" class="font-medium text-primary-500 hover:text-primary-600">
                                     Register here
                                 </a>
                             </p>
