@@ -30,7 +30,7 @@
         "symfony/dom-crawler": "^6.2",
         "vertex-it/blade-components": "^2.4",
         "laravel/fortify": "^1.17",
-        "yajra/laravel-datatables": "^v10.1.0",
+        "yajra/laravel-datatables": "^v10.1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^8.0"
