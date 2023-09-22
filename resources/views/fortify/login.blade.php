@@ -36,16 +36,16 @@
                     <x-inputs.input name="email" type="email" autofocus />
                     <x-inputs.input name="password" type="password" />
                     <x-inputs.toggle name="remember" label="{{ __('voiler::interface.remember_me') }}" value="true" />
-                    <div class="mt-14 mb-6">
-{{--                        @if (Route::has('admin.register'))--}}
+                    @if (Route::has('register'))
+                        <div class="mt-14 mb-6">
                             <p class="mt-3 text-xs md:text-sm text-center text-gray-500">
                                 Don't have account?
                                 <a href="{{ route('register') }}" class="font-medium text-primary-500 hover:text-primary-600">
                                     Register here
                                 </a>
                             </p>
-{{--                        @endif--}}
-                    </div>
+                        </div>
+                    @endif
                 </x-form>
             </div>
         </div>
