@@ -2,11 +2,20 @@
 
 namespace {{ namespace }};
 
+use Illuminate\Validation\Rule;
 use VertexIT\Voiler\Http\Requests\BaseFormRequest;
 
 class {{ class }} extends BaseFormRequest
 {
-    protected array $baseRules = [
-        // TODO Fill array with model attributes
-    ];
+    public function getBaseRules(): array
+    {
+        return [
+            'name' => [
+                'string',
+                'max:255',
+                Rule::unique('{{ database_table }}')->ignore($this->{{ name_singular }}?->id),
+            ],
+            // TODO Fill array with model attributes
+        ];
+    }
 }

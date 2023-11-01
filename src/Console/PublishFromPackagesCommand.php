@@ -8,7 +8,7 @@ class PublishFromPackagesCommand extends Command
 {
     protected $signature = 'voiler:publish-packages';
 
-    protected $description = 'Install the BlogPackage';
+    protected $description = 'Publish necessary voiler packages.';
 
     public function handle()
     {

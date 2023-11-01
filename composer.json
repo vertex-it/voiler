@@ -59,12 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VertexIT\\Voiler\\VoilerServiceProvider",
-                "VertexIT\\Voiler\\FortifyServiceProvider"
-            ],
-            "aliases": {
-                "Voiler": "VertexIT\\Voiler\\VoilerFacade"
-            }
+                "VertexIT\\Voiler\\Providers\\VoilerServiceProvider",
+                "VertexIT\\Voiler\\Providers\\FortifyServiceProvider",
+                "VertexIT\\BladeComponents\\BladeComponentsServiceProvider"
+            ]
         }
     }
 }

@@ -1,12 +1,19 @@
 <?php
 
-namespace VertexIT\Voiler;
+namespace VertexIT\Voiler\Providers;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use VertexIT\Voiler\Console\GenerateCommand;
+use VertexIT\BladeComponents\View\Components\Breadcrumb;
+use VertexIT\Voiler\Console\VoilerGenerateCommand;
+use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerFactoryMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerMigrationMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerSeederMakeCommand;
+use VertexIT\Voiler\Console\MakeCommands\VoilerAPIControllerMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerControllerMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerDatatableServiceMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerFormViewMakeCommand;
@@ -23,11 +30,11 @@ class VoilerServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'voiler');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'voiler');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'voiler');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'voiler');
         $this->registerRoutes();
         $this->registerPolicies();
 
@@ -40,27 +47,20 @@ class VoilerServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register(): void
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'voiler');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('voiler', function () {
-            return new Voiler;
-        });
+        $this->mergeConfigFrom(__DIR__ . '/../../config/config.php', 'voiler');
     }
 
-    protected function registerRoutes()
+    protected function registerRoutes(): void
     {
         Route::macro('voilerResource', function ($uri, $controller) {
             Route::as('admin.')->middleware(config('voiler.middleware'))->group(function () use ($uri, $controller) {
-                $modelName = Str::of($uri)->singular()->slug('_')->camel();
+                $model = Str::of($uri)->singular()->slug('_')->camel();
 
-                $namePrefix = Str::of($uri)->plural()->slug('_')->camel();
-
-                Route::as("{$uri}.")->prefix($namePrefix)->group(function() use ($controller, $modelName) {
-                    Route::get("clone/{{$modelName}}", [$controller, 'edit'])->name('clone');
+                Route::as("{$uri}.")->prefix($uri)->group(function() use ($controller, $model) {
+                    Route::get("clone/{{$model}}", [$controller, 'edit'])->name('clone');
                     Route::put('restore', [$controller, 'restore'])->name('restore');
                     Route::put('update-priority', [$controller, 'updatePriority'])->name('updatePriority');
                     Route::delete('force-delete', [$controller, 'forceDelete'])->name('forceDelete');
@@ -69,15 +69,16 @@ class VoilerServiceProvider extends ServiceProvider
                 Route::resource($uri, $controller)
                     ->except(['show'])
                     ->parameters([
-                        $uri => $modelName,
+                        $uri => $model,
                     ]);
             });
         });
 
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
     }
 
-    protected function registerPolicies()
+    protected function registerPolicies(): void
     {
         $policies = [
             'VertexIT\Voiler\Models\VoilerUser' => 'VertexIT\Voiler\Policies\UserPolicy',
@@ -96,47 +97,50 @@ class VoilerServiceProvider extends ServiceProvider
         });
     }
 
-    protected function registerPublishableFiles()
+    protected function registerPublishableFiles(): void
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('voiler.php'),
-            __DIR__.'/../config/navigation.php' => config_path('navigation.php'),
+            __DIR__ . '/../../config/config.php' => config_path('voiler.php'),
+            __DIR__ . '/../../config/navigation.php' => config_path('navigation.php'),
         ], 'voiler-config');
 
         $this->publishes([
-            __DIR__.'/../resources/js' => resource_path('js/vendor'),
-            __DIR__.'/../resources/css' => resource_path('css/vendor'),
-            __DIR__.'/../.gitignore' => '.gitignore',
-            __DIR__.'/../package.json' => 'package.json',
+            __DIR__ . '/../../resources/js' => resource_path('js/vendor'),
+            __DIR__ . '/../../resources/css' => resource_path('css/vendor'),
+            __DIR__ . '/../../.gitignore' => '.gitignore',
+            __DIR__ . '/../../package.json' => 'package.json',
         ], 'voiler-assets');
 
         $this->publishes([
-            __DIR__.'/../.gitignore' => '.gitignore',
+            __DIR__ . '/../../.gitignore' => '.gitignore',
         ], 'voiler-gitignore');
 
         $this->publishes([
-            __DIR__.'/../webpack.mix.js' => 'webpack.mix.js',
-            __DIR__.'/../tailwind.config.js' => 'tailwind.config.js',
+            __DIR__ . '/../../webpack.mix.js' => 'webpack.mix.js',
+            __DIR__ . '/../../tailwind.config.js' => 'tailwind.config.js',
         ], 'voiler-build-config');
 
         $this->publishes([
-            __DIR__.'/../database/seeders' => database_path('seeders'),
-            // __DIR__.'/../database/factories/Admin' => database_path('factories/Admin'),
+            __DIR__ . '/../../database/seeders' => database_path('seeders'),
         ], 'voiler-seeders');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views'),
+            __DIR__ . '/../../resources/views' => resource_path('views'),
         ], 'voiler-views');
     }
 
-    protected function registerCommands()
+    protected function registerCommands(): void
     {
         $this->commands([
             PublishFromPackagesCommand::class,
-            GenerateCommand::class,
+            VoilerGenerateCommand::class,
             VoilerControllerMakeCommand::class,
+            VoilerAPIControllerMakeCommand::class,
             VoilerRequestMakeCommand::class,
             VoilerPolicyMakeCommand::class,
+            VoilerMigrationMakeCommand::class,
+            VoilerFactoryMakeCommand::class,
+            VoilerSeederMakeCommand::class,
             VoilerDatatableServiceMakeCommand::class,
             VoilerIndexViewModelMakeCommand::class,
             VoilerFormViewModelMakeCommand::class,

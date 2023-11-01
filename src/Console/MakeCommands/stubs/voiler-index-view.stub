@@ -1,13 +1,10 @@
 @extends('voiler::layouts.base-index')
 
-@section('filters')
-    {{-- TODO | Add table filters or remove section if not necessary --}}
-@endsection
-
 @section('scripts')
     <script>
         var additionalConfig = {
             columns: [
+                { title: 'Name', data: 'name' },
                 {{-- TODO | Add table columns --}}
                 { title: '', data: "action", searchable: false, orderable: false, width: "40px",  responsivePriority: 1 },
             ],
@@ -16,11 +13,21 @@
                 selector: 'td:not(:last-child)'
             }
         };
+    </script>
+@endsection
 
+{{-- TODO | Optional Datatables filters --}}
+
+@section('filters')
+    {{-- TODO | Add table filters --}}
+@endsection
+
+@push('scripts')
+    <script>
         ajaxData = function () {
             return {
-                {{-- TODO | Add filters values or remove function if not necessary --}}
+                {{-- TODO | Append filter values to datatable request --}}
             };
         }
     </script>
-@endsection
+@endpush

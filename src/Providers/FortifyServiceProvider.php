@@ -1,6 +1,6 @@
 <?php
 
-namespace VertexIT\Voiler;
+namespace VertexIT\Voiler\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;

@@ -6,9 +6,7 @@ use VertexIT\Voiler\Models\BaseModel;
 
 class {{ class }} extends BaseModel
 {
-    // TODO This value should be set to reflect model title
     protected string $titleColumn = 'name';
 
-    // TODO This value should be set to reflect model slug
     protected array | string $slugMap = 'name';
 }

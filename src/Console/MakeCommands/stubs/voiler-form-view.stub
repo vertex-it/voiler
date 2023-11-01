@@ -8,6 +8,11 @@
 
 @section('inputs')
 
+    <x-blade-components::inputs.input
+        name="name"
+        :value="${{ nameSingular }}->name"
+    />
+
     {{-- Add form inputs here... --}}
 
 @endsection

@@ -48,8 +48,13 @@ class GuesserService
             'database_table' => (string) Str::of($resourceName)->plural()->snake(),
             'controller' => $resourceName . 'Controller',
             'controller_fqn' => '\\App\\Http\\Controllers\\Admin\\' . $resourceName . 'Controller',
+            'api_controller' => $resourceName . 'APIController',
+            'api_controller_fqn' => '\\App\\Http\\Controllers\\API\\' . $resourceName . 'APIController',
+            'api_resource' => $resourceName . 'Resource',
+            'api_resource_fqn' => '\\App\\Http\\Resources\\' . $resourceName . 'Resource',
             'route' => 'admin/' . Str::of($resourceName)->plural()->kebab()->lower(),
-            'route_name' => 'admin.' . Str::of($resourceName)->plural()->camel(),
+            'route_name' => 'admin.' . Str::of($resourceName)->plural()->kebab()->lower(),
+            'route_suffix' => Str::of($resourceName)->plural()->kebab()->lower(),
             'model' => $resourceName,
             'model_fqn' => $classNamespaces['model'],
             'title_column' => class_exists($classNamespaces['model']) ? (new $classNamespaces['model'])->getTitleColumn() : '',
@@ -69,6 +74,8 @@ class GuesserService
             'index_view_model_fqn' => $classNamespaces['indexViewModel'],
             'form_view_model' => $resourceName . 'FormViewModel',
             'form_view_model_fqn' => $classNamespaces['formViewModel'],
+            'title_singular' => (string) Str::of($resourceName)->headline(),
+            'title_plural' => (string) Str::of($resourceName)->plural()->headline(),
             'roles' => self::generatePermissions($resourceName),
         ];
     }
@@ -81,6 +88,20 @@ class GuesserService
     public static function fromControllerName(string $className): array
     {
         $resourceName = self::getClassPrefixName($className, 'Controller');
+
+        return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function fromRequestName(string $className): array
+    {
+        $resourceName = self::getClassPrefixName($className, 'Request');
+
+        return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function fromAPIControllerName(string $className): array
+    {
+        $resourceName = self::getClassPrefixName($className, 'APIController');
 
         return self::formResourceNameMapping($resourceName);
     }
@@ -109,6 +130,20 @@ class GuesserService
     public static function fromDatatableServiceName(string $className): array
     {
         $resourceName = self::getClassPrefixName($className, 'DatatableService');
+
+        return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function fromFactoryName(string $className): array
+    {
+        $resourceName = self::getClassPrefixName($className, 'Factory');
+
+        return self::formResourceNameMapping($resourceName);
+    }
+
+    public static function fromSeederName(string $className): array
+    {
+        $resourceName = self::getClassPrefixName($className, 'Seeder');
 
         return self::formResourceNameMapping($resourceName);
     }

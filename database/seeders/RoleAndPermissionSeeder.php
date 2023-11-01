@@ -25,11 +25,11 @@ class RoleAndPermissionSeeder extends Seeder
 
         foreach ($models as $model) {
             foreach ($permissionTypes as $permissionType) {
-                Permission::create(['name' => $model . ' ' . $permissionType]);
+                Permission::firstOrCreate(['name' => $model . ' ' . $permissionType]);
             }
         }
 
-        Role::create(['name' => 'superadmin']);
+        Role::firstOrCreate(['name' => 'superadmin']);
     }
 
     protected function getModels()

@@ -8,9 +8,11 @@ use VertexIT\Voiler\Http\Controllers\ProfileController;
 use VertexIT\Voiler\Http\Controllers\RoleController;
 use VertexIT\Voiler\Http\Controllers\UserController;
 
-Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+Route::middleware(config('voiler.middleware'))->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
 
-Route::get('activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+    Route::get('activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+});
 
 Route::voilerResource('activities', ActivityController::class);
 Route::voilerResource('roles', RoleController::class);

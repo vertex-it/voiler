@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('voiler::dashboard');
+        return view('voiler::admin.dashboard');
     }
 }

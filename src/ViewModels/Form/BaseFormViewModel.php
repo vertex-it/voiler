@@ -50,6 +50,6 @@ class BaseFormViewModel extends ViewModel
             return 'Kloniranje - ' . $this->formTitle;
         }
 
-        return __('Add ' . $this->resource['name_singular']);
+        return __('Add ' . $this->resource['title_singular']);
     }
 }

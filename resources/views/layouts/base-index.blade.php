@@ -1,6 +1,6 @@
 @extends('voiler::layouts.master')
 
-@section('title', __('All ' . $resource['name_plural']))
+@section('title', __('All ' . $resource['title_plural']))
 
 @section('breadcrumbs')
     <x-breadcrumb />
@@ -17,7 +17,7 @@
         @if (Auth::user()->can($resource['roles']['create']) && $getModelRoute('create'))
             @section('action-button')
                 <a class="btn btn-primary btn-sm" href="{{ $getModelRoute('create') }}">
-                    {{ __('Add ' . $resource['name_singular']) }}
+                    {{ __('Add ' . $resource['title_singular']) }}
                 </a>
             @endsection
         @endif

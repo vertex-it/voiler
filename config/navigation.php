@@ -5,41 +5,7 @@ return [
         'route' => 'admin.index',
     ],
     '_pages' => [
-        'Demo single page' => [
-            'route' => 'admin.index',
-            'can' => '',
-        ],
-        'Demo multiple pages' => [
-            [
-                'name' => 'Show all',
-                'route' => 'admin.index',
-                'can' => '',
-            ],
-            [
-                'name' => 'Create new',
-                'route' => 'admin.index',
-                'can' => '',
-            ],
-            'can' => '',
-            'direction' => 'direction-left-down'
-        ],
-        'Demo section' => [
-            'Demo subsection' => [
-                [
-                    'name' => 'Show all',
-                    'route' => 'admin.index',
-                    'can' => '',
-                ],
-                [
-                    'name' => 'Create new',
-                    'route' => 'admin.index',
-                    'can' => '',
-                ],
-                'can' => '',
-                'direction' => 'direction-right-down'
-            ],
-            'can' => '',
-        ],
+        // VOILER GENERATED PAGES
     ],
     '_profile' => [
         'Settings' => [
