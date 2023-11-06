@@ -7,12 +7,12 @@ const tailwindcss = require('tailwindcss')
 mix.webpackConfig({
     resolve: {
         symlinks: false,
-    }
-});
+    },
+})
 
 // Mix tailwind css
 
-mix.postCss("./vendor/vertex-it/voiler/resources/css/tailwind.css", "public/css", [ tailwindcss ])
+mix.postCss('./vendor/vertex-it/voiler/resources/css/tailwind.css', 'public/css', [tailwindcss])
    .postCss('./vendor/vertex-it/voiler/resources/css/tailwind-vendor.css', 'public/css/tailwind-vendor.css', [tailwindcss])
    .postCss('./vendor/vertex-it/blade-components/resources/css/blade-components.css', 'public/css/blade-components.css', [tailwindcss])
 
@@ -34,11 +34,18 @@ mix.scripts([
        'public/js/tailwind.js',
        './vendor/vertex-it/voiler/resources/js/toastr.min.js',
    ], 'public/js/app.js')
-   .version();
+   .version()
 
-mix.copyDirectory('node_modules/tinymce/icons', 'public/js/icons');
-mix.copyDirectory('node_modules/tinymce/plugins', 'public/js/plugins');
-mix.copyDirectory('node_modules/tinymce/skins', 'public/js/skins');
-mix.copyDirectory('node_modules/tinymce/themes', 'public/js/themes');
+const fs = require('fs')
+const tinyMCEResources = [
+    'icons', 'plugins', 'skins', 'themes',
+]
+
+// Copy tinymce resources
+for (i = 0; i < tinyMCEResources.length; i++) {
+    if (! fs.existsSync(`public/js/${ tinyMCEResources[i] }`)) {
+        mix.copyDirectory(`node_modules/tinymce/${ tinyMCEResources[i] }`, `public/js/${ tinyMCEResources[i] }`)
+    }
+}
 
 // --- VOILER MIX ASSETS END ---
