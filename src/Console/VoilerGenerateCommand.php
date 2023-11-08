@@ -140,7 +140,6 @@ class VoilerGenerateCommand extends Command
             "                'can' => 'create " . $resource['model'] . "',",
             "            ],",
             "            'can' => 'view " . $resource['model'] . "',",
-            "            'direction' => 'direction-left-down',",
             "        ],",
         ];
 

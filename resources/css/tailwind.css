@@ -174,7 +174,7 @@
     }
 
     .nav-label {
-        @apply uppercase font-bold text-gray-300 tracking-wider text-[.72rem] p-2 pl-0 pt-[10px];
+        @apply uppercase text-primary-500 tracking-wider text-[.72rem] p-2 pl-4 pt-6;
     }
 
     .nav-item {
@@ -182,20 +182,14 @@
     }
 
     .nav-item.active {
-        @apply bg-gray-100 rounded-xl;
+        @apply bg-primary-50 text-primary-500 font-bold rounded-md;
+    }
+    .collapse .nav-item.active {
+        @apply mr-4;
     }
 
-    .nav-item .menuitem {
-        @apply border-l-2 border-primary-300 hover:bg-transparent;
-    }
-
-    .collapse .nav-item,
-    .collapsing .nav-item,
-    .collapse .nav-label,
-    .collapsing .nav-label {
-        @apply pl-8;
-    }
-
+    nav .collapse,
+    nav .collapsing,
     .collapse .collapse,
     .collapse .collapsing,
     .collapsing .collapsing,
@@ -272,7 +266,7 @@
 
 @layer utilities {
     .bg-primary {
-        background-color: #f3f4f6;
+        background-color: #fafafa;
     }
 
     .text-headline {

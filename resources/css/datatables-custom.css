@@ -185,11 +185,6 @@ tr.dt-rowReorder-moving td.dtfc-fixed-right:last-child {
     border-right: 2px solid #555 !important
 }
 
-/* Action dropdown */
-table td .dropdown > .dropdown-menu {
-    @apply fixed right-[45px] md:right-[95px] !important;
-}
-
 /* Filter */
 .btn-filter.active {
     @apply bg-primary-50 text-primary-600 hover:bg-primary-200 !important

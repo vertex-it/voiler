@@ -35,15 +35,15 @@
 
         <div id="custom_filters" class="hidden">
             @hasSection('filters')
-                <div class="dropdown direction-down-right">
-                    <button class="btn btn-sm btn-gray btn-filter btn-has-icon text-gray-600">
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-gray btn-filter btn-has-icon text-gray-600 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                         </svg>
                          Filters
                     </button>
 
-                    <div class="hidden dropdown-menu w-80 md:w-96 p-6" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="dropdown-menu w-80 md:w-96 p-6">
                         <div class="filter-inputs">
                             @yield('filters')
                         </div>
@@ -62,18 +62,18 @@
         </div>
 
         <div id="table_buttons">
-            <div class="dropdown direction-down-left h-full">
-                <button class="btn btn-gray btn-has-icon px-2.5 py-1.5 h-full">
+            <div class="dropdown h-full">
+                <button class="btn btn-gray btn-has-icon px-2.5 py-1.5 h-full dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </button>
 
-                <div class="hidden dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                    <a href="#" class="menuitem" data-action="selectAll">{{ __('voiler::interface.select_all') }}</a>
-                    <a href="#" class="menuitem" data-action="selectNone">{{ __('voiler::interface.cancel') }}</a>
-                    <a href="#" class="menuitem" data-action="soft_delete">{{ __('voiler::interface.soft_delete') }}</a>
-                    <a href="#" class="menuitem" data-action="restore">{{ __('voiler::interface.restore') }}</a>
+                <div class="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <a href="#" class="dropdown-item" data-action="selectAll">{{ __('voiler::interface.select_all') }}</a>
+                    <a href="#" class="dropdown-item" data-action="selectNone">{{ __('voiler::interface.cancel') }}</a>
+                    <a href="#" class="dropdown-item" data-action="soft_delete">{{ __('voiler::interface.soft_delete') }}</a>
+                    <a href="#" class="dropdown-item" data-action="restore">{{ __('voiler::interface.restore') }}</a>
                 </div>
             </div>
         </div>
@@ -284,7 +284,7 @@
             let customButtons = $('#custom_filters').html()
             $('#datatable_wrapper div.custom-filters').html(customButtons)
 
-            $(document).on('click', 'div.table-buttons .menuitem', function () {
+            $(document).on('click', 'div.table-buttons .dropdown-item', function () {
                 let action = $(this).data('action');
 
                 if (action === 'selectAll') {

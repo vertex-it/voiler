@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
         @yield('master-styles')
     </head>
-    <body class="bg-primary h-full">
+    <body class="bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 h-full">
         <form class="hidden" id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
         <x-modal/>
         
@@ -53,7 +53,7 @@
         </div>
         
         <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-            <div class="flex flex-col flex-grow px-6 py-6 bg-white overflow-y-auto shadow">
+            <div class="flex flex-col flex-grow px-4 py-6 bg-white overflow-y-auto shadow">
                 <div class="flex justify-center">
                     <a href="{{ config('navigation._logo.route') ? route(config('navigation._logo.route')) : '#' }}">
                         <img class="h-14 w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Workflow">
@@ -88,12 +88,12 @@
                     <div class="ml-4 flex items-center md:ml-6">
                         <button
                             type="button"
-                            class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="btn btn-transparent p-2 rounded-full dropdown-toggle"
                         >
                             <span class="sr-only">View notifications</span>
                             <!-- Heroicon name: outline/bell -->
                             <svg
-                                class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" aria-hidden="true"
                             >
                                 <path
