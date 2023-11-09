@@ -20,7 +20,7 @@ class BaseAPIController extends Controller
     public function index()
     {
         // TODO
-        $this->authorize('viewAny', $this->resource['model_fqn']);
+        // $this->authorize('viewAny', $this->resource['model_fqn']);
 
         return $this->resource['api_resource_fqn']::collection(
             $this->resource['model_fqn']::latest()
@@ -33,7 +33,7 @@ class BaseAPIController extends Controller
         $model = $this->resource['model_fqn']::findByRouteKeyName($model)->firstOrFail();
 
         // TODO
-        $this->authorize('update', $model);
+        // $this->authorize('update', $model);
 
         return new $this->resource['api_resource_fqn']($model);
     }
@@ -41,7 +41,7 @@ class BaseAPIController extends Controller
     public function store()
     {
         // TODO
-        $this->authorize('create', $this->resource['model_fqn']);
+        // $this->authorize('create', $this->resource['model_fqn']);
 
         $request = app($this->resource['request_fqn']);
 
@@ -55,7 +55,7 @@ class BaseAPIController extends Controller
     public function update(Request $request, $model)
     {
         // TODO
-        $this->authorize('update', $this->resource['model_fqn']::findByRouteKeyName($model)->firstOrFail());
+        // $this->authorize('update', $this->resource['model_fqn']::findByRouteKeyName($model)->firstOrFail());
 
         [$request, $model] = $this->bindModelAndValidateRequest($request, $model);
 
@@ -71,7 +71,7 @@ class BaseAPIController extends Controller
         $model = $this->resource['model_fqn']::findByRouteKeyName($model);
 
         // TODO
-        $this->authorize('delete', $model->firstOrFail());
+        // $this->authorize('delete', $model->firstOrFail());
 
         $model->delete();
 
