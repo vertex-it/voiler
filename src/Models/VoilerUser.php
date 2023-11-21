@@ -32,9 +32,6 @@ abstract class VoilerUser extends BaseModel implements
 
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Check if user is owner for specific resource.
-     */
     public function isOwner($id): bool
     {
         return $this->id === $id;

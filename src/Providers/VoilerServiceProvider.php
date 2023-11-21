@@ -95,6 +95,12 @@ class VoilerServiceProvider extends ServiceProvider
         Gate::before(function ($user) {
             return $user->hasRole('superadmin') ? true : null;
         });
+
+        Gate::guessPolicyNamesUsing(function (string $modelClass) {
+            $policy = str_replace('Models', 'Policies\\Admin', $modelClass . 'Policy');
+
+            return ltrim($policy, '\\');
+        });
     }
 
     protected function registerPublishableFiles(): void

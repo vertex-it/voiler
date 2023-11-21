@@ -52,9 +52,11 @@ class BasePolicy
         return $this->hasPermissionTo($user, 'forceDelete') && $model->isOwnedByUser($user);
     }
 
-    private function hasPermissionTo(VoilerUser $user, $permissionName): bool
+    private function hasPermissionTo(VoilerUser $user, $action): bool
     {
-        return $user->hasPermissionTo($this->getPermissionName($permissionName));
+        $permissionName = $this->getPermissionName($action);
+
+        return $user->hasPermissionTo($permissionName);
     }
 
     private function getPermissionName($permission): string

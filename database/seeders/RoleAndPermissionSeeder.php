@@ -30,6 +30,7 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         Role::firstOrCreate(['name' => 'superadmin']);
+        Role::firstOrCreate(['name' => 'user']);
     }
 
     protected function getModels()
