@@ -134,7 +134,6 @@
                     fixedHeader: true,
                     scrollX: true,
                     scrollCollapse: true,
-                    fixedColumns: true,
                     ajax: {
                         url: "{{ $getModelRoute('index') }}",
                         data: function (d) {
