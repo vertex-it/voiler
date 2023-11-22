@@ -57,7 +57,9 @@ class GuesserService
             'route_suffix' => Str::of($resourceName)->plural()->kebab()->lower(),
             'model' => $resourceName,
             'model_fqn' => $classNamespaces['model'],
-            'title_column' => class_exists($classNamespaces['model']) ? (new $classNamespaces['model'])->getTitleColumn() : '',
+            'title_column' => class_exists($classNamespaces['model']) && method_exists($classNamespaces['model'], 'getTitleColumn')
+                ? (new $classNamespaces['model'])->getTitleColumn()
+                : 'id',
             'view_path' => (string) Str::of($resourceName)->kebab()->lower(),
             'view_full_path' => $view,
             'request' => $resourceName . 'Request',
