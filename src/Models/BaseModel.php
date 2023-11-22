@@ -17,17 +17,13 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use VertexIT\Voiler\Traits\HasCompleteness;
 
-abstract class BaseModel extends Model implements HasMedia
+abstract class BaseModel extends BaseSimpleModel implements HasMedia
 {
-    use SoftDeletes, HasSlug, InteractsWithMedia, HasFactory, LogsActivity, HasCompleteness;
-
-    protected $guarded = [];
+    use HasSlug, InteractsWithMedia, HasFactory, HasCompleteness;
 
     protected array | string $slugMap;
 
     protected array $searchableColumns = [];
-
-    protected string $titleColumn;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -62,48 +58,6 @@ abstract class BaseModel extends Model implements HasMedia
         return true;
     }
 
-    public static function createWithRelations(Request $request)
-    {
-        return DB::transaction(function () use ($request) {
-            $model = self::create($request->validated());
-            $model->createRelations($request);
-
-            return $model;
-        });
-    }
-
-    public function updateWithRelations(Request $request)
-    {
-        return DB::transaction(function () use ($request) {
-            $this->update($request->validated());
-            $this->updateRelations($request);
-
-            return $this;
-        });
-    }
-
-    public function forceDeleteWithRelations()
-    {
-        $this->deleteRelations();
-
-        $this->forceDelete();
-    }
-
-    public function createRelations(Request $request): void
-    {
-        //
-    }
-
-    public function updateRelations(Request $request): void
-    {
-        //
-    }
-
-    public function deleteRelations(): void
-    {
-        //
-    }
-
     public function registerMediaCollections(): void
     {
         foreach ($this->casts as $columnName => $castType) {
@@ -119,39 +73,6 @@ abstract class BaseModel extends Model implements HasMedia
                 }
             }
         }
-    }
-
-    public function getTitle(): ?string
-    {
-        if ($this->titleColumn) {
-            return strip_tags($this->{$this->titleColumn});
-        }
-
-        if (is_array($this->slugMap)) {
-            $title = '';
-
-            foreach ($this->slugMap as $column) {
-                $title .= $this->{$column} . ' ';
-            }
-
-            return strip_tags($title);
-        }
-
-        if ($this->slugMap) {
-            return strip_tags($this->{$this->slugMap});
-        }
-
-        return null;
-    }
-
-    public function getTitleColumn(): string
-    {
-        return $this->titleColumn;
-    }
-
-    public function scopeFindByRouteKeyName($query, $key)
-    {
-        return $query->where($this->getRouteKeyName(), $key);
     }
 
     public function scopeSearchTable($query, $keyword, $specificColumns = null)
@@ -174,14 +95,5 @@ abstract class BaseModel extends Model implements HasMedia
         return $query->whereHas($relation, function ($q) use ($keyword) {
             $q->searchTable($keyword);
         });
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logAll()
-            ->dontLogIfAttributesChangedOnly(['updated_at'])
-            ->logOnlyDirty()
-            ->dontSubmitEmptyLogs();
     }
 }

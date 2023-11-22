@@ -77,6 +77,21 @@ abstract class BaseSimpleModel extends Model
             return strip_tags($this->{$this->titleColumn});
         }
 
+        // When base model is extending
+        if (is_array($this->slugMap)) {
+            $title = '';
+
+            foreach ($this->slugMap as $column) {
+                $title .= $this->{$column} . ' ';
+            }
+
+            return strip_tags($title);
+        }
+
+        if ($this->slugMap) {
+            return strip_tags($this->{$this->slugMap});
+        }
+
         return null;
     }
 
