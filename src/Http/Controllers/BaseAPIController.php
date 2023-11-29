@@ -17,7 +17,7 @@ class BaseAPIController extends Controller
         $this->resource = GuesserService::fromAPIControllerName($this::class);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', $this->resource['model_fqn']);
 
