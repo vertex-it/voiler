@@ -18,11 +18,13 @@ class UserSeeder extends Seeder
             User::factory()->create([
                 'name' => 'Superadmin',
                 'email' => 'admin@admin.com',
+                'username' => 'superadmin',
             ])->assignRole('superadmin');
 
             User::factory()->create([
                 'name' => 'Taylor Otwell',
                 'email' => 'taylor@otwell.com',
+                'username' => 'taylor',
             ])->assignRole('user');
         }
     }
