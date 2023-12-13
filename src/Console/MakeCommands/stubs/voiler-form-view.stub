@@ -8,7 +8,7 @@
 
 @section('inputs')
 
-    <x-blade-components::inputs.input
+    <x-inputs.input
         name="name"
         :value="${{ nameSingular }}->name"
     />

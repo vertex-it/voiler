@@ -73,7 +73,7 @@ class VoilerGenerateCommand extends Command
             'name' => $resource['name'],
         ]);
 
-        $this->call('make:resource', [
+        $this->call('make:resource --collection', [
             'name' => $resource['api_resource'],
         ]);
 
