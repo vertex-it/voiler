@@ -39,6 +39,19 @@ class APIAuthController extends Controller
         return response()->json([
             'message' => 'User logged in successfully!',
             'token' => $token->plainTextToken,
+            'user' => [
+                'id' => Auth::user()->id,
+                'name' => Auth::user()->name,
+                'username' => Auth::user()->username,
+                'slug' => Auth::user()->slug,
+                'address' => Auth::user()->address,
+                'phone' => Auth::user()->phone,
+                'notifications' => Auth::user()->notifications,
+                'is_dealership' => Auth::user()->is_dealership,
+                'photo' => Auth::user()->photo,
+                'email' => Auth::user()->email,
+                'email_verified_at' => Auth::user()->email_verified_at,
+            ],
         ]);
     }
 
