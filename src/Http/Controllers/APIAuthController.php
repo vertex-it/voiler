@@ -11,6 +11,11 @@ class APIAuthController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required',
+        ]);
+
         if (! Auth::attempt($request->only(['email', 'password']))) {
             return response()->json([
                 'message' => 'Your credentials don\'t match our records!',
