@@ -192,3 +192,10 @@ tr.dt-rowReorder-moving td.dtfc-fixed-right:last-child {
 .btn-filter.active svg {
     @apply text-primary-600 !important
 }
+
+.truncate {
+    max-width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

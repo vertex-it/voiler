@@ -128,12 +128,11 @@
                     searchDelay: 500,
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     deferRender: true,
                     stateSave: true,
                     stateDuration: 60*60*24*365,
                     fixedHeader: true,
-                    scrollX: true,
-                    scrollCollapse: true,
                     ajax: {
                         url: "{{ $getModelRoute('index') }}",
                         data: function (d) {

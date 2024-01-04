@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+const tailwindNesting = require('tailwindcss/nesting')
 const tailwindcss = require('tailwindcss')
 
 // --- VOILER MIX ASSETS BEGIN ---
@@ -12,7 +13,7 @@ mix.webpackConfig({
 
 // Mix tailwind css
 
-mix.postCss('./vendor/vertex-it/voiler/resources/css/tailwind.css', 'public/css', [tailwindcss])
+mix.postCss('./vendor/vertex-it/voiler/resources/css/tailwind.css', 'public/css', [tailwindNesting, tailwindcss])
    .postCss('./vendor/vertex-it/voiler/resources/css/tailwind-vendor.css', 'public/css/tailwind-vendor.css', [tailwindcss])
    .postCss('./vendor/vertex-it/blade-components/resources/css/blade-components.css', 'public/css/blade-components.css', [tailwindcss])
 
