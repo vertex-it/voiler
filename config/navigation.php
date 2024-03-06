@@ -3,6 +3,8 @@ return [
     // TODO Document
     '_logo' => [
         'route' => 'admin.index',
+        'url' => 'https://vertex-it.com/img/logo.svg',
+        'height' => 'h-14',
     ],
     '_pages' => [
         // VOILER GENERATED PAGES
