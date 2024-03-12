@@ -15,4 +15,6 @@ return [
         'restore',
         'forceDelete',
     ],
+
+    'show_placeholder' => true,
 ];

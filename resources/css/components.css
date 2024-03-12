@@ -1,0 +1,228 @@
+/* BREADCRUMBS START */
+
+.breadcrumbs {
+    @apply flex items-center text-xs;
+}
+
+.breadcrumbs > .item {
+    @apply mr-2 tracking-wide text-gray-600;
+}
+
+.breadcrumbs > .item-link:hover {
+    @apply text-gray-900;
+}
+
+.breadcrumbs > .item-last {
+    @apply text-gray-400;
+}
+
+.breadcrumbs > .separator {
+    @apply mr-2 text-gray-500;
+}
+
+/* BREADCRUMBS END */
+
+/* FORMS START */
+
+[type='checkbox'], [type='radio'] {
+    @apply text-primary-500;
+}
+
+.tabs {
+    @apply border-b border-gray-200 mb-8 flex;
+}
+
+.tabs .tab-item {
+    @apply px-7 py-3 mr-3 text-xs md:text-sm text-gray-400 border-b-2 border-white uppercase hover:border-primary-500;
+}
+
+.tabs .tab-item.active {
+    @apply text-primary-500 font-medium border-primary-500 hover:border-primary-600;
+}
+
+.tab-pane {
+    @apply hidden;
+}
+
+.tab-pane.active {
+    @apply block;
+}
+
+.form-footer {
+    @apply bg-gray-50 flex gap-x-3 justify-end -mx-5 -mb-5 px-4 md:-mx-8 md:-mb-8 md:px-8 py-4 rounded-b-xl;
+}
+
+.form-inline {
+    @apply flex gap-x-6 flex-wrap lg:flex-nowrap w-full;
+}
+
+.form-group {
+    @apply mb-6 md:mb-9 w-full;
+}
+
+.form-inline > .form-group {
+    @apply mb-4 lg:mb-8;
+}
+
+.form-label {
+    @apply inline-block text-xs md:text-sm font-medium text-gray-700 mb-1.5;
+}
+
+.form-input, .selectize-input {
+    @apply block px-3 py-2 w-full text-gray-800 shadow-sm border border-gray-300 rounded-lg text-xs md:text-sm lg:text-base focus:ring-primary-500 focus:border-primary-500;
+}
+
+input {
+    @apply placeholder-gray-400
+}
+
+input:disabled {
+    @apply bg-gray-100 cursor-not-allowed !important
+}
+
+.form-input.has-error {
+    @apply border-red-500;
+}
+
+.form-input-with-btn {
+    @apply flex items-center items-stretch;
+}
+
+.form-input-append-btn {
+    @apply border-l-0 rounded-l-none rounded-r-md;
+}
+
+/* Form components - TinyMCE */
+.form-group > div.tox.tox-tinymce {
+    @apply text-gray-800 shadow-sm w-full bg-white border-gray-300 border rounded;
+}
+
+/* Form components - toggle */
+input:checked ~ .dot {
+    @apply transform translate-x-full bg-white;
+}
+input:checked ~ .toggle-background {
+    @apply bg-primary-500 !important;
+}
+
+.form-input-comment {
+    @apply text-xs text-gray-400 mt-2;
+}
+
+form fieldset {
+    @apply my-6 md:my-9;
+}
+
+form fieldset legend {
+    @apply block w-full text-primary-500 mb-10 border-b border-gray-200 text-sm md:text-base;
+    line-height: 0.1em;
+}
+
+form fieldset legend span {
+    @apply bg-white pr-4;
+}
+
+/* FORMS END */
+/* CROPPER START */
+.aspect-ratios, .view-modes {
+    @apply flex justify-between space-x-1;
+}
+/* CROPPER END */
+/* UPPY START */
+.uppy-Dashboard-AddFiles-title {
+    @apply text-gray-700 !important;
+}
+.uppy-Dashboard-browse {
+    @apply text-primary-500 !important;
+}
+.uppy-Dashboard-note, .uppy-Dashboard-Item-statusSize {
+    @apply text-gray-400 !important;
+}
+.uppy-StatusBar.is-waiting .uppy-StatusBar-actionBtn--upload, .uppy-c-btn {
+    @apply px-3 py-2 cursor-pointer border border-gray-400 text-sm font-medium rounded shadow bg-white hover:bg-gray-100 text-gray-800 !important;
+}
+.uppy-c-btn-primary, .uppy-StatusBar.is-waiting .uppy-StatusBar-actionBtn--upload {
+    @apply bg-primary-600 hover:bg-primary-700 text-white !important
+}
+.uppy-DashboardContent-addMore, .uppy-DashboardContent-back {
+    @apply text-primary-500 hover:bg-primary-100 !important;
+}
+.uppy-DashboardContent-title, .uppy-DashboardContent-titleFile {
+    @apply text-gray-700 font-medium !important;
+}
+.uppy-Root {
+    @apply font-sans text-gray-700 !important
+}
+.uppy-Dashboard-inner {
+    @apply bg-white rounded !important
+}
+.uppy-Dashboard-AddFiles {
+    @apply border-dashed border-gray-300 rounded !important
+}
+
+.uppy-Dashboard-FileCard-preview {
+    @apply bg-primary-50 !important
+}
+
+.uppy-Dashboard-FileCard-label {
+    @apply font-medium text-gray-700 !important
+}
+
+.uppy-c-textInput {
+    @apply shadow-sm border border-gray-300 rounded text-xs md:text-sm focus:ring-primary-500 focus:border-primary-500 !important
+}
+
+.uppy-Dashboard-Item-previewImg {
+    @apply shadow-lg rounded !important
+}
+
+.uppy-Dashboard-Item-name {
+    @apply text-gray-700 text-xs !important
+}
+
+.uppy-Dashboard-FileCard-actions, .uppy-DashboardContent-bar, .uppy-StatusBar-actions, .uppy-DashboardContent-bar {
+    @apply bg-gray-50 !important
+}
+
+.uppy-StatusBar-actions {
+    @apply z-10 !important
+}
+
+.uppy-Dashboard-files {
+    @apply bg-white
+}
+/* UPPY END */
+/* MODALS START */
+.modal {
+    @apply fixed z-10 inset-0 overflow-y-auto;
+}
+
+.modal-dialog {
+    @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0;
+}
+
+.modal-bg {
+    @apply fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity;
+}
+
+.modal-center {
+    @apply hidden sm:inline-block sm:align-middle sm:h-screen;
+}
+
+.modal-data {
+    @apply inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full;
+}
+
+.modal-title {
+    @apply text-lg md:text-xl leading-6 font-medium text-center text-gray-900;
+}
+
+.modal-content {
+    @apply text-gray-600 mt-6;
+}
+
+.modal-footer {
+    @apply bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-x-2;
+}
+
+/* MODALS END */

@@ -23,7 +23,7 @@
 @endsection
 
 @section('master-scripts')
-    <script src="{{ mix('js/blade-components.js') }}"></script>
+    <script src="{{ mix('js/components.js') }}"></script>
 
     @yield('scripts')
     @stack('scripts')

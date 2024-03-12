@@ -15,19 +15,19 @@ mix.webpackConfig({
 
 mix.postCss('./vendor/vertex-it/voiler/resources/css/tailwind.css', 'public/css', [tailwindNesting, tailwindcss])
    .postCss('./vendor/vertex-it/voiler/resources/css/tailwind-vendor.css', 'public/css/tailwind-vendor.css', [tailwindcss])
-   .postCss('./vendor/vertex-it/blade-components/resources/css/blade-components.css', 'public/css/blade-components.css', [tailwindcss])
+   .postCss('./vendor/vertex-it/voiler/resources/css/components.css', 'public/css/components.css', [tailwindcss])
 
 mix.styles([
        'public/css/tailwind.css',
        'public/css/tailwind-vendor.css',
-       'public/css/blade-components.css',
+       'public/css/components.css',
    ], 'public/css/app.css')
    .version()
 
 // Mix jQuery, blade components and datatables
 mix.js('./vendor/vertex-it/voiler/resources/js/voiler.js', 'public/js/voiler.js')
    .js('./vendor/vertex-it/voiler/resources/js/tailwind.js', 'public/js/tailwind.js')
-   .js('./vendor/vertex-it/blade-components/resources/js/blade-components.js', 'public/js/blade-components.js')
+   .js('./vendor/vertex-it/voiler/resources/js/components.js', 'public/js/components.js')
    .js('./vendor/vertex-it/voiler/resources/js/datatables.js', 'public/js/datatables.js')
 
 mix.scripts([

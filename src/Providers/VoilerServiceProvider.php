@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use VertexIT\BladeComponents\View\Components\Breadcrumb;
-use VertexIT\Voiler\Console\VoilerGenerateCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerFactoryMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerMigrationMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerSeederMakeCommand;
@@ -24,6 +22,26 @@ use VertexIT\Voiler\Console\MakeCommands\VoilerModelMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerPolicyMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerRequestMakeCommand;
 use VertexIT\Voiler\Console\PublishFromPackagesCommand;
+use VertexIT\Voiler\Console\VoilerGenerateCommand;
+use VertexIT\Voiler\View\Components\Breadcrumb;
+use VertexIT\Voiler\View\Components\Form;
+use VertexIT\Voiler\View\Components\Inputs\Checkbox;
+use VertexIT\Voiler\View\Components\Inputs\Cropper;
+use VertexIT\Voiler\View\Components\Inputs\Date;
+use VertexIT\Voiler\View\Components\Inputs\Input;
+use VertexIT\Voiler\View\Components\Inputs\Radio;
+use VertexIT\Voiler\View\Components\Inputs\Select;
+use VertexIT\Voiler\View\Components\Inputs\Textarea;
+use VertexIT\Voiler\View\Components\Inputs\Time;
+use VertexIT\Voiler\View\Components\Inputs\Toggle;
+use VertexIT\Voiler\View\Components\Inputs\Uppy;
+use VertexIT\Voiler\View\Components\Inputs\WorkTime;
+use VertexIT\Voiler\View\Components\Inputs\WorkTimeDay;
+use VertexIT\Voiler\View\Components\Modal;
+use VertexIT\Voiler\View\Components\ModalButton;
+use VertexIT\Voiler\View\Components\Multiple;
+use VertexIT\Voiler\View\Components\MultipleRow;
+use VertexIT\Voiler\View\Components\Translated;
 
 class VoilerServiceProvider extends ServiceProvider
 {
@@ -37,6 +55,7 @@ class VoilerServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'voiler');
         $this->registerRoutes();
         $this->registerPolicies();
+        $this->registerVoilerComponents();
 
         if ($this->app->runningInConsole()) {
             $this->registerPublishableFiles();
@@ -55,8 +74,8 @@ class VoilerServiceProvider extends ServiceProvider
 
     protected function registerRoutes(): void
     {
-        Route::macro('voilerResource', function ($uri, $controller) {
-            Route::as('admin.')->middleware(config('voiler.middleware'))->group(function () use ($uri, $controller) {
+        Route::macro('voilerResource', function($uri, $controller) {
+            Route::as('admin.')->middleware(config('voiler.middleware'))->group(function() use ($uri, $controller) {
                 $model = Str::of($uri)->singular()->slug('_')->camel();
 
                 Route::as("{$uri}.")->prefix($uri)->group(function() use ($controller, $model) {
@@ -92,11 +111,11 @@ class VoilerServiceProvider extends ServiceProvider
             Gate::policy($key, $value);
         }
 
-        Gate::before(function ($user) {
+        Gate::before(function($user) {
             return $user->hasRole('superadmin') ? true : null;
         });
 
-        Gate::guessPolicyNamesUsing(function (string $modelClass) {
+        Gate::guessPolicyNamesUsing(function(string $modelClass) {
             $policy = str_replace('Models', 'Policies\\Admin', $modelClass . 'Policy');
 
             return ltrim($policy, '\\');
@@ -154,5 +173,32 @@ class VoilerServiceProvider extends ServiceProvider
             VoilerIndexViewMakeCommand::class,
             VoilerModelMakeCommand::class,
         ]);
+    }
+
+    private function registerVoilerComponents()
+    {
+        Blade::componentNamespace('VertexIT\\Voiler\\View\\Components', 'voiler');
+
+        Blade::component('breadcrumb', Breadcrumb::class);
+        Blade::component('form', Form::class);
+        Blade::component('modal-button', ModalButton::class);
+        Blade::component('modal', Modal::class);
+        Blade::component('multiple', Multiple::class);
+        Blade::component('multiple-row', MultipleRow::class);
+        Blade::component('translated', Translated::class);
+        Blade::component('inputs.checkbox', Checkbox::class);
+        Blade::component('inputs.cropper', Cropper::class);
+        Blade::component('inputs.date', Date::class);
+        Blade::component('inputs.file', File::class);
+        Blade::component('inputs.input', Input::class);
+        // Blade::component('inputs.multi-input', MultiInput::class);
+        Blade::component('inputs.radio', Radio::class);
+        Blade::component('inputs.select', Select::class);
+        Blade::component('inputs.textarea', Textarea::class);
+        Blade::component('inputs.time', Time::class);
+        Blade::component('inputs.toggle', Toggle::class);
+        Blade::component('inputs.uppy', Uppy::class);
+        Blade::component('inputs.work-time', WorkTime::class);
+        Blade::component('inputs.work-time-day', WorkTimeDay::class);
     }
 }

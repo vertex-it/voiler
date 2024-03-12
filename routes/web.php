@@ -7,6 +7,9 @@ use VertexIT\Voiler\Http\Controllers\PermissionController;
 use VertexIT\Voiler\Http\Controllers\ProfileController;
 use VertexIT\Voiler\Http\Controllers\RoleController;
 use VertexIT\Voiler\Http\Controllers\UserController;
+use VertexIT\Voiler\Http\Controllers\VoilerFileController;
+
+Route::post('voiler/files', [VoilerFileController::class, 'store'])->name('voiler.files');
 
 Route::middleware(config('voiler.middleware'))->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');

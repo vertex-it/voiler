@@ -17,7 +17,7 @@ class PermissionDatatableService extends BaseDatatableService
                 return 'n/a';
             }
 
-            return view('blade-components::components.modal-button', [
+            return view('voiler::components.modal-button', [
                 'id' => 'roles-modal',
                 'title' => __('voiler::interface.roles'),
                 'content' => implode('<br>', $roles),
@@ -33,7 +33,7 @@ class PermissionDatatableService extends BaseDatatableService
                     return 'n/a';
                 }
 
-                return view('blade-components::components.modal-button', [
+                return view('voiler::components.modal-button', [
                     'id' => 'users-modal',
                     'title' => __('voiler::interface.users'),
                     'content' => implode('<br>', $users),
