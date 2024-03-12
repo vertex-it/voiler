@@ -66,7 +66,7 @@ abstract class BaseInputComponent extends Component
 
     public function getPlaceholder()
     {
-        if (config('blade_components.show_placeholder')) {
+        if (config('voiler.show_placeholder')) {
             return $this->placeholder ?? implode(' ', [
                 __('voiler::components.placeholder_prefix'),
                 strtolower($this->getLabel())
