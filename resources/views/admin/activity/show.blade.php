@@ -27,7 +27,7 @@
                                 @if(isset($activity['old']))
                                     <td>
                                         @if($column === 'updated_at')
-                                            {{ \Carbon\Carbon::rawParse($activity['old'][$column])->format('d-m-Y H:i:s') }}
+                                            {{ Carbon::rawParse($activity['old'][$column])->format('d-m-Y H:i:s') }}
                                         @else
                                             {{ json_encode($activity['old'][$column]) }}
                                         @endif
@@ -35,7 +35,7 @@
                                 @endif
                                 <td>
                                     @if($column === 'updated_at')
-                                        {{ \Carbon\Carbon::rawParse($value)->format('d-m-Y H:i:s') }}
+                                        {{ Carbon::rawParse($value)->format('d-m-Y H:i:s') }}
                                     @else
                                         {{ json_encode($value) }}
                                     @endif

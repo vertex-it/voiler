@@ -86,7 +86,6 @@ class VoilerServiceProvider extends ServiceProvider
                 });
 
                 Route::resource($uri, $controller)
-                    ->except(['show'])
                     ->parameters([
                         $uri => $model,
                     ]);

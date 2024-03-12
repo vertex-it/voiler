@@ -13,8 +13,6 @@ Route::post('voiler/files', [VoilerFileController::class, 'store'])->name('voile
 
 Route::middleware(config('voiler.middleware'))->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
-
-    Route::get('activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
 });
 
 Route::voilerResource('activities', ActivityController::class);

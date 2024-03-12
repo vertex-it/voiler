@@ -13,10 +13,10 @@ class ActivityDatatableService extends BaseDatatableService
     public function make(Request $request)
     {
         return DataTables::eloquent($this->prepareQuery($request))
-            ->addColumn('action', function ($activity) {
+            ->addColumn('action', function($activity) {
                 return view('voiler::admin.activity.action', new ActivityIndexViewModel($activity));
             })
-            ->addColumn('created_at_formatted', function ($activity) {
+            ->addColumn('created_at_formatted', function($activity) {
                 return $activity->created_at->format('d. M Y - H:i\h');
             })
             ->make();
