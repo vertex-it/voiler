@@ -56,7 +56,7 @@
             <div class="flex flex-col flex-grow px-4 py-6 bg-white overflow-y-auto shadow">
                 <div class="flex justify-center">
                     <a href="{{ config('navigation._logo.route') ? route(config('navigation._logo.route')) : '#' }}">
-                        <img class="{{ config('navigation._logo.height ?? 'h-14') }} w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Workflow">
+                        <img class="{{ config('navigation._logo.height') ?? 'h-14' }} w-auto" src="{{ asset(config('navigation._logo.url')) }}" alt="Workflow">
                     </a>
                 </div>
                 <div class="mt-10 flex-grow flex flex-col">
