@@ -32,8 +32,13 @@ class BaseDatatableService
 
     public function prepareQuery(Request $request)
     {
-        return $this->resource['model_fqn']::withTrashed()
-            ->latest();
+        $query = $this->resource['model_fqn']::withTrashed();
+
+        if ((new $this->resource['model_fqn'])->timestamps) {
+            return $query->latest();
+        }
+
+        return $query;
     }
 
     public function addColumns($datatables)
