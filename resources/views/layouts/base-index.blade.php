@@ -23,7 +23,7 @@
         @endif
 
         <div class="card">
-            <table id="datatable" class="datatable nowrap hover" style="width: 100%">
+            <table id="datatable" class="datatable hover" style="width: 100%">
                 <thead></thead>
                 <tbody></tbody>
             </table>
