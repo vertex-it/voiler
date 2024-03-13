@@ -122,7 +122,7 @@
             }).toBlob(function (blob) {
                 let formData = new FormData();
 
-                formData.append('image', blob);
+                formData.append('file', blob);
 
                 $.ajax({
                     method: 'POST',

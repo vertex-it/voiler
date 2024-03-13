@@ -190,7 +190,6 @@ class VoilerServiceProvider extends ServiceProvider
         Blade::component('inputs.date', Date::class);
         Blade::component('inputs.file', File::class);
         Blade::component('inputs.input', Input::class);
-        // Blade::component('inputs.multi-input', MultiInput::class);
         Blade::component('inputs.radio', Radio::class);
         Blade::component('inputs.select', Select::class);
         Blade::component('inputs.textarea', Textarea::class);

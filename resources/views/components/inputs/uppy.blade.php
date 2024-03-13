@@ -2,17 +2,17 @@
     .uploaded-container {
         height: 120px;
     }
-
+    
     .uploaded-container > img, .uploaded-container > a > img {
         height: 100%;
         width: 100%;
         object-fit: cover;
     }
-
+    
     .droppable-trash {
         padding: 0.4em 0.9em 0.9em;
     }
-
+    
     .droppable-trash img {
         opacity: .2;
     }
@@ -39,10 +39,10 @@
         <div id="drag-drop-area-{{ $key }}"></div>
     </div>
 
-    <input name="{{ $name }}[]" type="hidden" value="">
+    <input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="">
 
     <div class="flex flex-wrap justify-start items-center" id="uppy-uploaded-{{ $key }}">
-        @foreach(old($name, $value) ?? [] as $url)
+        @foreach(old($name, is_array($value) ? $value : [$value]) ?? [] as $url)
             @if($url)
                 <div class="uploaded-container cursor-move mt-2 mr-2">
                     @if(in_array(pathinfo($url, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
@@ -54,7 +54,7 @@
                             <img class="rounded" src="https://play-lh.googleusercontent.com/3tLaTWjP9kz56OwkbnbAnZoNp4HL28zcDMt5DEjt-kfuVhraWJBYC5XQRuMBf084JQ" alt="{{ $url }}" title="{{ $url }}">
                         </a>
                     @endif
-                    <input name="{{ $name }}[]" type="hidden" value="{{ $url }}">
+                    <input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="{{ $url }}">
                 </div>
             @endif
         @endforeach
@@ -100,54 +100,37 @@
         // TODO: Hide/Show uppy button
     </script>
     <script>
-        showOrHideTrash()
+        toggleTrash()
 
         $(document).on('click', '#uppy-modal-{{ $key }}', function (e) {
             e.preventDefault();
         });
 
-        const uppy{{ $key }} = new Uppy().use(Dashboard, {
-            inline: false,
+        const uppy{{ $key }} = new Uppy({
+            restrictions: {
+                maxFileSize: {{ 1024 * 1024 * $maxFileSize }}, // number	maximum file size in bytes for each individual file
+                // minFileSize: 0,	        // number	minimum file size in bytes for each individual file
+                // maxTotalFileSize: 0,	// number	maximum file size in bytes for all the files that can be selected for upload
+                maxNumberOfFiles: {{ $single ? 1 : 'null' }},	// number	total number of files that can be selected
+                // minNumberOfFiles: 0,	// number	minimum number of files that must be selected before the upload
+                // allowedFileTypes: [],	// Array	wildcards image/*, or exact mime types image/jpeg, or file extensions .jpg: ['image/*', '.jpg', '.jpeg', '.png', '.gif']
+            },
+        }).use(Dashboard, {
             target: '#drag-drop-area-{{ $key }}',
             trigger: '#uppy-modal-{{ $key }}',
-            height: 500,
-            thumbnailWidth: 200,
-            proudlyDisplayPoweredByUppy: false,
-            showLinkToFileUploadResult: true,
             showProgressDetails: true,
+            proudlyDisplayPoweredByUppy: false,
             note: '{{ $getLabel() }}',
             closeModalOnClickOutside: true,
             disablePageScrollWhenModalOpen: true,
             showRemoveButtonAfterComplete: true,
-            restrictions: {
-                maxFileSize: {{ 1024 * 1024 * $maxFileSize }}
-            },
-            metaFields: [
-                {
-                    id: 'name',
-                    name: 'File name',
-                    render ({ value, onChange, fieldCSSClasses }, h) {
-                        const point = value.lastIndexOf('.')
-                        const name = value.slice(0, point)
-                        const ext = value.slice(point + 1)
-                        return h('input', {
-                            class: fieldCSSClasses.text,
-                            type: 'text',
-                            value: name,
-                            placeholder: '{{ __("Edit file name") }}',
-                            onChange: (event) => onChange(event.target.value + '.' + ext),
-                            'data-uppy-super-focusable': true
-                        })
-                    }
-                },
-            ],
         })
         .use(XHRUpload, {
             // TODO: Uppy will be used for all file types, not only images...
             endpoint: '{{ $route ?? route("voiler.files") }}',
             method: 'POST',
             formData: true,
-            fieldName: '{{ $route ? $name : "image" }}',
+            fieldName: 'file',
             bundle: false,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -155,7 +138,8 @@
             getResponseError (responseText, response) {
                 return new Error(response.statusText);
             }
-        });
+        })
+        .use(Compressor)
 
         var imageTypes = ['png', 'tif', 'tiff', 'wbmp', 'ico', 'jng', 'bmp', 'svg', 'webp', 'jpg', 'jpeg'];
         function isImage(url) {
@@ -178,12 +162,11 @@
         }
 
         uppy{{ $key }}.on('upload-success', (file, response) => {
-            showOrHideTrash()
+            let uploadedContainer = $('#uppy-uploaded-{{ $key }}')
+            toggleTrash()
 
             $('#uppy-modal-{{ $key }}').addClass('mb-1');
-
-            $('#uppy-removed-{{ $key }}').show();
-
+            
             let display
             if (isImage(response.body)) {
                 display = '<img class="rounded" src="' + response.body + '" alt="" style="width: inherit;" />';
@@ -192,17 +175,21 @@
                     '<img class="rounded" src="https://play-lh.googleusercontent.com/3tLaTWjP9kz56OwkbnbAnZoNp4HL28zcDMt5DEjt-kfuVhraWJBYC5XQRuMBf084JQ" alt="' + file.name + '" style="width: inherit;" />' +
                 '</a>';
             }
+            
+            if ({{ $single }}) {
+                uploadedContainer.html('')
+            }
 
-            $('#uppy-uploaded-{{ $key }}').append(
+            uploadedContainer.append(
                 '<div class="uploaded-container cursor-move mt-2 mr-2">' +
                     display +
-                    '<input name="{{ $name }}[]" type="hidden" value="' + response.body + '">' +
+                    '<input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="' + response.body + '">' +
                 '</div>'
             );
         });
 
-        function showOrHideTrash() {
-            if ($('#uppy-uploaded-{{ $key }}').children().length > 0) {
+        function toggleTrash() {
+            if ($('#uppy-uploaded-{{ $key }}').children().length > 0 && ! {{ (bool) $single }}) {
                 $('#uppy-removed-{{ $key }}').removeClass('hidden')
             } else {
                 $('#uppy-removed-{{ $key }}').addClass('hidden')

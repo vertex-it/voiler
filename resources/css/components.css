@@ -154,7 +154,7 @@ form fieldset legend span {
     @apply font-sans text-gray-700 !important
 }
 .uppy-Dashboard-inner {
-    @apply bg-white rounded !important
+    @apply w-1/2 h-2/3 bg-white rounded !important
 }
 .uppy-Dashboard-AddFiles {
     @apply border-dashed border-gray-300 rounded !important
@@ -180,8 +180,14 @@ form fieldset legend span {
     @apply text-gray-700 text-xs !important
 }
 
-.uppy-Dashboard-FileCard-actions, .uppy-DashboardContent-bar, .uppy-StatusBar-actions, .uppy-DashboardContent-bar {
-    @apply bg-gray-50 !important
+.uppy-Dashboard-FileCard-actions,
+.uppy-DashboardContent-bar,
+.uppy-StatusBar-actions {
+    @apply bg-transparent !important
+}
+
+.uppy-Dashboard-Item-preview img.uppy-Dashboard-Item-previewImg {
+    transform: none !important;
 }
 
 .uppy-StatusBar-actions {

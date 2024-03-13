@@ -11,7 +11,7 @@ require('cropperjs/dist/cropper.min.css')
 
 // Date
 window.flatpickr = require('flatpickr').default
-// window.flatpickrSerbian = require("flatpickr/dist/l10n/sr.js").default.sr
+// window.flatpickrSerbian = require('flatpickr/dist/l10n/sr.js').default.sr
 // flatpickr.localize(flatpickrSerbian)
 flatpickr.l10ns.default.firstDayOfWeek = 1
 require('flatpickr/dist/flatpickr.css')
@@ -42,9 +42,16 @@ require('tinymce/plugins/code/plugin.js')
 window.timepicker = require('timepicker')
 require('timepicker/jquery.timepicker.min.css')
 
-// Uppy
-window.Uppy = require('@uppy/core')
-window.XHRUpload = require('@uppy/xhr-upload')
-window.Dashboard = require('@uppy/dashboard')
-require('@uppy/core/dist/style.css')
-require('@uppy/dashboard/dist/style.css')
+// Uppy start
+import Uppy from '@uppy/core'
+import XHRUpload from '@uppy/xhr-upload'
+import Compressor from '@uppy/compressor'
+import Dashboard from '@uppy/dashboard'
+import '@uppy/core/dist/style.css'
+import '@uppy/dashboard/dist/style.css'
+
+window.Uppy = Uppy
+window.XHRUpload = XHRUpload
+window.Compressor = Compressor
+window.Dashboard = Dashboard
+// Uppy end

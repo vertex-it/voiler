@@ -9,6 +9,7 @@ class Uppy extends BaseInputComponent
     public string $key;
     public ?string $route;
     public int $maxFileSize;
+    public bool $single;
 
     public function __construct(
         $name,
@@ -19,13 +20,15 @@ class Uppy extends BaseInputComponent
         $comment = null,
         $inline = null,
         $route = null,
-        $maxFileSize = 2
+        $maxFileSize = 2,
+        $single = false,
     ) {
         parent::__construct($name, $label, $placeholder, $value, $required, $comment, $inline);
 
         $this->key = uniqid();
         $this->route = $route;
         $this->maxFileSize = $maxFileSize;
+        $this->single = $single;
     }
 
     public function render()

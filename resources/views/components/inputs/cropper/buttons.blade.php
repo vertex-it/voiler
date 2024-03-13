@@ -4,7 +4,7 @@
     </div>
 
     <div class="flex justify-center flex-wrap my-3 cropper-details-{{ $name }}" data-name="{{ $name }}">
-        <div class="mr-5 view-modes mb-3">
+        <div class="view-modes mb-3" style="margin-right: 0.25rem;">
             <button class="btn btn-white shadow-sm font-bold cropper-vm" data-value="1">
                 {{ __('Keep') }}
             </button>

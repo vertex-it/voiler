@@ -56,5 +56,7 @@
             document.getElementById("{{ $getId }}_filename").innerHTML = fileName;
             document.getElementById("{{ $getId }}_filename").style.color='#1F2937';
         };
+        
+        
     </script>
 @endpush
