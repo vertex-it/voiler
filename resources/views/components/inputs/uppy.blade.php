@@ -176,9 +176,9 @@
                 '</a>';
             }
             
-            if ({{ $single }}) {
+            @if ($single)
                 uploadedContainer.html('')
-            }
+            @endif
 
             uploadedContainer.append(
                 '<div class="uploaded-container cursor-move mt-2 mr-2">' +
