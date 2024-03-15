@@ -100,6 +100,8 @@
         // TODO: Hide/Show uppy button
     </script>
     <script>
+        var single = {{ Js::from($single) }}
+
         toggleTrash()
 
         $(document).on('click', '#uppy-modal-{{ $key }}', function (e) {
@@ -176,9 +178,9 @@
                 '</a>';
             }
             
-            @if ($single)
+            if (single) {
                 uploadedContainer.html('')
-            @endif
+            }
 
             uploadedContainer.append(
                 '<div class="uploaded-container cursor-move mt-2 mr-2">' +
@@ -189,7 +191,7 @@
         });
 
         function toggleTrash() {
-            if ($('#uppy-uploaded-{{ $key }}').children().length > 0 && ! {{ (bool) $single }}) {
+            if ($('#uppy-uploaded-{{ $key }}').children().length > 0 && ! single) {
                 $('#uppy-removed-{{ $key }}').removeClass('hidden')
             } else {
                 $('#uppy-removed-{{ $key }}').addClass('hidden')
