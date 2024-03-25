@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use VertexIT\Voiler\Console\GenerateTranslationsCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerFactoryMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerMigrationMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerSeederMakeCommand;
@@ -131,6 +132,7 @@ class VoilerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../resources/js' => resource_path('js/vendor'),
             __DIR__ . '/../../resources/css' => resource_path('css/vendor'),
+            __DIR__ . '/../../resources/lang' => resource_path('lang'),
             __DIR__ . '/../../.gitignore' => '.gitignore',
             __DIR__ . '/../../package.json' => 'package.json',
         ], 'voiler-assets');
@@ -156,6 +158,7 @@ class VoilerServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
+            GenerateTranslationsCommand::class,
             PublishFromPackagesCommand::class,
             VoilerGenerateCommand::class,
             VoilerControllerMakeCommand::class,
