@@ -8,11 +8,11 @@ use RuntimeException;
 
 class FileService
 {
-    public function store(UploadedFile $file, array | string $path, string $name = ''): array | string
+    public static function store(UploadedFile $file, array | string $path, string $name = ''): array | string
     {
-        $this->makeDirectory($path);
+        self::makeDirectory($path);
 
-        return $file->storeAs($path, $this->getFileNameWithExtension($file, $name));
+        return $file->storeAs($path, self::getFileNameWithExtension($file, $name));
     }
 
     public static function delete(array | string $paths): bool
@@ -20,7 +20,7 @@ class FileService
         return Storage::delete($paths);
     }
 
-    protected function makeDirectory(string $path): void
+    public static function makeDirectory(string $path): void
     {
         if (Storage::exists($path)) {
             return;
@@ -34,7 +34,7 @@ class FileService
         }
     }
 
-    protected function getFileNameWithExtension(UploadedFile $file, string $name): string
+    public static function getFileNameWithExtension(UploadedFile $file, string $name): string
     {
         return $name === ''
             ? $file->hashName()

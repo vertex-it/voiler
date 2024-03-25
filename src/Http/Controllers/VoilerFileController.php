@@ -10,9 +10,9 @@ use VertexIT\Voiler\Services\FileService;
 
 class VoilerFileController extends Controller
 {
-    public function store(Request $request, FileService $fileService): JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        $file = $fileService->store(
+        $file = FileService::store(
             $request->file,
             'temp',
             $request->name ?? '',
