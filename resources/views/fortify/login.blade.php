@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body class="h-screen bg-gradient-to-tr from-blue-100 via-primary-100 to-blue-100">
+<body class="h-screen bg-gradient-to-tr from-login-secondary-100 via-primary-100 to-login-secondary-100">
     <div class="container mx-auto h-full flex items-start md:items-center">
         <div class="w-full sm:max-w-lg p-5 md:p-8 mx-2 sm:mx-auto mt-16 md:mt-0 bg-white rounded-lg shadow-lg">
             <img
