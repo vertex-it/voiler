@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Spatie\Permission\Contracts\Role as RoleContract;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Guard;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
 
 class Role extends BaseModel implements RoleContract
 {
-    use HasPermissions, RefreshesPermissionCache;
+    use HasPermissions;
+    use RefreshesPermissionCache;
 
     protected $guarded = ['id'];
 
@@ -23,23 +26,52 @@ class Role extends BaseModel implements RoleContract
 
     protected string $titleColumn = 'name';
 
+    public function createRelations(Request $request): void
+    {
+        $this->updateRelations($request);
+    }
+
+    public function updateRelations(Request $request): void
+    {
+        $this->syncPermissions($request->permissions);
+        $this->users()->sync($request->users);
+    }
+
+    /*
+     * Spatie code start
+     * Leave this comment for easier future upgrades
+     */
+
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
 
         parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('permission.table_names.roles') ?: parent::getTable();
     }
 
-    public function getTable()
-    {
-        return config('permission.table_names.roles', parent::getTable());
-    }
-
+    /**
+     * @return RoleContract|\Spatie\Permission\Models\Role
+     *
+     * @throws RoleAlreadyExists
+     */
     public static function create(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
 
-        if (static::where('name', $attributes['name'])->where('guard_name', $attributes['guard_name'])->first()) {
+        $params = ['name' => $attributes['name'], 'guard_name' => $attributes['guard_name']];
+        if (app(PermissionRegistrar::class)->teams) {
+            $teamsKey = app(PermissionRegistrar::class)->teamsKey;
+
+            if (array_key_exists($teamsKey, $attributes)) {
+                $params[$teamsKey] = $attributes[$teamsKey];
+            } else {
+                $attributes[$teamsKey] = getPermissionsTeamId();
+            }
+        }
+        if (static::findByParam($params)) {
             throw RoleAlreadyExists::create($attributes['name'], $attributes['guard_name']);
         }
 
@@ -54,8 +86,8 @@ class Role extends BaseModel implements RoleContract
         return $this->belongsToMany(
             config('permission.models.permission'),
             config('permission.table_names.role_has_permissions'),
-            'role_id',
-            'permission_id'
+            app(PermissionRegistrar::class)->pivotRole,
+            app(PermissionRegistrar::class)->pivotPermission
         );
     }
 
@@ -65,10 +97,10 @@ class Role extends BaseModel implements RoleContract
     public function users(): BelongsToMany
     {
         return $this->morphedByMany(
-            getModelForGuard($this->attributes['guard_name']),
+            getModelForGuard($this->attributes['guard_name'] ?? config('auth.defaults.guard')),
             'model',
             config('permission.table_names.model_has_roles'),
-            'role_id',
+            app(PermissionRegistrar::class)->pivotRole,
             config('permission.column_names.model_morph_key')
         );
     }
@@ -76,33 +108,36 @@ class Role extends BaseModel implements RoleContract
     /**
      * Find a role by its name and guard name.
      *
-     * @param  string  $name
-     * @param  null  $guardName
+     * @return RoleContract|Role
      *
-     * @return \Spatie\Permission\Contracts\Role
-     *
+     * @throws RoleDoesNotExist
      */
-    public static function findByName(string $name, $guardName = null): RoleContract
+    public static function findByName(string $name, ?string $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::where('name', $name)->where('guard_name', $guardName)->first();
+        $role = static::findByParam(['name' => $name, 'guard_name' => $guardName]);
 
         if (! $role) {
-            throw RoleDoesNotExist::named($name);
+            throw RoleDoesNotExist::named($name, $guardName);
         }
 
         return $role;
     }
 
-    public static function findById(int $id, $guardName = null): RoleContract
+    /**
+     * Find a role by its id (and optionally guardName).
+     *
+     * @return RoleContract|Role
+     */
+    public static function findById(int|string $id, ?string $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::where('id', $id)->where('guard_name', $guardName)->first();
+        $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
 
         if (! $role) {
-            throw RoleDoesNotExist::withId($id);
+            throw RoleDoesNotExist::withId($id, $guardName);
         }
 
         return $role;
@@ -111,62 +146,69 @@ class Role extends BaseModel implements RoleContract
     /**
      * Find or create role by its name (and optionally guardName).
      *
-     * @param  string  $name
-     * @param  null  $guardName
+     * @return RoleContract|Role
      */
-    public static function findOrCreate(string $name, $guardName = null): RoleContract
+    public static function findOrCreate(string $name, ?string $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::where('name', $name)->where('guard_name', $guardName)->first();
+        $role = static::findByParam(['name' => $name, 'guard_name' => $guardName]);
 
         if (! $role) {
-            return static::query()->create(['name' => $name, 'guard_name' => $guardName]);
+            return static::query()->create(['name' => $name, 'guard_name' => $guardName] + (app(PermissionRegistrar::class)->teams ? [app(PermissionRegistrar::class)->teamsKey => getPermissionsTeamId()] : []));
         }
 
         return $role;
     }
 
     /**
-     * Determine if the user may perform the given permission.
+     * Finds a role based on an array of parameters.
      *
-     * @param string|Permission $permission
-     *
-     * @return bool
-     *
-     * @throws \Spatie\Permission\Exceptions\GuardDoesNotMatch
+     * @return RoleContract|Role|null
      */
-    public function hasPermissionTo($permission): bool
+    protected static function findByParam(array $params = []): ?RoleContract
     {
-        if (config('permission.enable_wildcard_permission', false)) {
-            return $this->hasWildcardPermission($permission, $this->getDefaultGuardName());
+        $query = static::query();
+
+        if (app(PermissionRegistrar::class)->teams) {
+            $teamsKey = app(PermissionRegistrar::class)->teamsKey;
+
+            $query->where(fn ($q) => $q->whereNull($teamsKey)
+                ->orWhere($teamsKey, $params[$teamsKey] ?? getPermissionsTeamId())
+            );
+            unset($params[$teamsKey]);
         }
 
-        $permissionClass = $this->getPermissionClass();
-
-        if (is_string($permission)) {
-            $permission = $permissionClass->findByName($permission, $this->getDefaultGuardName());
+        foreach ($params as $key => $value) {
+            $query->where($key, $value);
         }
 
-        if (is_int($permission)) {
-            $permission = $permissionClass->findById($permission, $this->getDefaultGuardName());
+        return $query->first();
+    }
+
+    /**
+     * Determine if the role may perform the given permission.
+     *
+     * @param  string|int|Permission|\BackedEnum  $permission
+     *
+     * @throws PermissionDoesNotExist|GuardDoesNotMatch
+     */
+    public function hasPermissionTo($permission, ?string $guardName = null): bool
+    {
+        if ($this->getWildcardClass()) {
+            return $this->hasWildcardPermission($permission, $guardName);
         }
+
+        $permission = $this->filterPermission($permission, $guardName);
 
         if (! $this->getGuardNames()->contains($permission->guard_name)) {
-            throw GuardDoesNotMatch::create($permission->guard_name, $this->getGuardNames());
+            throw GuardDoesNotMatch::create($permission->guard_name, $guardName ?? $this->getGuardNames());
         }
 
-        return $this->permissions->contains('id', $permission->id);
+        return $this->permissions->contains($permission->getKeyName(), $permission->getKey());
     }
 
-    public function createRelations(Request $request): void
-    {
-        $this->updateRelations($request);
-    }
-
-    public function updateRelations(Request $request): void
-    {
-        $this->syncPermissions($request->permissions);
-        $this->users()->sync($request->users);
-    }
+    /*
+     * Spatie code end
+     */
 }
