@@ -5,6 +5,7 @@ use VertexIT\Voiler\Http\Controllers\APIAuthController;
 
 Route::middleware(['api'])->prefix('api')->group(function() {
     Route::post('login', [APIAuthController::class, 'login']);
+    Route::post('register', [APIAuthController::class, 'register']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [APIAuthController::class, 'logout']);

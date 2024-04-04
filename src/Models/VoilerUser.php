@@ -30,10 +30,25 @@ abstract class VoilerUser extends BaseModel implements
 
     protected string $titleColumn = 'name';
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'email_verified_at',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+    ];
 
     public function isOwner($id): bool
     {
         return $this->id === $id;
+    }
+
+    protected static function booted()
+    {
+        static::creating(static function($user) {
+            if (! $user->name) {
+                $user->name = $user->username;
+            }
+        });
     }
 }

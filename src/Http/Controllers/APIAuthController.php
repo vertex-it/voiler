@@ -2,30 +2,27 @@
 
 namespace VertexIT\Voiler\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use VertexIT\Voiler\Http\Requests\LoginAPIRequest;
+use VertexIT\Voiler\Http\Requests\RegisterAPIRequest;
 
 class APIAuthController extends Controller
 {
-    public function login(Request $request): JsonResponse
+    public function login(LoginAPIRequest $request): JsonResponse
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required',
+        $credentials = $request->only([
+            $request->email ? 'email' : 'username',
+            'password',
         ]);
 
-        if (! Auth::attempt($request->only(['email', 'password']))) {
+        if (! Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Your credentials don\'t match our records!',
             ], 401);
-        }
-
-        if (Auth::user()->tokens->count() && ! $request->refresh_token) {
-            return response()->json([
-                'message' => 'There is already an active session using your account.',
-            ], 400);
         }
 
         if ($request->refresh_token) {
@@ -39,19 +36,7 @@ class APIAuthController extends Controller
         return response()->json([
             'message' => 'User logged in successfully!',
             'token' => $token->plainTextToken,
-            'user' => [
-                'id' => Auth::user()->id,
-                'name' => Auth::user()->name,
-                'username' => Auth::user()->username,
-                'slug' => Auth::user()->slug,
-                'address' => Auth::user()->address,
-                'phone' => Auth::user()->phone,
-                'notifications' => Auth::user()->notifications,
-                'is_dealership' => Auth::user()->is_dealership,
-                'photo' => Auth::user()->photo,
-                'email' => Auth::user()->email,
-                'email_verified_at' => Auth::user()->email_verified_at,
-            ],
+            'user' => $this->getUserResourceIfExists(Auth::user()),
         ]);
     }
 
@@ -64,8 +49,28 @@ class APIAuthController extends Controller
         ]);
     }
 
+    public function register(RegisterAPIRequest $request)
+    {
+        $input = $request->validated();
+
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+
+        return $this->getUserResourceIfExists($user);
+    }
+
     public function user()
     {
-        return Auth::user();
+        return $this->getUserResourceIfExists(Auth::user());
+    }
+
+    private function getUserResourceIfExists(User $user): \App\Http\Resources\UserResource | array
+    {
+        if (class_exists('\App\Http\Resources\UserResource')) {
+            $userResource = new \App\Http\Resources\UserResource($user);
+        }
+
+        return $userResource ?? $user->toArray();
     }
 }
