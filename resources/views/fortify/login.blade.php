@@ -28,14 +28,62 @@
             </h2>
 
             <div class="mt-8">
+                @if ($errors->any())
+                    <div class="bg-red-200 rounded-md p-2 my-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <x-form
                     action="{{ route('login') }}"
                     method="POST"
                     buttonText="{{ __('voiler::interface.login') }}"
                 >
-                    <x-inputs.input name="email" type="email" autofocus />
-                    <x-inputs.input name="password" type="password" />
-                    <x-inputs.toggle name="remember" label="{{ __('voiler::interface.remember_me') }}" value="true" />
+                    @switch(config('voiler.login.default'))
+                        @case('all')
+                            <x-inputs.input
+                                type="text"
+                                name="username_or_email"
+                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                autofocus
+                            />
+                            @break
+                            
+                        @case('username')
+                            <x-inputs.input
+                                type="text"
+                                name="username"
+                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                autofocus
+                            />
+                            @break
+                            
+                        @case('email')
+                            <x-inputs.input
+                                type="email"
+                                name="email"
+                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                autofocus
+                            />
+                            @break
+                        
+                    @endswitch
+                    
+                    <x-inputs.input
+                        name="password"
+                        type="password"
+                    />
+                    
+                    <x-inputs.toggle
+                        name="remember"
+                        label="{{ __('voiler::interface.remember_me') }}"
+                        value="true"
+                    />
+                    
                     @if (Route::has('register'))
                         <div class="mt-14 mb-6">
                             <p class="mt-3 text-xs md:text-sm text-center text-gray-500">

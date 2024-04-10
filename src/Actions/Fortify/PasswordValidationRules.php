@@ -16,7 +16,7 @@ trait PasswordValidationRules
         $rules = [
             'required',
             'string',
-            new Password,
+            new \Illuminate\Validation\Rules\Password(8),
         ];
 
         if ($confirmed) {

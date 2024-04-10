@@ -17,4 +17,17 @@ return [
     ],
 
     'show_placeholder' => true,
+
+    'login' => [
+
+        // Supported keys for login
+        'keys' => [
+            'username', 'email',
+        ],
+
+        // Default key for login
+        // Here can go any option from keys array
+        // If you want all keys just set this option to all
+        'default' => 'all',
+    ],
 ];
