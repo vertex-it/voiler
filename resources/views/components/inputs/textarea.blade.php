@@ -66,7 +66,7 @@
                             };
 
                             formData = new FormData();
-                            formData.append('image', blobInfo.blob(), blobInfo.filename());
+                            formData.append('file', blobInfo.blob(), blobInfo.filename());
 
                             xhr.send(formData);
                         }
