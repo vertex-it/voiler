@@ -73,8 +73,9 @@ class VoilerGenerateCommand extends Command
             'name' => $resource['name'],
         ]);
 
-        $this->call('make:resource --collection', [
+        $this->call('make:resource', [
             'name' => $resource['api_resource'],
+            '--collection' => true,
         ]);
 
         $this->generateWebRoutes($resource);
