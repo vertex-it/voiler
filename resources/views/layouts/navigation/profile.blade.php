@@ -1,7 +1,7 @@
 <div class="ml-3 dropdown">
     <button class="btn btn-transparent p-2 rounded-full dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="sr-only">
-            Open user menu
+            {{ __('Open user menu') }}
         </span>
         
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-600" viewBox="0 0 20 20" fill="currentColor">
@@ -12,7 +12,7 @@
     <ul class="dropdown-menu dropdown-menu-right">
         @can('profiles update')
             <a href="{{ route('admin.profiles.edit', ['profile' => Auth::user()]) }}" class="dropdown-item">
-                Profile
+                {{ __('Profile') }}
             </a>
         @endcan
         
@@ -25,7 +25,7 @@
         @endforeach
         
         <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">
-            Sign out
+            {{ __('Sign out') }}
         </a>
     </ul>
 </div>
