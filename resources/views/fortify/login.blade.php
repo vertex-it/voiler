@@ -57,7 +57,7 @@
                             <x-inputs.input
                                 type="text"
                                 name="username"
-                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                placeholder="{{ __('voiler::interface.enter_your_username') }}"
                                 autofocus
                             />
                             @break
@@ -66,7 +66,7 @@
                             <x-inputs.input
                                 type="email"
                                 name="email"
-                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                placeholder="{{ __('voiler::interface.enter_your_email') }}"
                                 autofocus
                             />
                             @break
@@ -87,9 +87,9 @@
                     @if (Route::has('register'))
                         <div class="mt-14 mb-6">
                             <p class="mt-3 text-xs md:text-sm text-center text-gray-500">
-                                Don't have account?
+                                {{ __('voiler::interface.dont_have_account') }}
                                 <a href="{{ route('register') }}" class="font-medium text-primary-500 hover:text-primary-600">
-                                    Register here
+                                    {{ __('voiler::interface.register_here') }}
                                 </a>
                             </p>
                         </div>

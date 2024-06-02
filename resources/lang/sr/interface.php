@@ -59,4 +59,12 @@ return [
     'sign_in_to_your_account' => 'Prijavite se na vaš nalog',
     'remember_me' => 'Zapamti me',
     'register' => 'Registrujte se',
+    'enter_your_email_or_username' => 'Unesite vaš email ili korisničko ime',
+    'enter_your_username' => 'Unesite vaše korisničko ime',
+    'enter_your_email' => 'Unesite vaš email',
+    'Username or email' => 'Korisničko ime ili email',
+    'Username' => 'Korisničko ime',
+    'Password' => 'Lozinka',
+    'dont_have_account' => 'Nemate nalog?',
+    'register_here' => 'Registrujte se ovdje'
 ];
