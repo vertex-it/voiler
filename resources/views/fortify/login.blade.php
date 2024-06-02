@@ -48,7 +48,8 @@
                             <x-inputs.input
                                 type="text"
                                 name="username_or_email"
-                                placeholder="{{ __('voiler::interface.enter_your_email_or_username') }}"
+                                label="{{ __('voiler::interface.username_or_email') }}"
+                                placeholder="{{ __('voiler::interface.enter_your_username_or_email') }}"
                                 autofocus
                             />
                             @break
@@ -57,6 +58,7 @@
                             <x-inputs.input
                                 type="text"
                                 name="username"
+                                label="{{ __('voiler::interface.username') }}"
                                 placeholder="{{ __('voiler::interface.enter_your_username') }}"
                                 autofocus
                             />
@@ -66,6 +68,7 @@
                             <x-inputs.input
                                 type="email"
                                 name="email"
+                                label="{{ __('voiler::interface.email') }}"
                                 placeholder="{{ __('voiler::interface.enter_your_email') }}"
                                 autofocus
                             />
