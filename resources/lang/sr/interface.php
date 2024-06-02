@@ -59,7 +59,7 @@ return [
     'sign_in_to_your_account' => 'Prijavite se na vaš nalog',
     'remember_me' => 'Zapamti me',
     'register' => 'Registrujte se',
-    'enter_your_username or email' => 'Unesite vaše korisničko ime ili email',
+    'enter_your_username_or_email' => 'Unesite vaše korisničko ime ili email',
     'enter_your_username' => 'Unesite vaše korisničko ime',
     'enter_your_email' => 'Unesite vaš email',
     'username_or_email' => 'Korisničko ime ili email',
