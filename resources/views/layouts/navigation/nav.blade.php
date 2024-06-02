@@ -6,7 +6,7 @@
     @foreach($navigation as $name => $navigationGroup)
         @if(isset($navigationGroup['label']))
             <li class="nav-label">
-                {{ $navigationGroup['label'] }}
+                {{ __($navigationGroup['label']) }}
             </li>
         @else
             <li>

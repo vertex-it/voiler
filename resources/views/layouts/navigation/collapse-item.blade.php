@@ -9,7 +9,7 @@
     @if(isset($navigationGroup['route']))
         {{-- Single page --}}
         <a class="nav-item {{ Route::currentRouteName() === $navigationGroup['route'] ? 'active' : '' }}" href="{{ route($navigationGroup['route']) }}">
-            {{ $name }}
+            {{ __($name) }}
         </a>
     @else
         <a
@@ -21,7 +21,7 @@
             class="nav-item justify-between"
         >
             <span>
-                {{ $name }}
+                {{ __($name) }}
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-3" viewBox="0 0 20 20" fill="currentColor">
                 <path
@@ -37,7 +37,7 @@
                 @foreach(Arr::except($navigationGroup, 'can') as $item)
                     @if(! isset($item['can']) || Auth::user()->can($item['can']))
                         <a href="{{ route($item['route']) }}" class="nav-item {{ Route::currentRouteName() === $item['route'] ? 'active' : '' }}">
-                            {{ $item['name'] }}
+                            {{ __($item['name']) }}
                         </a>
                     @endif
                 @endforeach

@@ -16,7 +16,7 @@
             href="{{ route('admin.profiles.edit', ['profile' => Auth::user()]) }}"
             class="nav-item {{ Route::currentRouteName() === 'admin.profiles.edit' ? 'active' : '' }}"
         >
-            Profile
+            {{ __('Profile') }}
         </a>
     @endcan
 
@@ -25,6 +25,6 @@
     ])
 
     <a href="#" class="nav-item" onclick="document.getElementById('logout-form').submit();">
-        Sign out
+        {{ __('Sign out') }}
     </a>
 </div>

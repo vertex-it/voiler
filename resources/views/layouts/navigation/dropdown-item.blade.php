@@ -2,7 +2,7 @@
     @if(isset($navigationGroup['route']))
         {{-- single page --}}
         <a href="{{ route($navigationGroup['route']) }}" class="dropdown-item" aria-current="page">
-            {{ $name }}
+            {{ __($name) }}
         </a>
     @else
         <li>
@@ -14,7 +14,7 @@
                 aria-haspopup="true"
             >
                 @if(isset($isSubmenu) && $isSubmenu)
-                    {{ $name }}
+                    {{ __($name) }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-3" viewBox="0 0 20 20" fill="currentColor">
                         <path
                             fill-rule="evenodd"
@@ -24,7 +24,7 @@
                     </svg>
                 @else
                     <span class="inline-flex justify-center">
-                        {{ $name }}
+                        {{ __($name) }}
                         <svg
                             xmlns="http://www.w3.org/2000/svg" class="ml-1 h-5 w-3" viewBox="0 0 20 20"
                             fill="currentColor"
@@ -49,7 +49,7 @@
                         
                         @if(! isset($item['can']) || Auth::user()->can($item['can']))
                             <a href="{{ route($item['route']) }}" class="dropdown-item">
-                                {{ $item['name'] }}
+                                {{ __($item['name']) }}
                             </a>
                         @endif
                     @endforeach
