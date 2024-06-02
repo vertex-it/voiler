@@ -74,6 +74,8 @@
                     @endswitch
                     
                     <x-inputs.input
+                        label="{{ __('voiler::interface.password') }}"
+                        placeholder="{{ __('voiler::interface.please_enter_your_password') }}"
                         name="password"
                         type="password"
                     />

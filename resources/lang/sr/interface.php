@@ -64,7 +64,6 @@ return [
     'enter_your_email' => 'Unesite vaš email',
     'Username or email' => 'Korisničko ime ili email',
     'Username' => 'Korisničko ime',
-    'Password' => 'Lozinka',
     'dont_have_account' => 'Nemate nalog?',
     'register_here' => 'Registrujte se ovdje'
 ];

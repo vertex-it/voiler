@@ -64,7 +64,6 @@ return [
     'enter_your_email' => 'Enter your email',
     'Username or email' => 'Username or email',
     'Username' => 'Username',
-    'Password' => 'Password',
     'dont_have_account' => 'Don\'t have account?',
     'register_here' => 'Register here',
 ];
