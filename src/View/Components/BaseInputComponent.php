@@ -51,7 +51,7 @@ abstract class BaseInputComponent extends Component
 
     public function getLabel()
     {
-        return $this->label ?? $this->getNameAsTitle();
+        return __($this->label ?? $this->getNameAsTitle());
     }
 
     public function getEscapedName()
@@ -67,10 +67,12 @@ abstract class BaseInputComponent extends Component
     public function getPlaceholder()
     {
         if (config('voiler.show_placeholder')) {
-            return $this->placeholder ?? implode(' ', [
-                __('voiler::components.placeholder_prefix'),
-                strtolower($this->getLabel())
-            ]);
+            return __(
+                $this->placeholder ?? implode(' ', [
+                    __('voiler::components.placeholder_prefix'),
+                    strtolower($this->getLabel())
+                ])
+            );
         }
 
         return '';
