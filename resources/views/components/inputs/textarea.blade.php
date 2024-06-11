@@ -34,6 +34,7 @@
                         min_height: 400,
                         max_height: 900,
                         content_style: 'img { max-width: 100%; height: auto; }',
+                        entity_encoding: 'raw',
                         paste_data_images : true,
                         file_picker_types: 'image',
                         relative_urls: false,
