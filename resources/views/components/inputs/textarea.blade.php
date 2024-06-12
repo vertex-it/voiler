@@ -37,6 +37,8 @@
                         entity_encoding: 'raw',
                         paste_data_images : true,
                         file_picker_types: 'image',
+                        remove_script_host : false,
+                        convert_urls : true,
                         relative_urls: false,
                         document_base_url: '',
                         images_upload_handler: function (blobInfo, success, failure) {
