@@ -24,8 +24,8 @@
                 $(document).ready(function () {
                     tinymce.init({
                         selector: '.tinymce',
-                        plugins: 'autoresize advlist charmap fullscreen image link preview searchreplace visualblocks wordcount help lists code',
-                        toolbar: 'fullscreen | undo redo | bold italic underline strikethrough | forecolor backcolor | numlist bullist | alignleft aligncenter alignright alignjustify | link image | preview code visualblocks wordcount | searchreplace | help',
+                        plugins: 'autoresize advlist charmap fullscreen image link paste preview searchreplace visualblocks wordcount help lists code',
+                        toolbar: 'fullscreen | undo redo | bold italic underline strikethrough | forecolor backcolor | numlist bullist | alignleft aligncenter alignright alignjustify | link image | removeformat |preview code visualblocks wordcount | searchreplace | help',
                         menubar: false,
                         advlist_bullet_styles: "square",
                         automatic_uploads: true,
@@ -36,6 +36,7 @@
                         content_style: 'img { max-width: 100%; height: auto; }',
                         entity_encoding: 'raw',
                         paste_data_images : true,
+                        paste_as_text: true,
                         file_picker_types: 'image',
                         remove_script_host : false,
                         convert_urls : true,
