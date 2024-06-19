@@ -39,10 +39,16 @@ class MediaMultipleService
         // If uploaded urls are not in temp then they will not be uploaded
         foreach ($uploadedUrls as $url) {
             if (str_contains($url, config('app.url') . '/storage/temp/')) {
-                $model->addMediaFromDisk(
+                $adder = $model->addMediaFromDisk(
                     str_replace(config('app.url') . '/storage', '', $url),
                     'public'
-                )->toMediaCollection($key);
+                );
+
+                if (config('voiler.media_library.preserve_temp_files')) {
+                    $adder->preservingOriginal();
+                }
+
+                $adder->toMediaCollection($key);
             }
         }
 

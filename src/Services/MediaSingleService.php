@@ -18,7 +18,7 @@ class MediaSingleService
         if (str_contains($value, config('app.url') . '/storage')) {
             $adder = $model->addMediaFromDisk(str_replace(config('app.url') . '/storage', '', $value), 'public');
 
-            if (! str_contains($value, config('app.url') . '/storage/temp')) {
+            if (! str_contains($value, config('app.url') . '/storage/temp') || config('voiler.media_library.preserve_temp_files')) {
                 $adder = $adder->preservingOriginal();
             }
 

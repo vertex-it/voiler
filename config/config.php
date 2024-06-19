@@ -30,4 +30,8 @@ return [
         // If you want all keys just set this option to all
         'default' => 'all',
     ],
+
+    'media_library' => [
+        'preserve_temp_files' => env('PRESERVE_TEMP_FILES', false),
+    ],
 ];
