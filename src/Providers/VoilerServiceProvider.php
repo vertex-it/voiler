@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use VertexIT\Voiler\Console\FixImageURLsCommand;
 use VertexIT\Voiler\Console\GenerateTranslationsCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerFactoryMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerMigrationMakeCommand;
@@ -158,6 +159,7 @@ class VoilerServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
+            FixImageURLsCommand::class,
             GenerateTranslationsCommand::class,
             PublishFromPackagesCommand::class,
             VoilerGenerateCommand::class,
