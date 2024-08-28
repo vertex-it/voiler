@@ -57,7 +57,15 @@ class APIAuthController extends Controller
 
         $user = User::create($input);
 
-        return $this->getUserResourceIfExists($user);
+        $permissions = $user->getAllPermissions()->pluck('name')->toArray();
+
+        $token = $user->createToken("API TOKEN", $permissions);
+
+        return response()->json([
+            'message' => 'User registered successfully!',
+            'token' => $token->plainTextToken,
+            'user' => $this->getUserResourceIfExists($user),
+        ]);
     }
 
     public function user()

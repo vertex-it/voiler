@@ -2,6 +2,8 @@
 
 namespace VertexIT\Voiler\Providers;
 
+use App\Models\User;
+use Auth;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -13,6 +15,7 @@ use VertexIT\Voiler\Actions\Fortify\ResetUserPassword;
 use VertexIT\Voiler\Actions\Fortify\UpdateUserPassword;
 use VertexIT\Voiler\Actions\Fortify\UpdateUserProfileInformation;
 use VertexIT\Voiler\Http\Requests\LoginRequest;
+use VertexIT\Voiler\Http\Responses\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -32,7 +35,12 @@ class FortifyServiceProvider extends ServiceProvider
         // Bind custom login request to support login with multiple keys (username, email)
         $this->app->bind(
             \Laravel\Fortify\Http\Requests\LoginRequest::class,
-            LoginRequest::class
+            LoginRequest::class,
+        );
+
+        $this->app->bind(
+            \Laravel\Fortify\Http\Responses\LoginResponse::class,
+            LoginResponse::class,
         );
 
         Fortify::createUsersUsing(CreateNewUser::class);
