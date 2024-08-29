@@ -2,6 +2,8 @@
 
 namespace VertexIT\Voiler\Http\Responses;
 
+use App\Models\User;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
 
@@ -14,12 +16,14 @@ class LoginResponse implements \Laravel\Fortify\Contracts\LoginResponse
             : redirect()->intended(Fortify::redirects('login'));
     }
 
-    private function getUserResourceIfExists($user): \App\Http\Resources\UserResource | array
+    private function getUserResourceIfExists(User $user): array | JsonResource
     {
-        if (class_exists('\App\Http\Resources\UserResource')) {
-            $userResource = new \App\Http\Resources\UserResource($user);
+        $userResourceFQN = \App\Http\Resources\UserResource::class;
+
+        if (class_exists($userResourceFQN)) {
+            return new $userResourceFQN($user);
         }
 
-        return $userResource ?? $user->toArray();
+        return $user->toArray();
     }
 }
