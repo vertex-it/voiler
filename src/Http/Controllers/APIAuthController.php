@@ -4,6 +4,7 @@ namespace VertexIT\Voiler\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,7 @@ class APIAuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         Auth::user()->currentAccessToken()->delete();
 
@@ -49,8 +50,15 @@ class APIAuthController extends Controller
         ]);
     }
 
-    public function register(RegisterAPIRequest $request)
+    public function register(): JsonResponse
     {
+        $requestClass = \App\Http\Requests\RegisterAPIRequest::class;
+        $requestClass = ! class_exists($requestClass)
+            ? RegisterAPIRequest::class
+            : $requestClass;
+
+        $request = app($requestClass);
+
         $input = $request->validated();
 
         $input['password'] = Hash::make($input['password']);
@@ -68,17 +76,19 @@ class APIAuthController extends Controller
         ]);
     }
 
-    public function user()
+    public function user(): array | JsonResource
     {
         return $this->getUserResourceIfExists(Auth::user());
     }
 
-    private function getUserResourceIfExists(User $user): \App\Http\Resources\UserResource | array
+    private function getUserResourceIfExists(User $user): array | JsonResource
     {
-        if (class_exists('\App\Http\Resources\UserResource')) {
-            $userResource = new \App\Http\Resources\UserResource($user);
+        $userResourceFQN = \App\Http\Resources\UserResource::class;
+
+        if (class_exists($userResourceFQN)) {
+            return new $userResourceFQN($user);
         }
 
-        return $userResource ?? $user->toArray();
+        return $user->toArray();
     }
 }
