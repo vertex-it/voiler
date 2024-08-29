@@ -46,7 +46,7 @@ class BaseAPIController extends Controller
 
         $this->dispatchEvent('store', $model);
 
-        return response()->json($model, 201);
+        return new $this->resource['api_resource_fqn']($model);
     }
 
     public function update(Request $request, $model)
@@ -59,7 +59,7 @@ class BaseAPIController extends Controller
 
         $this->dispatchEvent('update', $model);
 
-        return $model;
+        return new $this->resource['api_resource_fqn']($model);
     }
 
     public function destroy($model)
