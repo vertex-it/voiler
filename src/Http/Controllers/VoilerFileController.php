@@ -12,6 +12,10 @@ class VoilerFileController extends Controller
 {
     public function store(Request $request): JsonResponse
     {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+
         $file = FileService::store(
             $request->file,
             'temp',
