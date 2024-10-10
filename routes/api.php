@@ -5,7 +5,7 @@ use VertexIT\Voiler\Http\Controllers\APIAuthController;
 use VertexIT\Voiler\Http\Controllers\VoilerFileController;
 
 Route::middleware(['api'])->prefix('api')->group(function() {
-    Route::post('voiler/files', [VoilerFileController::class, 'store'])->name('voiler.files');
+    Route::post('voiler/files', [VoilerFileController::class, 'store']);
 
     Route::post('login', [APIAuthController::class, 'login']);
     Route::post('register', [APIAuthController::class, 'register']);
