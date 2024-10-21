@@ -52,6 +52,28 @@ You can publish the views:
 php artisan vendor:publish --tag=views --force
 ```
 
+## How to run it locally
+
+Install the project in the same directory as the source project.
+
+In `docker-compose.yml` in `app` service `volumes` parameter add:
+```
+    volumes:
+        - ../voiler:/var/www/voiler
+```
+
+In `composer.json` add
+```
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../voiler"
+        }
+    ]
+```
+
+Delete `composer.lock` and `vendor` and install composer dependencies again.
+
 ## Usage
 
 ```php
