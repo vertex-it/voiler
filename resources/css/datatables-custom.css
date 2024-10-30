@@ -2,14 +2,6 @@ table.datatable {
     @apply py-0;
 }
 
-.dataTables_wrapper * {
-    @apply text-sm text-left;
-}
-
-.dataTables_wrapper .dataTables_length select {
-    @apply py-2 pl-3 pr-7 ml-2 text-gray-600 cursor-pointer font-medium text-xs md:text-sm rounded-lg bg-gray-100 border border-gray-100 hover:bg-gray-200 hover:border-gray-200 shadow-sm focus:ring-primary-500 focus:border-primary-500 !important
-}
-
 .dataTables_wrapper .dataTables_filter {
     @apply flex mt-0;
 }
@@ -29,7 +21,7 @@ table.datatable {
 
 table.dataTable tbody th,
 table.dataTable tbody td {
-    @apply py-1 md:py-2.5 px-2 md:px-4 text-gray-800 text-xs md:text-[0.9rem] border-b border-gray-100;
+    @apply py-1 md:py-2.5 text-gray-900 text-xs md:text-[0.9rem] border-b border-gray-100 !important;
 }
 
 table.dataTable thead th,
@@ -45,10 +37,32 @@ table.dataTable tbody td img {
 
 table.dataTable thead th,
 table.dataTable thead td {
-    @apply border-b border-gray-200 text-gray-700 font-medium text-xs mb-2 py-1 md:py-3;
+    @apply border-b border-gray-400 text-gray-700 font-semibold text-xs mb-2 py-1 md:py-3 !important;
 }
 
 /*Pagination Buttons*/
+#datatable_wrapper div.dt-layout-cell.dt-layout-end > div > nav {
+    @apply flex items-center
+}
+
+div.dt-container .dt-paging .dt-paging-button {
+    @apply text-sm rounded-md py-2 text-gray-700 font-medium transition-colors duration-200 hover:bg-gray-50 relative inline-flex items-center border-none focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 !important
+}
+
+div.dt-container .dt-paging .dt-paging-button.current, div.dt-container .dt-paging .dt-paging-button.current:hover {
+    background: none;
+    @apply z-10 bg-primary-500 border-none text-white font-semibold !important;
+}
+
+div.dt-container .dt-paging .dt-paging-button:hover {
+    background: none;
+    @apply bg-gray-200 text-gray-700 border-none !important;
+}
+
+div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active {
+    @apply cursor-not-allowed hover:bg-white text-gray-200 hover:text-gray-200 !important;
+}
+
 .dataTables_paginate.paging_simple_numbers {
     @apply relative z-0 inline-flex;
 }
@@ -100,8 +114,20 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
     @apply bg-primary-500;
 }
 
-.dataTables_wrapper .dataTables_info .select-info {
-    @apply pl-2;
+#datatable_wrapper > div:nth-child(1) {
+    @apply mb-5 mt-0;
+}
+
+#datatable_wrapper > div:nth-child(3) {
+    @apply mt-5 mb-0;
+}
+
+.dt-info > span {
+    @apply ml-2;
+}
+
+.dt-info {
+    @apply text-sm text-gray-700 !important;
 }
 
 .dataTables_info, .dataTables_length {
@@ -121,26 +147,25 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
     @apply text-gray-800 font-medium border-b border-gray-200 !important;
 }
 
-.table-row-deleted td:first-child {
+.table-row-deleted td:nth-child(2) {
     @apply text-red-500 !important;
 }
 
 /*Row Hover*/
 table.dataTable.hover tbody tr:hover td,
 table.dataTable.display tbody tr:hover td{
-    @apply bg-gray-50 cursor-pointer !important;
+    background-color: #fff !important;
+    box-shadow: inset 0 0 0 9999px #fff;
 }
 
-tr td:first-child,
-tr th:first-child {
-    @apply bg-white
+table.dataTable tbody tr.selected > * {
+    box-shadow: inset 0 0 0 9999px rgba(228, 228, 231, 0.6);
+    color: #000;
 }
 
-table.dataTable tbody tr.selected td {
-    @apply bg-gray-50 !important
-}
-table.dataTable tbody tr.selected td:first-child {
-    @apply border-l-2 border-l-primary-500 pl-3.5 !important
+table.dataTable.hover > tbody > tr.selected:hover > *,
+table.dataTable.display > tbody > tr.selected:hover > * {
+    box-shadow: inset 0 0 0 9999px rgba(228, 228, 231, 0.6) !important;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -168,27 +193,86 @@ table.dataTable tbody tr.selected td:first-child {
 }
 
 /* Fixed columns */
-tr td:first-child {
-    @apply border-r border-r-gray-100 lg:border-r-0 !important
-}
+/*tr td:first-child {*/
+/*    @apply border-r border-r-gray-100 lg:border-r-0 !important*/
+/*}*/
 
-tr.dt-rowReorder-moving td.dtfc-fixed-left, tr.dt-rowReorder-moving td.dtfc-fixed-right {
-    border-top: 2px solid #555 !important;
-    border-bottom: 2px solid #555 !important
-}
+/*tr.dt-rowReorder-moving td.dtfc-fixed-left, tr.dt-rowReorder-moving td.dtfc-fixed-right {*/
+/*    border-top: 2px solid #555 !important;*/
+/*    border-bottom: 2px solid #555 !important*/
+/*}*/
 
-tr.dt-rowReorder-moving td.dtfc-fixed-left:first-child {
-    border-left: 2px solid #555 !important
-}
+/*tr.dt-rowReorder-moving td.dtfc-fixed-left:first-child {*/
+/*    border-left: 2px solid #555 !important*/
+/*}*/
 
-tr.dt-rowReorder-moving td.dtfc-fixed-right:last-child {
-    border-right: 2px solid #555 !important
-}
+/*tr.dt-rowReorder-moving td.dtfc-fixed-right:last-child {*/
+/*    border-right: 2px solid #555 !important*/
+/*}*/
 
 /* Filter */
 .btn-filter.active {
-    @apply bg-primary-50 text-primary-600 hover:bg-primary-200 !important
+    @apply bg-primary-50 text-primary-500 !important
 }
 .btn-filter.active svg {
-    @apply text-primary-600 !important
+    @apply text-primary-500 !important
+}
+
+/* Select */
+#datatable .select-checkbox.dt-select {
+    cursor: pointer;
+}
+
+#datatable .select-checkbox.dt-select > input {
+    cursor: pointer;
+    border-radius: 3px;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
+}
+
+/* Responsive */
+table.dataTable > tbody > tr.child ul.dtr-details {
+    width: 100%;
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details .dtr-data img {
+    display: inline-block;
+    height: 50px;
+}
+
+div.dt-container .dt-search input, /* Search */
+div.dt-buttons > .dt-button, div.dt-buttons > div.dt-button-split .dt-button, /* Buttons */
+div.dt-container .dt-length select, /* Select results per page */
+.table-select-actions-btn /* Custom button for select actions */
+{
+    @apply px-4 py-2 text-gray-700 bg-gray-100 shadow-sm text-sm border border-transparent rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-gray-300 !important
+}
+
+/* Buttons */
+div.dt-buttons {
+    @apply mr-2 !important
+}
+
+div.dt-buttons > .dt-button, div.dt-buttons > div.dt-button-split .dt-button {
+    @apply bg-none transition-colors duration-200 hover:bg-gray-200 m-0 !important;
+}
+
+/* Search */
+div.dt-container .dt-search input {
+    @apply w-52 mx-0
+}
+
+/* Select results per page */
+div.dt-container .dt-length {
+    @apply ml-2 !important
+}
+div.dt-container .dt-length select {
+    @apply pr-8 transition-colors duration-200 hover:bg-gray-200 cursor-pointer !important
+}
+
+/* Custom button for select actions and filters */
+.table-select-actions {
+    @apply ml-2 !important
+}
+.table-select-actions-btn {
+    @apply m-auto btn-has-icon transition-colors duration-200 hover:bg-gray-200 !important
 }

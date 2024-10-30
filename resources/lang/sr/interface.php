@@ -45,8 +45,6 @@ return [
 
     'save' => 'Sačuvajte',
 
-    'select_all' => 'Odaberite sve',
-    'cancel' => 'Otkažite',
     'details_for' => 'Detalji za',
     'there_was_an_error' => 'Desila se greška!',
     'soft_delete_success' => 'Unos je obrisan privremeno.',

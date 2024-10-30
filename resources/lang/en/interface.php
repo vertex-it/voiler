@@ -45,8 +45,6 @@ return [
 
     'save' => 'Save',
 
-    'select_all' => 'Select all',
-    'cancel' => 'Cancel',
     'details_for' => 'Details for',
     'there_was_an_error' => 'There was an error!',
     'soft_delete_success' => 'Success! Entry was deleted.',

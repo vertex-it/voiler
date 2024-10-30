@@ -1,8 +1,7 @@
 window.$ = window.jQuery = require('jquery')
 
-require('datatables.net-dt')
-require('datatables.net-buttons-dt')
-require('datatables.net-select-dt')
-require('datatables.net-responsive-dt')
-require('datatables.net-fixedheader-dt')
-require('datatables.net-fixedcolumns-dt')
+import 'datatables.net-dt'
+import 'datatables.net-buttons-dt'
+import 'datatables.net-select-dt'
+import 'datatables.net-responsive-dt'
+import 'datatables.net-fixedheader-dt'

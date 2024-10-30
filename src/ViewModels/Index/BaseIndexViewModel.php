@@ -10,6 +10,7 @@ class BaseIndexViewModel extends ViewModel
     public $model;
     public array $resource = [];
     public array $actions = [
+        'index',
         'create',
         'show',
         'edit',

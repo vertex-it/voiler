@@ -32,7 +32,7 @@
         "spatie/laravel-view-models": "^1.6",
         "laravel/fortify": "^1.21",
         "symfony/dom-crawler": "^7.0",
-        "yajra/laravel-datatables": "^11.0"
+        "yajra/laravel-datatables": "^11.1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",

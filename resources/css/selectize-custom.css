@@ -75,7 +75,7 @@
 }
 
 .selectize-control.plugin-remove_button .item .remove:hover {
-    @apply bg-primary-200;
+    @apply bg-blue-200;
 }
 
 .selectize-control.plugin-remove_button .disabled .item .remove:hover {
@@ -127,7 +127,7 @@
 }
 
 .selectize-control.multi .selectize-input > div.active {
-    @apply bg-primary-100 border-transparent;
+    @apply bg-blue-100 border-transparent;
 }
 
 .selectize-control.multi .selectize-input.disabled > div, .selectize-control.multi .selectize-input.disabled > div.active {

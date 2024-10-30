@@ -13,7 +13,7 @@
                 @if($name === 'can')
                     @continue
                 @endif
-                
+
                 @include('voiler::layouts.navigation.collapse-item', [
                     'name' => $name,
                     'navigationGroup' => $navigationGroup,

@@ -16,7 +16,7 @@
     <div class="section w-full">
         @if (Auth::user()->can($resource['roles']['create']) && $getModelRoute('create'))
             @section('action-button')
-                <a class="btn btn-primary btn-sm" href="{{ $getModelRoute('create') }}">
+                <a class="btn btn-primary" href="{{ $getModelRoute('create') }}">
                     {{ __('Add ' . $resource['title_singular']) }}
                 </a>
             @endsection
@@ -33,10 +33,10 @@
             @yield('additional-post-content')
         </div>
 
-        <div id="custom_filters" class="hidden">
+        <div id="table_custom_filters" class="hidden">
             @hasSection('filters')
                 <div class="dropdown">
-                    <button class="btn btn-sm btn-gray btn-filter btn-has-icon text-gray-600 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="table-select-actions-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                         </svg>
@@ -56,22 +56,22 @@
                     </div>
                 </div>
                 @push('master-scripts')
+{{--                    TODO --}}
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js" integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                 @endpush
             @endif
         </div>
 
         <div id="table_buttons">
-            <div class="dropdown h-full">
-                <button class="btn btn-gray btn-has-icon px-2.5 py-1.5 h-full dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown">
+                <button class="table-select-actions-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
+                    Akcije odabira
                 </button>
 
                 <div class="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                    <a href="#" class="dropdown-item" data-action="selectAll">{{ __('voiler::interface.select_all') }}</a>
-                    <a href="#" class="dropdown-item" data-action="selectNone">{{ __('voiler::interface.cancel') }}</a>
                     <a href="#" class="dropdown-item" data-action="soft_delete">{{ __('voiler::interface.soft_delete') }}</a>
                     <a href="#" class="dropdown-item" data-action="restore">{{ __('voiler::interface.restore') }}</a>
                 </div>
@@ -82,21 +82,82 @@
 
 @section('master-scripts')
     <script src="{{ mix('js/datatables.js') }}"></script>
+{{--   TODO --}}
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.colVis.min.js"></script>
     <script>
         ajaxData = function () {
             return {}
         }
 
         $(document).ready(function () {
+            // Order by first column if custom order is not set
+            if (! additionalConfig.order) {
+                additionalConfig.order = [1, 'asc']
+            }
+
+            // Add select to the first column
+            additionalConfig.columns.unshift({
+                title: '',
+                defaultContent: '',
+                searchable: false,
+                orderable: false,
+                className: 'select-checkbox',
+                width: '40px',
+                responsivePriority: 1,
+                render: $.fn.dataTable.render.select(),
+            })
+
+            // Add actions to the last column
+            additionalConfig.columns.push({
+                title: '',
+                data: "action",
+                searchable: false,
+                orderable: false,
+                width: "40px",
+                responsivePriority: 1,
+            })
+
             DataTable = $("#datatable").DataTable(
                 Object.assign(additionalConfig, {
-                    dom:
-                        '<"flex flex-wrap justify-between items-center -mt-1"' +
-                            '<"custom-filters">' +
-                            '<"flex justify-end items-stretch" fl <"ml-2 table-buttons">>' +
-                        '>' +
-                        ' t ' +
-                        'i p',
+                    layout: {
+                        topStart: {
+                            // Show colvis if there is more than 5 + 2 columns
+                            buttons: additionalConfig.columns.length > 7 ?
+                            [
+                                {
+                                    extend: 'colvis',
+                                    popoverTitle: 'Prikazane kolone',
+                                    columns: ':not(:first-child, :nth-child(2), :last-child)',
+                                    postfixButtons: ['colvisRestore'],
+                                    text: 'Prikazane kolone'
+                                }
+                            ]
+                            : [],
+                            div: {
+                                className: 'custom-filters',
+                            }
+                        },
+                        topEnd: {
+                            search: {
+                                placeholder: 'Pretraga',
+                            },
+                            pageLength: {
+                                menu: [ 10, 15, 25, 50, 100 ]
+                            },
+                            div: {
+                                className: 'table-select-actions',
+                            }
+                        },
+                        bottomStart: {
+                            info: true,
+                        },
+                        bottomEnd: {
+                            paging: {
+                                firstLast: true,
+                            },
+                        },
+                    },
+                    pageLength: 15,
                     language: {
                         "sProcessing":   "Obrada u toku...",
                         "sLengthMenu":   "_MENU_",
@@ -107,6 +168,7 @@
                         "sInfoPostFix":  "",
                         "sSearch":       "",
                         "sSearchPlaceholder": "Pretraga...",
+                        "sLoadingRecords": "Učitavanje rezultata",
                         "sUrl":          "",
                         "oPaginate": {
                             "sFirst": '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /> </svg>',
@@ -117,7 +179,7 @@
                         "select": {
                             "rows": {
                                 _: "Odabrali ste %d redova",
-                                0: "Kliknite na red da ga odaberete",
+                                0: "",
                                 1: "Odabrali ste 1 red",
                                 2: "Odabrali ste 2 reda",
                                 3: "Odabrali ste 3 reda",
@@ -128,11 +190,23 @@
                     searchDelay: 500,
                     processing: true,
                     serverSide: true,
-                    responsive: true,
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 1,
+                        }
+                    },
                     deferRender: true,
-                    stateSave: true,
-                    stateDuration: 60*60*24*365,
-                    fixedHeader: true,
+                    // stateSave: false, // TODO set to true
+                    // stateDuration: 60*60*24*365,
+                    fixedHeader: {
+                        header: true,
+                        footer: false,
+                    },
+                    select: {
+                        style: 'multi',
+                        selector: 'td:first-child',
+                    },
                     ajax: {
                         url: "{{ $getModelRoute('index') }}",
                         data: function (d) {
@@ -275,23 +349,15 @@
                 updatePriority(id, priority)
             })
 
-            let customFilters = $('#table_buttons').html()
+            let customButtons = $('#table_buttons').html()
             $('#table_buttons').remove()
-            $('#datatable_wrapper div.table-buttons').html(customFilters)
+            $('#datatable_wrapper div.table-select-actions').html(customButtons)
 
-            let customButtons = $('#custom_filters').html()
-            $('#datatable_wrapper div.custom-filters').html(customButtons)
+            let customFilters = $('#table_custom_filters').html()
+            $('#datatable_wrapper div.custom-filters').html(customFilters)
 
-            $(document).on('click', 'div.table-buttons .dropdown-item', function () {
+            $(document).on('click', 'div.table-select-actions .dropdown-item', function () {
                 let action = $(this).data('action');
-
-                if (action === 'selectAll') {
-                    DataTable.rows().select()
-                }
-
-                if (action === 'selectNone') {
-                    DataTable.rows().deselect()
-                }
 
                 if (action === 'soft_delete') {
                     let data = DataTable.rows({selected: true}).data()

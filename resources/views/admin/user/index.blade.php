@@ -4,14 +4,11 @@
     <script>
         var additionalConfig = {
             columns: [
-                { data: "name" },
-                { data: "email" },
-                { data: "action", searchable: false, orderable: false, width: "40px",  responsivePriority: 1 },
+                { title: 'Name', data: 'name' },
+                { title: 'Email', data: 'email' },
+                { title: 'Registered at', data: 'created_at' },
             ],
-            select: {
-                style: 'multi',
-                selector: 'td:not(:last-child)'
-            }
+            order: [3, 'desc']
         };
     </script>
 @endsection

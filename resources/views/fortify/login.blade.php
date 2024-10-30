@@ -7,11 +7,12 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
+{{--    TODO delete --}}
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body class="h-screen bg-gradient-to-tr from-login-secondary-100 via-primary-100 to-login-secondary-100">
+<body class="h-screen bg-primary-50">
     <div class="container mx-auto h-full flex items-start md:items-center">
         <div class="w-full sm:max-w-lg p-5 md:p-8 mx-2 sm:mx-auto mt-16 md:mt-0 bg-white rounded-lg shadow-lg">
             <img
@@ -37,7 +38,7 @@
                         </ul>
                     </div>
                 @endif
-                
+
                 <x-form
                     action="{{ route('login') }}"
                     method="POST"
@@ -53,7 +54,7 @@
                                 autofocus
                             />
                             @break
-                            
+
                         @case('username')
                             <x-inputs.input
                                 type="text"
@@ -63,7 +64,7 @@
                                 autofocus
                             />
                             @break
-                            
+
                         @case('email')
                             <x-inputs.input
                                 type="email"
@@ -73,22 +74,22 @@
                                 autofocus
                             />
                             @break
-                        
+
                     @endswitch
-                    
+
                     <x-inputs.input
                         label="{{ __('voiler::interface.password') }}"
                         placeholder="{{ __('voiler::interface.please_enter_your_password') }}"
                         name="password"
                         type="password"
                     />
-                    
+
                     <x-inputs.toggle
                         name="remember"
                         label="{{ __('voiler::interface.remember_me') }}"
                         value="true"
                     />
-                    
+
                     @if (Route::has('register'))
                         <div class="mt-14 mb-6">
                             <p class="mt-3 text-xs md:text-sm text-center text-gray-500">
