@@ -257,7 +257,7 @@
     }
 
     .link-primary {
-        @apply text-primary-500 hover:text-primary-700 transition-colors
+        @apply text-primary-500 hover:text-primary-600 transition-colors
     }
 }
 
