@@ -11,3 +11,7 @@ All notable changes to `voiler` will be documented in this file
 ## v11.1.1 - 2024-10-30
 
 - Minor bugfix
+
+## v11.1.2 - 2024-11-01
+
+- Datatable save state
