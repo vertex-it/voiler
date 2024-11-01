@@ -197,8 +197,8 @@
                         }
                     },
                     deferRender: true,
-                    // stateSave: false, // TODO set to true
-                    // stateDuration: 60*60*24*365,
+                    stateSave: true,
+                    stateDuration: 60*60*24*365,
                     fixedHeader: {
                         header: true,
                         footer: false,
