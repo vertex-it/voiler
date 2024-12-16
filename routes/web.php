@@ -6,9 +6,12 @@ use VertexIT\Voiler\Http\Controllers\PermissionController;
 use VertexIT\Voiler\Http\Controllers\ProfileController;
 use VertexIT\Voiler\Http\Controllers\RoleController;
 use VertexIT\Voiler\Http\Controllers\UserController;
-use VertexIT\Voiler\Http\Controllers\VoilerFileController;
+use VertexIT\Voiler\Http\Controllers\VoilerUploadController;
 
-Route::post('voiler/files', [VoilerFileController::class, 'store'])->name('voiler.files');
+Route::prefix('voiler/upload')->group(function() {
+    Route::post('file', [VoilerUploadController::class, 'file'])->name('voiler.file');
+    Route::post('image', [VoilerUploadController::class, 'image'])->name('voiler.image');
+});
 
 Route::middleware(config('voiler.middleware'))->group(function() {
     $dashboardController = VertexIT\Voiler\Http\Controllers\DashboardController::class;

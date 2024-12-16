@@ -22,6 +22,7 @@ class Uppy extends BaseInputComponent
         $route = null,
         $maxFileSize = 2,
         $single = false,
+        $imagesUpload = true,
     ) {
         parent::__construct($name, $label, $placeholder, $value, $required, $comment, $inline);
 
