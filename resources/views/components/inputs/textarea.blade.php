@@ -47,7 +47,7 @@
 
                             xhr = new XMLHttpRequest();
                             xhr.withCredentials = false;
-                            xhr.open('POST', "{{ route('voiler.files') }}");
+                            xhr.open('POST', "{{ route('voiler.image') }}");
                             xhr.setRequestHeader("X-CSRF-Token", "{{ csrf_token() }}");
 
                             xhr.onload = function() {
