@@ -42,7 +42,8 @@ class VoilerUploadController extends Controller
 
         $absolutePath = Storage::path($filePath);
 
-        $webpPath = Str::of($absolutePath)->replace('.jpg', '.webp');
+        $uploadedExtension = $request->file('file')->extension();
+        $webpPath = Str::of($absolutePath)->replace('.' . $uploadedExtension, '.webp');
         $image = Image::read($absolutePath);
 
         if (! config('voiler.images.keep_original')) {
