@@ -10,6 +10,7 @@ class Uppy extends BaseInputComponent
     public ?string $route;
     public int $maxFileSize;
     public bool $single;
+    public bool $imagesUpload = true;
 
     public function __construct(
         $name,
