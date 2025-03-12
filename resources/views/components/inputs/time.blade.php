@@ -34,6 +34,7 @@
                 $(scope + ' .bc-time').timepicker({
                     "appendTo": $(scope + ' .bc-time').parent(),
                     timeFormat: "H:i",
+                    show2400: true,
                     listWidth: 1,
                     step: '{{ $attributes["data-step"] ?? "30" }}',
                     minTime: '{{ $attributes["data-min-time"] ?? "05:00" }}'
