@@ -19,39 +19,46 @@
 </style>
 <div class="form-group w-full @error($name) has-error has-danger @enderror">
     @include('voiler::components.inputs.includes.label')
-
+    
     <div>
         <button
             class="btn btn-gray btn-has-icon {{ is_array(old($name, $value)) ? 'mb-1' : '' }}"
             id="uppy-modal-{{ $key }}"
             title="{{ __('voiler::components.add_more') }}"
-             type="button"
+            type="button"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            <svg
+                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
             </svg>
             {{ __('voiler::components.add_more') }}
         </button>
     </div>
     @include('voiler::components.inputs.includes.comment')
-
+    
     <div class="uppy-{{ $key }}">
         <div id="drag-drop-area-{{ $key }}"></div>
     </div>
-
+    
     <input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="">
-
+    
     <div class="flex flex-wrap justify-start items-center" id="uppy-uploaded-{{ $key }}">
         @foreach(old($name, is_array($value) ? $value : [$value]) ?? [] as $url)
             @if($url)
                 <div class="uploaded-container cursor-move mt-2 mr-2">
                     @if(in_array(pathinfo($url, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
                         <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">
-                            <img class="rounded" src="{{ $url }}"  alt="{{ $url }}" title="{{ $url }}"/>
+                            <img class="rounded" src="{{ $url }}" alt="{{ $url }}" title="{{ $url }}"/>
                         </a>
                     @else
                         <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">
-                            <img class="rounded" src="https://play-lh.googleusercontent.com/3tLaTWjP9kz56OwkbnbAnZoNp4HL28zcDMt5DEjt-kfuVhraWJBYC5XQRuMBf084JQ" alt="{{ $url }}" title="{{ $url }}">
+                            <img
+                                class="rounded"
+                                src="https://play-lh.googleusercontent.com/3tLaTWjP9kz56OwkbnbAnZoNp4HL28zcDMt5DEjt-kfuVhraWJBYC5XQRuMBf084JQ"
+                                alt="{{ $url }}" title="{{ $url }}"
+                            >
                         </a>
                     @endif
                     <input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="{{ $url }}">
@@ -60,14 +67,14 @@
         @endforeach
     </div>
     <div class="mb-2"></div>
-
+    
     <div
         class="flex droppable-trash mt-4 border-dashed border-2 border-gray-300 hidden"
         id="uppy-removed-{{ $key }}"
         style="{{ is_array(old($name, $value)) ? '' : 'display: none;' }}"
     >
     </div>
-
+    
     @include('voiler::components.inputs.includes.error')
 </div>
 
@@ -118,32 +125,33 @@
                 // allowedFileTypes: [],	// Array	wildcards image/*, or exact mime types image/jpeg, or file extensions .jpg: ['image/*', '.jpg', '.jpeg', '.png', '.gif']
             },
         }).use(Dashboard, {
-            target: '#drag-drop-area-{{ $key }}',
-            trigger: '#uppy-modal-{{ $key }}',
-            showProgressDetails: true,
-            proudlyDisplayPoweredByUppy: false,
-            note: '{{ $getLabel() }}',
-            closeModalOnClickOutside: true,
-            disablePageScrollWhenModalOpen: true,
-            showRemoveButtonAfterComplete: true,
-        })
-        .use(XHRUpload, {
-            // TODO: Uppy will be used for all file types, not only images...
-            endpoint: '{{ $route ?? route("voiler.files") }}',
-            method: 'POST',
-            formData: true,
-            fieldName: 'file',
-            bundle: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            getResponseError (responseText, response) {
-                return new Error(response.statusText);
-            }
-        })
-        .use(Compressor)
+              target: '#drag-drop-area-{{ $key }}',
+              trigger: '#uppy-modal-{{ $key }}',
+              showProgressDetails: true,
+              proudlyDisplayPoweredByUppy: false,
+              note: '{{ $getLabel() }}',
+              closeModalOnClickOutside: true,
+              disablePageScrollWhenModalOpen: true,
+              showRemoveButtonAfterComplete: true,
+          })
+          .use(XHRUpload, {
+              // TODO: Uppy will be used for all file types, not only images...
+              endpoint: '{{ $route ?? ($imagesUpload ? route('voiler.image') : route('voiler.file')) }}',
+              method: 'POST',
+              formData: true,
+              fieldName: 'file',
+              bundle: false,
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              getResponseError(responseText, response) {
+                  return new Error(response.statusText);
+              }
+          })
+          .use(Compressor)
 
         var imageTypes = ['png', 'tif', 'tiff', 'wbmp', 'ico', 'jng', 'bmp', 'svg', 'webp', 'jpg', 'jpeg'];
+
         function isImage(url) {
             let extension = url.split('.').pop();
 
@@ -168,24 +176,24 @@
             toggleTrash()
 
             $('#uppy-modal-{{ $key }}').addClass('mb-1');
-            
+
             let display
             if (isImage(response.body)) {
                 display = '<img class="rounded" src="' + response.body + '" alt="" style="width: inherit;" />';
             } else {
                 display = '<a href="' + response.body + '" target="_blank" title="' + file.name + '" rel="noopener noreferrer">' +
                     '<img class="rounded" src="https://play-lh.googleusercontent.com/3tLaTWjP9kz56OwkbnbAnZoNp4HL28zcDMt5DEjt-kfuVhraWJBYC5XQRuMBf084JQ" alt="' + file.name + '" style="width: inherit;" />' +
-                '</a>';
+                    '</a>';
             }
-            
+
             if (single) {
                 uploadedContainer.html('')
             }
 
             uploadedContainer.append(
                 '<div class="uploaded-container cursor-move mt-2 mr-2">' +
-                    display +
-                    '<input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="' + response.body + '">' +
+                display +
+                '<input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="' + response.body + '">' +
                 '</div>'
             );
         });

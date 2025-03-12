@@ -34,4 +34,10 @@ return [
     'media_library' => [
         'preserve_temp_files' => env('PRESERVE_TEMP_FILES', false),
     ],
+
+    'images' => [
+        'keep_original' => false,
+        'width' => 1920,
+        'height' => 1080,
+    ],
 ];

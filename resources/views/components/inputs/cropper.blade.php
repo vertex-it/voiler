@@ -126,7 +126,7 @@
 
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route("voiler.files") }}',
+                    url: '{{ route("voiler.image") }}',
                     data: formData,
                     processData: false,
                     contentType: false,
