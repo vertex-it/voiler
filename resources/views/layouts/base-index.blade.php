@@ -356,6 +356,11 @@
             let customFilters = $('#table_custom_filters').html()
             $('#datatable_wrapper div.custom-filters').html(customFilters)
 
+            // Do not close filters on click inside dropdown
+            $('#datatable_wrapper div.custom-filters .dropdown-menu').on('click', function (e) {
+                e.stopPropagation()
+            })
+
             $(document).on('click', 'div.table-select-actions .dropdown-item', function () {
                 let action = $(this).data('action');
 
