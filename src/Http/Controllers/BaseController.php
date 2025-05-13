@@ -3,6 +3,7 @@
 namespace VertexIT\Voiler\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use VertexIT\Voiler\Services\GuesserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
+    use AuthorizesRequests;
+
     protected array $resource;
 
     public function __construct()
