@@ -7,6 +7,7 @@ use VertexIT\Voiler\View\Components\BaseInputComponent;
 class Textarea extends BaseInputComponent
 {
     public bool $richText;
+    public int $rows;
 
     public function __construct(
         $name,
@@ -18,10 +19,12 @@ class Textarea extends BaseInputComponent
         $inline = null,
         $richText = false,
         $width = null,
+        $rows = null,
     ) {
         parent::__construct($name, $label, $placeholder, $value, $required, $comment, $inline, $width);
 
         $this->richText = $richText;
+        $this->rows = $rows;
     }
 
     public function render()
