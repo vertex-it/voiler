@@ -19,7 +19,7 @@ class Textarea extends BaseInputComponent
         $inline = null,
         $richText = false,
         $width = null,
-        $rows = null,
+        $rows = 7,
     ) {
         parent::__construct($name, $label, $placeholder, $value, $required, $comment, $inline, $width);
 

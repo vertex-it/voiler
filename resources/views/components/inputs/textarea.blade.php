@@ -5,7 +5,7 @@
     class="{{ $richText ? 'tinymce' : 'form-input' }}"
     id="{{ $getId }}"
     name="{{ $name }}"
-    rows="{{ $rows ?? '7' }}"
+    rows="{{ $rows }}"
     placeholder="{{ $getPlaceholder() }}"
     {{ ! $richText ? $outputRequired() : '' }}
     {{ $attributes }}
