@@ -2,24 +2,24 @@
     .uploaded-container {
         height: 120px;
     }
-    
+
     .uploaded-container > img, .uploaded-container > a > img {
         height: 100%;
         width: 100%;
         object-fit: cover;
     }
-    
+
     .droppable-trash {
         padding: 0.4em 0.9em 0.9em;
     }
-    
+
     .droppable-trash img {
         opacity: .2;
     }
 </style>
 <div class="form-group w-full @error($name) has-error has-danger @enderror">
     @include('voiler::components.inputs.includes.label')
-    
+
     <div>
         <button
             class="btn btn-gray btn-has-icon {{ is_array(old($name, $value)) ? 'mb-1' : '' }}"
@@ -37,18 +37,18 @@
         </button>
     </div>
     @include('voiler::components.inputs.includes.comment')
-    
+
     <div class="uppy-{{ $key }}">
         <div id="drag-drop-area-{{ $key }}"></div>
     </div>
-    
+
     <input name="{{ $name . ($single ? '' : '[]')}}" type="hidden" value="">
-    
+
     <div class="flex flex-wrap justify-start items-center" id="uppy-uploaded-{{ $key }}">
         @foreach(old($name, is_array($value) ? $value : [$value]) ?? [] as $url)
             @if($url)
                 <div class="uploaded-container cursor-move mt-2 mr-2">
-                    @if(in_array(pathinfo($url, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
+                    @if(in_array(pathinfo($url, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'webp']))
                         <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">
                             <img class="rounded" src="{{ $url }}" alt="{{ $url }}" title="{{ $url }}"/>
                         </a>
@@ -67,14 +67,14 @@
         @endforeach
     </div>
     <div class="mb-2"></div>
-    
+
     <div
         class="flex droppable-trash mt-4 border-dashed border-2 border-gray-300 hidden"
         id="uppy-removed-{{ $key }}"
         style="{{ is_array(old($name, $value)) ? '' : 'display: none;' }}"
     >
     </div>
-    
+
     @include('voiler::components.inputs.includes.error')
 </div>
 
