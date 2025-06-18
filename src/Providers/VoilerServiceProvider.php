@@ -3,11 +3,13 @@
 namespace VertexIT\Voiler\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Events\MediaHasBeenAddedEvent;
 use VertexIT\Voiler\Console\FixImageURLsCommand;
 use VertexIT\Voiler\Console\GenerateTranslationsCommand;
 use VertexIT\Voiler\Console\MakeCommands\Database\Migrations\VoilerFactoryMakeCommand;
@@ -25,6 +27,7 @@ use VertexIT\Voiler\Console\MakeCommands\VoilerPolicyMakeCommand;
 use VertexIT\Voiler\Console\MakeCommands\VoilerRequestMakeCommand;
 use VertexIT\Voiler\Console\PublishFromPackagesCommand;
 use VertexIT\Voiler\Console\VoilerGenerateCommand;
+use VertexIT\Voiler\Listeners\OptimizeMediaImageListener;
 use VertexIT\Voiler\View\Components\Breadcrumb;
 use VertexIT\Voiler\View\Components\Form;
 use VertexIT\Voiler\View\Components\Inputs\Checkbox;
@@ -63,6 +66,11 @@ class VoilerServiceProvider extends ServiceProvider
             $this->registerPublishableFiles();
             $this->registerCommands();
         }
+
+        Event::listen(
+            MediaHasBeenAddedEvent::class,
+            OptimizeMediaImageListener::class,
+        );
     }
 
     /**

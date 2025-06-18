@@ -56,8 +56,6 @@ class VoilerUploadController extends Controller
         $image->save($webpPath);
         unlink($absolutePath);
 
-        OptimizeWithSquoosh::dispatch($webpPath);
-
         return response()->json(
             Storage::url(
                 Str::of($webpPath)->after('app/public')
