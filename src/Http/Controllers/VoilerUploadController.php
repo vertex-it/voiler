@@ -47,7 +47,7 @@ class VoilerUploadController extends Controller
         $image = Image::read($absolutePath);
 
         if (! config('voiler.images.keep_original')) {
-            $image->scale(
+            $image->scaleDown(
                 width: config('voiler.images.width'),
                 height: config('voiler.images.height'),
             );
