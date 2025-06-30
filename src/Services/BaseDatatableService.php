@@ -34,10 +34,6 @@ class BaseDatatableService
     {
         $query = $this->resource['model_fqn']::withTrashed();
 
-        if ((new $this->resource['model_fqn'])->timestamps) {
-            return $query->latest();
-        }
-
         return $query;
     }
 
