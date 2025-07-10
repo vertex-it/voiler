@@ -53,8 +53,8 @@ class VoilerUploadController extends Controller
             );
         }
 
-        $image->save($webpPath);
         unlink($absolutePath);
+        $image->save($webpPath);
 
         return response()->json(
             Storage::url(
