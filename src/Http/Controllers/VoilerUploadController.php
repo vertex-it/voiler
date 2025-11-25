@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
+use Intervention\Image\ImageManager;
 use Intervention\Image\Laravel\Facades\Image;
 use VertexIT\Voiler\Jobs\OptimizeWithSquoosh;
 use VertexIT\Voiler\Services\FileService;
@@ -44,7 +47,14 @@ class VoilerUploadController extends Controller
 
         $uploadedExtension = $request->file('file')->extension();
         $webpPath = Str::of($absolutePath)->replace('.' . $uploadedExtension, '.webp');
-        $image = Image::read($absolutePath);
+
+        if ($uploadedExtension === 'heic') {
+            $manager = new ImageManager(ImagickDriver::class);
+        } else {
+            $manager = new ImageManager(GdDriver::class);
+        }
+
+        $image = $manager->read($absolutePath);
 
         if (! config('voiler.images.keep_original')) {
             $image->scaleDown(
