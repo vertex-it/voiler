@@ -22,7 +22,7 @@ class APIAuthController extends Controller
 
         if (! Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Your credentials don\'t match our records!',
+                'message' => __('auth.failed'),
             ], 401);
         }
 
