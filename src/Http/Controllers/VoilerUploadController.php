@@ -20,9 +20,11 @@ class VoilerUploadController extends Controller
     {
         $request->validate(['file' => 'required|file']);
 
+        $uploadDirectory = $request->has('permanent_upload') ? 'uploads' : 'temp';
+
         $filePath = FileService::store(
             $request->file,
-            'temp',
+            $uploadDirectory,
             $request->name ?? '',
         );
 
@@ -37,9 +39,11 @@ class VoilerUploadController extends Controller
     {
         $request->validate(['file' => 'required|file']);
 
+        $uploadDirectory = $request->has('permanent_upload') ? 'uploads' : 'temp';
+
         $filePath = FileService::store(
             $request->file,
-            'temp',
+            $uploadDirectory,
             $request->name ?? '',
         );
 
