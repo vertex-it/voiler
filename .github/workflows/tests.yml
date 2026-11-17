@@ -1,0 +1,27 @@
+name: Laravel compatibility
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, exif, gd, intl, mbstring, pdo_sqlite, zip
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - run: composer update --prefer-dist --no-interaction --no-progress
+      - run: composer test -- --fail-on-warning --fail-on-risky --fail-on-deprecation

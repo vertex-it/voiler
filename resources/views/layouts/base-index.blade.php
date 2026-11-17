@@ -377,7 +377,8 @@
                             slug = data[i].id
                         }
 
-                        deleteElement("{{ $getModelRoute('destroy', '') }}/" + slug)
+                        let deleteUrl = @js($getModelRoute('destroy', '__VOILER_MODEL__'))
+                        deleteElement(deleteUrl.replace('__VOILER_MODEL__', encodeURIComponent(slug)))
                     })
                 }
 
