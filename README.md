@@ -8,11 +8,26 @@
 
 ## Installation
 
+This development line targets Laravel 13 and requires PHP 8.3 or later. It uses
+Laravel Tinker 3 and Yajra DataTables 13. Applications on Laravel 11 should keep
+using the published Voiler 11.x releases until they are ready to upgrade.
+
 Install the package via composer:
 
 ```bash
 composer require vertex-it/voiler
 ```
+
+Package compatibility tests run with Orchestra Testbench:
+
+```bash
+composer install
+composer test -- --fail-on-warning --fail-on-risky --fail-on-deprecation
+```
+
+CI resolves dependencies and runs these tests on PHP 8.3, 8.4, and 8.5. This is a
+library, so `composer.lock` is not committed; applications should commit their
+own lockfile.
 
 You can publish the config:
 
